@@ -1,0 +1,12 @@
+package com.yboot.base.modules.base.dao;
+
+import com.yboot.base.modules.base.entity.TxAccount;
+import com.yboot.common.base.YbootBaseDao;
+
+/**
+ * @author 田培融
+ * @Date 2020/3/13 20:17
+ * @EMail canghaihongxin@163.com
+ **/
+public interface TxAccountDao extends YbootBaseDao<TxAccount,String> {
+}

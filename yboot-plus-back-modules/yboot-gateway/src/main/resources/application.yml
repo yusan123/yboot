@@ -1,0 +1,78 @@
+server:
+  port: 9200
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    gateway:
+      # 开启动态发现服务 需要和注册中心一起使用，这样网关就可以在注册中心找到其他的服务
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        # 路径id 唯一自定义的名称
+        - id: base-router
+          # 此处需要使用Lb协议
+          uri: lb://yboot-base-server
+          predicates:
+            # 断言，路径相匹配的进行路由  匹配base请求路径后面的接口
+            - Path=/base/**
+        - id: business-router
+          uri: lb://yboot-business-server
+          predicates:
+            - Path=/business/**
+security:
+  oauth2:
+    client:
+      client-id: gateway
+      client-secret: 123456
+
+jwt:
+  # 有效期，单位秒，默认2周
+  expire-time-in-second: 1209600
+
+# 配置健康检查
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+# 忽略url
+ignored:
+  # 无需登录认证的请求
+  urls:
+    - /base/oauth2/**
+    - /base/actuator/**
+    - /base/admin/**
+    - /editor-app/**
+    - /base/act/**
+    - /base/dictData/getByType/**
+    - /base/email/sendResetCode/**
+    - /base/email/resetByEmail
+    - /base/file/view/**
+    - /base/social/**
+    - /base/ws/**
+    - /base/user/regist
+    - /base/user/smsLogin
+    - /base/user/resetByMobile
+    - /base/common/**
+    - /druid/**
+    - /swagger-ui.html
+    - /swagger-resources/**
+    - /swagger/**
+    - /**/v2/api-docs
+    - /**/*.js
+    - /**/*.css
+    - /**/*.png
+    - /**/*.ico
+    - /base/test/**
+  # 限流及黑名单不拦截的路径
+  limitUrls:
+    - /**/*.js
+    - /**/*.css
+    - /**/*.png
+    - /**/*.ico
