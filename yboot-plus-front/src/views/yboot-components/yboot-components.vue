@@ -33,14 +33,14 @@
             <Submenu name="3">
               <template slot="title">
                 <Icon type="ios-create" />
-                <Badge dot :offset="[5,-3]">富文本编辑器(付费)</Badge>
+                <Badge dot :offset="[5,-3]">富文本编辑器()</Badge>
               </template>
               <MenuItem name="3-1">wangEditor</MenuItem>
               <MenuItem name="3-2">Quill</MenuItem>
             </Submenu>
             <Submenu name="2">
               <template slot="title">
-                <Icon type="md-git-compare" />工作流组件(付费)
+                <Icon type="md-git-compare" />工作流组件()
               </template>
               <MenuItem name="2-1">工作流程选择发起</MenuItem>
               <MenuItem name="2-2">通过流程key直接发起</MenuItem>

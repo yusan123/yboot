@@ -8,7 +8,7 @@
         <Card>     
           <Tabs value="1">
             <TabPane label="慕课类" name="1">
-              <Alert type="warning" show-icon>说明：基于Vue组件化开发，该组件付费获取后无需授权，请自行修改UI避免侵权！</Alert>
+              <Alert type="warning" show-icon>说明：基于Vue组件化开发，该组件获取后无需授权，请自行修改UI避免侵权！</Alert>
               <CategoryMooc/>
             </TabPane>
             <TabPane label="电商类" name="2">

@@ -6,11 +6,14 @@ module.exports = {
         port: 9999,
         proxy: {
             '/base': {
-                target: 'http://127.0.0.1:9200',  // 请求本地 需要yboot后台项目
+                // target: 'http://127.0.0.1:9200',  // 请求本地 需要yboot后台项目
+                target: 'http://123.57.131.135:9200', 
+
                 ws: true
             },
             '/oauth': {
-                target: 'http://127.0.0.1:8888',  // 请求本地 需要yboot后台项目
+                // target: 'http://127.0.0.1:8888',  // 请求本地 需要yboot后台项目
+                target: 'http://123.57.131.135:8888', 
                 ws: true
             },
             '/foo': {

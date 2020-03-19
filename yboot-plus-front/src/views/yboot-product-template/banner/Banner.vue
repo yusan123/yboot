@@ -7,7 +7,7 @@
         <Card>     
           <Tabs value="1">
             <TabPane label="慕课类" name="1">
-              <Alert type="warning" show-icon>说明：基于Vue组件化开发，该组件付费获取后无需授权，请自行修改UI避免侵权！</Alert>
+              <Alert type="warning" show-icon>说明：基于Vue组件化开发，该组件获取后无需授权，请自行修改UI避免侵权！</Alert>
               <span style="margin-right:10px;">开启背景随图片模糊切换：</span>
               <i-switch size="large" v-model="isOpen">
                 <span slot="open">开启</span>
@@ -16,7 +16,7 @@
               <BannerMooc :bk="isOpen"/>
             </TabPane>
             <TabPane label="电商类1" name="2">
-              <Alert type="warning" show-icon style="margin-bottom:30px;">说明：基于Vue组件化开发，该组件付费获取后无需授权，请自行修改UI避免侵权！</Alert>
+              <Alert type="warning" show-icon style="margin-bottom:30px;">说明：基于Vue组件化开发，该组件获取后无需授权，请自行修改UI避免侵权！</Alert>
               <BannerShop/>
             </TabPane>
             <TabPane label="电商类2" name="3">

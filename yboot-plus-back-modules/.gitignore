@@ -54,3 +54,5 @@ build/
 
 ### VS Code ###
 .vscode/
+/yboot-base-server/src/main/resources/application-prod.yml
+/yboot-business/src/main/resources/application-prod.yml

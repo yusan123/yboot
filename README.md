@@ -8,13 +8,15 @@
 
 #### 安装教程
 
-1.  启动nacos项目这里使用的是windows版本的，在linux上使用自行去官网下载。启动时找到bin目录双击startup.cmd即可。
+1.  启动nacos项目这里使用的是windows版本的,启动时找到bin目录双击startup.cmd即可。
+    在linux上使用自行去官网下载, https://github.com/alibaba/nacos/releases/download/1.2.0-beta.1/nacos-server-1.2.0-beta.1.tar.gz,
+    解压文件，在bin目录下执行 ``` sh startup.sh -m standalone ```
 2.  seata同样找到bin目录双击seata-server.bat即可。
 3.  必须先启动base-servere服务，在启动其他两个服务。
 
 #### 参与贡献
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+1. Fork 本仓库
+2. 新建 Feat_xxx 分支
+3. 提交代码
+4. 新建 Pull Request

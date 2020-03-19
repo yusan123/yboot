@@ -28,7 +28,7 @@
         <Card>     
           <Tabs value="1">
             <TabPane label="慕课类" name="1">
-              <Alert type="warning" show-icon>说明：基于Vue组件化开发，该组件付费获取后无需授权，请自行修改UI避免侵权！</Alert>
+              <Alert type="warning" show-icon>说明：基于Vue组件化开发，该组件获取后无需授权，请自行修改UI避免侵权！</Alert>
               <div class="product-wrap">
                 <ProductMooc :data="p1" class="item"/>
                 <ProductMooc :data="p2" class="item"/>
