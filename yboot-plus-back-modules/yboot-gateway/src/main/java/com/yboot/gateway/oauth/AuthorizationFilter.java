@@ -49,6 +49,7 @@ public class AuthorizationFilter implements GlobalFilter, Ordered {
                 return   handleError(403,exchange);
             }
 
+
             // 修改请求头信息
 //            ServerHttpRequest newRequest = new ServerHttpRequestDecorator(request) {
 //                @Override
@@ -103,18 +104,6 @@ public class AuthorizationFilter implements GlobalFilter, Ordered {
 
         AntPathMatcher antPathMatcher =new AntPathMatcher();
         for (String url : ignoredUrlsProperties.getUrls()) {
-//            if (url.contains("**")){
-//                String ignored= StrUtil.subBefore(url, "**", true);
-//                // 放行认证服务器的请求
-//                if (StringUtils.startsWith(request.getURI().getPath(),ignored)){
-//                    return false;
-//                }
-//            }else {
-//                // 放行认证服务器的请求
-//                if (StringUtils.startsWith(request.getURI().getPath(),url)){
-//                    return false;
-//                }
-//            }
             if (antPathMatcher.match(url,request.getURI().getPath())){
                 return false;
             }
