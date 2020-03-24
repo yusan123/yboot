@@ -1,5 +1,6 @@
 package com.yboot.base.modules.social.service;
 
+import com.yboot.base.modules.social.dao.WechatDao;
 import com.yboot.common.base.YbootBaseService;
 import com.yboot.common.common.vo.SearchVo;
 import com.yboot.base.modules.social.entity.Wechat;
@@ -10,7 +11,7 @@ import org.springframework.data.domain.Pageable;
  * Github登录接口
  * @author 田培融
  */
-public interface WechatService extends YbootBaseService<Wechat, String> {
+public interface WechatService extends YbootBaseService<WechatDao,Wechat, String> {
 
     /**
      * 通过openId获取

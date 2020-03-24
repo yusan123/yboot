@@ -1,5 +1,6 @@
 package com.yboot.base.modules.social.service;
 
+import com.yboot.base.modules.social.dao.QQDao;
 import com.yboot.common.base.YbootBaseService;
 import com.yboot.common.common.vo.SearchVo;
 import com.yboot.base.modules.social.entity.QQ;
@@ -10,7 +11,7 @@ import org.springframework.data.domain.Pageable;
  * qq登录接口
  * @author 田培融
  */
-public interface QQService extends YbootBaseService<QQ, String> {
+public interface QQService extends YbootBaseService<QQDao,QQ, String> {
 
     /**
      * 通过openId获取

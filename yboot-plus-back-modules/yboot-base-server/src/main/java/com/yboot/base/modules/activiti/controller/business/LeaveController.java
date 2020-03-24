@@ -1,6 +1,7 @@
 package com.yboot.base.modules.activiti.controller.business;
 
 import com.yboot.base.common.utils.SecurityUtil;
+import com.yboot.base.modules.activiti.dao.business.LeaveDao;
 import com.yboot.base.modules.activiti.entity.ActBusiness;
 import com.yboot.base.modules.activiti.entity.business.Leave;
 import com.yboot.base.modules.activiti.service.ActBusinessService;
@@ -26,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(description = "请假申请接口")
 @Transactional
 @RequestMapping(value = "/base/leave")
-public class LeaveController extends YbootBaseController<Leave, String> {
+public class LeaveController extends YbootBaseController<LeaveDao,Leave, String> {
 
     @Autowired
     private LeaveService leaveService;

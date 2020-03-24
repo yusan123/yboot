@@ -1,5 +1,6 @@
 package com.yboot.base.modules.base.controller.manage;
 
+import com.yboot.base.modules.base.dao.MessageSendDao;
 import com.yboot.common.base.YbootBaseController;
 import com.yboot.common.common.utils.PageUtil;
 import com.yboot.common.common.utils.ResultUtil;
@@ -30,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(description = "消息发送管理接口")
 @RequestMapping("/base/messageSend")
 @Transactional
-public class MessageSendController extends YbootBaseController<MessageSend, String> {
+public class MessageSendController extends YbootBaseController<MessageSendDao,MessageSend, String> {
 
     @Autowired
     private UserService userService;
@@ -50,7 +51,6 @@ public class MessageSendController extends YbootBaseController<MessageSend, Stri
     @ApiOperation(value = "多条件分页获取")
     public Result<Page<MessageSend>> getByCondition(MessageSend ms,
                                                     PageVo pv){
-
         Page<MessageSend> page = messageSendService.findByCondition(ms, PageUtil.initPage(pv));
         // lambda
         page.getContent().forEach(item->{

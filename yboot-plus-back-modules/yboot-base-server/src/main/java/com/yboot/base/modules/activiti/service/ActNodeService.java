@@ -1,5 +1,6 @@
 package com.yboot.base.modules.activiti.service;
 
+import com.yboot.base.modules.activiti.dao.ActNodeDao;
 import com.yboot.common.base.YbootBaseService;
 import com.yboot.base.modules.activiti.entity.ActNode;
 import com.yboot.base.modules.base.entity.Department;
@@ -12,7 +13,7 @@ import java.util.List;
  * 流程节点用户接口
  * @author 田培融
  */
-public interface ActNodeService extends YbootBaseService<ActNode, String> {
+public interface ActNodeService extends YbootBaseService<ActNodeDao,ActNode, String> {
 
     /**
      * 通过nodeId获取用户

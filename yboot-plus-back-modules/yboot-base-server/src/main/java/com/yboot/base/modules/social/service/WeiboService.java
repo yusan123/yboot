@@ -1,5 +1,6 @@
 package com.yboot.base.modules.social.service;
 
+import com.yboot.base.modules.social.dao.WeiboDao;
 import com.yboot.common.base.YbootBaseService;
 import com.yboot.common.common.vo.SearchVo;
 import com.yboot.base.modules.social.entity.Weibo;
@@ -10,7 +11,7 @@ import org.springframework.data.domain.Pageable;
  * 微博登录接口
  * @author 田培融
  */
-public interface WeiboService extends YbootBaseService<Weibo, String> {
+public interface WeiboService extends YbootBaseService<WeiboDao,Weibo, String> {
 
     /**
      * 通过openId获取

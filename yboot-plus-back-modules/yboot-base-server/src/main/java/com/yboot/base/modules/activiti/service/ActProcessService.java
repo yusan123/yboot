@@ -1,5 +1,6 @@
 package com.yboot.base.modules.activiti.service;
 
+import com.yboot.base.modules.activiti.dao.ActProcessDao;
 import com.yboot.common.base.YbootBaseService;
 import com.yboot.common.common.vo.SearchVo;
 import com.yboot.base.modules.activiti.entity.ActBusiness;
@@ -14,7 +15,7 @@ import java.util.List;
  * 流程管理接口
  * @author 田培融
  */
-public interface ActProcessService extends YbootBaseService<ActProcess, String> {
+public interface ActProcessService extends YbootBaseService<ActProcessDao,ActProcess, String> {
 
     /**
      * 多条件分页获取

@@ -5,6 +5,7 @@ import com.yboot.common.common.utils.ResultUtil;
 import com.yboot.common.common.vo.PageVo;
 import com.yboot.common.common.vo.Result;
 import io.swagger.annotations.ApiOperation;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,20 +19,20 @@ import java.util.List;
 /**
  * @author 田培融
  */
-public abstract class YbootBaseController<E, ID extends Serializable> {
+public abstract class YbootBaseController<M extends YbootBaseDao<E,ID>, E extends YbootBaseEntity, ID extends Serializable> {
 
     /**
      * 获取service
      * @return
      */
     @Autowired
-    public abstract YbootBaseService<E,ID> getService();
+    public abstract YbootBaseService<M,E,ID> getService();
+
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
     @ResponseBody
     @ApiOperation(value = "通过id获取")
     public Result<E> get(@PathVariable ID id){
-
         E entity = getService().get(id);
         return new ResultUtil<E>().setData(entity);
     }

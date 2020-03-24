@@ -1,5 +1,6 @@
 package com.yboot.base.modules.activiti.service;
 
+import com.yboot.base.modules.activiti.dao.ActBusinessDao;
 import com.yboot.common.base.YbootBaseService;
 import com.yboot.common.common.vo.SearchVo;
 import com.yboot.base.modules.activiti.entity.ActBusiness;
@@ -12,7 +13,7 @@ import java.util.List;
  * 业务申请接口
  * @author 田培融
  */
-public interface ActBusinessService extends YbootBaseService<ActBusiness, String> {
+public interface ActBusinessService extends YbootBaseService<ActBusinessDao,ActBusiness, String> {
 
     /**
      * 多条件分页获取申请列表

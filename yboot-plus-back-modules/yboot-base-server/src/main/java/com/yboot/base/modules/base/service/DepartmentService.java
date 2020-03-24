@@ -1,5 +1,6 @@
 package com.yboot.base.modules.base.service;
 
+import com.yboot.base.modules.base.dao.DepartmentDao;
 import com.yboot.common.base.YbootBaseService;
 import com.yboot.base.modules.base.entity.Department;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * 部门接口
  * @author 田培融
  */
-public interface DepartmentService extends YbootBaseService<Department, String> {
+public interface DepartmentService extends YbootBaseService<DepartmentDao,Department, String> {
 
     /**
      * 通过父id获取 升序

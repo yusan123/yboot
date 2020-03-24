@@ -1,6 +1,7 @@
 package com.yboot.base.modules.base.service;
 
 
+import com.yboot.base.modules.base.dao.RoleDao;
 import com.yboot.common.base.YbootBaseService;
 import com.yboot.base.modules.base.entity.Role;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * 角色接口
  * @author 田培融
  */
-public interface RoleService extends YbootBaseService<Role, String> {
+public interface RoleService extends YbootBaseService<RoleDao,Role, String> {
 
     /**
      * 获取默认角色

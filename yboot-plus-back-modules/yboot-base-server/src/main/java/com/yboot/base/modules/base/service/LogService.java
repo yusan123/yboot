@@ -1,6 +1,7 @@
 package com.yboot.base.modules.base.service;
 
 
+import com.yboot.base.modules.base.dao.LogDao;
 import com.yboot.common.base.YbootBaseService;
 import com.yboot.common.common.vo.SearchVo;
 import com.yboot.base.modules.base.entity.Log;
@@ -11,7 +12,7 @@ import org.springframework.data.domain.Pageable;
  * 日志接口
  * @author 田培融
  */
-public interface LogService extends YbootBaseService<Log, String> {
+public interface LogService extends YbootBaseService<LogDao,Log, String> {
 
     /**
      * 分页搜索获取日志

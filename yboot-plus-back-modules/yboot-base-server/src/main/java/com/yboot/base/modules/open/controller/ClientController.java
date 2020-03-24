@@ -1,5 +1,6 @@
 package com.yboot.base.modules.open.controller;
 
+import com.yboot.base.modules.open.dao.ClientDao;
 import com.yboot.common.base.YbootBaseController;
 import com.yboot.common.common.utils.PageUtil;
 import com.yboot.common.common.utils.ResultUtil;
@@ -29,7 +30,7 @@ import java.util.UUID;
 @Api(description = "客户端管理接口")
 @RequestMapping("/base/client")
 @Transactional
-public class ClientController extends YbootBaseController<Client, String> {
+public class ClientController extends YbootBaseController<ClientDao,Client, String> {
 
     @Autowired
     private ClientService clientService;

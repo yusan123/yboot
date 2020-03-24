@@ -1,5 +1,6 @@
 package com.yboot.base.modules.social.service;
 
+import com.yboot.base.modules.social.dao.GithubDao;
 import com.yboot.common.base.YbootBaseService;
 import com.yboot.common.common.vo.SearchVo;
 import com.yboot.base.modules.social.entity.Github;
@@ -10,7 +11,7 @@ import org.springframework.data.domain.Pageable;
  * Github登录接口
  * @author 田培融
  */
-public interface GithubService extends YbootBaseService<Github, String> {
+public interface GithubService extends YbootBaseService<GithubDao,Github, String> {
 
     /**
      * 通过openId获取

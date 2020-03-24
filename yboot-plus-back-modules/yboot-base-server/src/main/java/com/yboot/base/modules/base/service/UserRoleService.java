@@ -1,6 +1,7 @@
 package com.yboot.base.modules.base.service;
 
 
+import com.yboot.base.modules.base.dao.UserRoleDao;
 import com.yboot.common.base.YbootBaseService;
 import com.yboot.base.modules.base.entity.User;
 import com.yboot.base.modules.base.entity.UserRole;
@@ -11,7 +12,7 @@ import java.util.List;
  * 用户角色接口
  * @author 田培融
  */
-public interface UserRoleService extends YbootBaseService<UserRole, String> {
+public interface UserRoleService extends YbootBaseService<UserRoleDao,UserRole, String> {
 
     /**
      * 通过roleId查找

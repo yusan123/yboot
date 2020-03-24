@@ -1,5 +1,6 @@
 package com.yboot.base.modules.base.service;
 
+import com.yboot.base.modules.base.dao.PermissionDao;
 import com.yboot.common.base.YbootBaseService;
 import com.yboot.base.modules.base.entity.Permission;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * 权限接口
  * @author 田培融
  */
-public interface PermissionService extends YbootBaseService<Permission, String> {
+public interface PermissionService extends YbootBaseService<PermissionDao,Permission, String> {
 
     /**
      * 通过层级查找

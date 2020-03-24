@@ -1,5 +1,7 @@
 package com.yboot.base.modules.base.service;
 
+import com.yboot.base.modules.base.dao.DepartmentDao;
+import com.yboot.base.modules.base.dao.DepartmentHeaderDao;
 import com.yboot.common.base.YbootBaseService;
 import com.yboot.base.modules.base.entity.DepartmentHeader;
 
@@ -9,7 +11,7 @@ import java.util.List;
  * 部门负责人接口
  * @author 田培融
  */
-public interface DepartmentHeaderService extends YbootBaseService<DepartmentHeader, String> {
+public interface DepartmentHeaderService extends YbootBaseService<DepartmentHeaderDao,DepartmentHeader, String> {
 
     /**
      * 通过部门和负责人类型获取

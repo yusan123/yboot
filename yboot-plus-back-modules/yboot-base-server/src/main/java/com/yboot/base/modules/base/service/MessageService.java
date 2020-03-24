@@ -1,5 +1,6 @@
 package com.yboot.base.modules.base.service;
 
+import com.yboot.base.modules.base.dao.MessageDao;
 import com.yboot.common.base.YbootBaseService;
 import com.yboot.common.common.vo.SearchVo;
 import com.yboot.base.modules.base.entity.Message;
@@ -12,7 +13,7 @@ import java.util.List;
  * 消息内容接口
  * @author 田培融
  */
-public interface MessageService extends YbootBaseService<Message, String> {
+public interface MessageService extends YbootBaseService<MessageDao,Message, String> {
 
     /**
      * 多条件分页获取

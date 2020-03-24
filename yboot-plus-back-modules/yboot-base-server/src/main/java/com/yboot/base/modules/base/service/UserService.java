@@ -1,6 +1,7 @@
 package com.yboot.base.modules.base.service;
 
 
+import com.yboot.base.modules.base.dao.UserDao;
 import com.yboot.common.base.YbootBaseService;
 import com.yboot.common.common.vo.SearchVo;
 import com.yboot.base.modules.base.entity.User;
@@ -16,7 +17,7 @@ import java.util.List;
  * @author 田培融
  */
 @CacheConfig(cacheNames = "user")
-public interface UserService extends YbootBaseService<User, String> {
+public interface UserService extends YbootBaseService<UserDao,User, String> {
 
     /**
      * 通过用户名获取用户
