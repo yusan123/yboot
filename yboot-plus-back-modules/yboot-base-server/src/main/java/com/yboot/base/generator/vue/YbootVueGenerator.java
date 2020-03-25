@@ -2,10 +2,10 @@ package com.yboot.base.generator.vue;
 
 import cn.hutool.core.util.StrUtil;
 import com.yboot.base.common.utils.IpInfoUtil;
-import com.yboot.base.generator.XbootGenerator;
+import com.yboot.base.generator.YbootGenerator;
 import com.yboot.base.generator.bean.Field;
 import com.yboot.common.common.exception.LimitException;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.common.common.limit.RedisRaterLimiter;
 import com.yboot.common.common.utils.ResultUtil;
 import com.yboot.common.common.vo.Result;
@@ -31,7 +31,7 @@ import java.util.*;
 @RestController
 @Api(description = "Vue代码生成")
 @RequestMapping(value = "/base/generate")
-public class XbootVueGenerator {
+public class YbootVueGenerator {
 
     @Autowired
     private RedisRaterLimiter redisRaterLimiter;
@@ -122,8 +122,8 @@ public class XbootVueGenerator {
         Collections.sort(fields, Comparator.comparing(Field::getSortOrder));
         // 绑定变量
         tableTemplate.binding("api", api);
-        tableTemplate.binding("vueName", XbootGenerator.name(vueName, false));
-        tableTemplate.binding("apiName", XbootGenerator.name(vueName, true));
+        tableTemplate.binding("vueName", YbootGenerator.name(vueName, false));
+        tableTemplate.binding("apiName", YbootGenerator.name(vueName, true));
         tableTemplate.binding("fields", fields);
         // 判断有无upload和日期范围搜索等组件
         Boolean upload = false, uploadThumb = false, wangEditor = false, quill = false, password = false;
@@ -253,7 +253,7 @@ public class XbootVueGenerator {
                 tableTemplate.binding("rowNum", 1);
             }
         }else{
-            throw new XbootException("rowNum仅支持数字1-4");
+            throw new YbootException("rowNum仅支持数字1-4");
         }
         // 生成代码
         String result = tableTemplate.render();

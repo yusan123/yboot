@@ -14,7 +14,7 @@ import com.yboot.base.modules.base.entity.Setting;
 import com.yboot.base.modules.base.service.SettingService;
 import com.yboot.base.modules.base.vo.SmsSetting;
 import com.yboot.common.common.constant.SettingConstant;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,7 +33,7 @@ public class SmsUtil {
 
         Setting setting = settingService.get(SettingConstant.ALI_SMS);
         if(StrUtil.isBlank(setting.getValue())){
-            throw new XbootException("您还未配置阿里云短信");
+            throw new YbootException("您还未配置阿里云短信");
         }
         return new Gson().fromJson(setting.getValue(), SmsSetting.class);
     }

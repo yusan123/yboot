@@ -4,7 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yboot.base.common.utils.SecurityUtil;
-import com.yboot.base.config.properties.XbootTokenProperties;
+import com.yboot.base.config.properties.YbootTokenProperties;
 import com.yboot.common.common.constant.SecurityConstant;
 import com.yboot.common.common.utils.ResponseUtil;
 import com.yboot.common.common.vo.TokenUser;
@@ -37,14 +37,14 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
 
-    private XbootTokenProperties tokenProperties;
+    private YbootTokenProperties tokenProperties;
 
     private StringRedisTemplate redisTemplate;
 
     private SecurityUtil securityUtil;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager,
-                                   XbootTokenProperties tokenProperties,
+                                   YbootTokenProperties tokenProperties,
                                    StringRedisTemplate redisTemplate, SecurityUtil securityUtil) {
         super(authenticationManager);
         this.tokenProperties = tokenProperties;

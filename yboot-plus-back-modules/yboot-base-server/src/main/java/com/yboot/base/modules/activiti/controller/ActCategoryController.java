@@ -1,7 +1,7 @@
 package com.yboot.base.modules.activiti.controller;
 
 import com.yboot.common.common.constant.CommonConstant;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.common.common.redis.RedisTemplateHelper;
 import com.yboot.common.common.utils.CommonUtil;
 import com.yboot.common.common.utils.ResultUtil;
@@ -104,7 +104,7 @@ public class ActCategoryController {
 
         List<ActProcess> list = actProcessService.findByCategoryId(id);
         if(list!=null&&list.size()>0){
-            throw new XbootException("删除失败，包含正被流程使用关联的分类");
+            throw new YbootException("删除失败，包含正被流程使用关联的分类");
         }
         // 获得其父节点
         ActCategory cat = actCategoryService.get(id);

@@ -1,11 +1,12 @@
 package ${entity.controllerPackage};
 
-import com.yboot.base.base.XbootBaseController;
-import com.yboot.base.common.utils.PageUtil;
-import com.yboot.base.common.utils.ResultUtil;
-import com.yboot.base.common.vo.PageVo;
-import com.yboot.base.common.vo.Result;
-import com.yboot.base.common.vo.SearchVo;
+import com.yboot.common.base.YbootBaseController;
+import com.yboot.base.modules.your.dao.${entity.className}Dao;
+import com.yboot.common.common.utils.PageUtil;
+import com.yboot.common.common.utils.ResultUtil;
+import com.yboot.common.common.vo.PageVo;
+import com.yboot.common.common.vo.Result;
+import com.yboot.common.common.vo.SearchVo;
 import ${entity.entityPackage}.${entity.className};
 import ${entity.servicePackage}.${entity.className}Service;
 import io.swagger.annotations.Api;
@@ -32,9 +33,9 @@ import cn.hutool.core.util.StrUtil;
 @Slf4j
 @RestController
 @Api(description = "${entity.description}管理接口")
-@RequestMapping("/xboot/${entity.classNameLowerCase}")
+@RequestMapping("/yboot/${entity.classNameLowerCase}")
 @Transactional
-public class ${entity.className}Controller extends XbootBaseController<${entity.className}, ${entity.primaryKeyType}> {
+public class ${entity.className}Controller extends YbootBaseController<${entity.className}Dao,${entity.className}, ${entity.primaryKeyType}> {
 
     @Autowired
     private ${entity.className}Service ${entity.classNameLowerCase}Service;

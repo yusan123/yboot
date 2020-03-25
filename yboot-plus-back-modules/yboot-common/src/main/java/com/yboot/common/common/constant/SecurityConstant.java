@@ -13,7 +13,7 @@ public interface SecurityConstant {
     /**
      * JWT签名加密key
      */
-    String JWT_SIGN_KEY = "xboot";
+    String JWT_SIGN_KEY = "Yboot";
 
     /**
      * token参数头
@@ -33,25 +33,25 @@ public interface SecurityConstant {
     /**
      * github保存state前缀key
      */
-    String GITHUB_STATE = "XBOOT_GITHUB:";
+    String GITHUB_STATE = "YBoot_GITHUB:";
 
     /**
      * qq保存state前缀key
      */
-    String QQ_STATE = "XBOOT_QQ:";
+    String QQ_STATE = "YBoot_QQ:";
 
     /**
      * qq保存state前缀key
      */
-    String WEIBO_STATE = "XBOOT_WEIBO:";
+    String WEIBO_STATE = "YBoot_WEIBO:";
 
     /**
      * 交互token前缀key
      */
-    String TOKEN_PRE = "XBOOT_TOKEN_PRE:";
+    String TOKEN_PRE = "YBoot_TOKEN_PRE:";
 
     /**
      * 用户token前缀key 单点登录使用
      */
-    String USER_TOKEN = "XBOOT_USER_TOKEN:";
+    String USER_TOKEN = "YBoot_USER_TOKEN:";
 }

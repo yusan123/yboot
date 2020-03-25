@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "base.ratelimit")
-public class XbootLimitProperties {
+public class YbootLimitProperties {
 
     /**
      * 是否开启全局限流

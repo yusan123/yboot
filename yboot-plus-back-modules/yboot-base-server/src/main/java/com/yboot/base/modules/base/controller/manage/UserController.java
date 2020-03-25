@@ -16,7 +16,7 @@ import com.yboot.base.modules.social.service.WeiboService;
 import com.yboot.common.common.annotation.SystemLog;
 import com.yboot.common.common.constant.CommonConstant;
 import com.yboot.common.common.enums.LogType;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.common.common.redis.RedisTemplateHelper;
 import com.yboot.common.common.utils.PageUtil;
 import com.yboot.common.common.utils.ResultUtil;
@@ -109,7 +109,7 @@ public class UserController {
 
         User u = userService.findByMobile(mobile);
         if(u==null){
-            throw new XbootException("手机号不存在");
+            throw new YbootException("手机号不存在");
         }
         String accessToken = securityUtil.getToken(u.getUsername(), saveLogin);
         return ResultUtil.data(accessToken);
@@ -212,7 +212,7 @@ public class UserController {
             User u = userService.get(id);
             // 在线DEMO所需
             if("test".equals(u.getUsername())||"test2".equals(u.getUsername())||"admin".equals(u.getUsername())){
-                throw new XbootException("测试账号及管理员账号不得重置");
+                throw new YbootException("测试账号及管理员账号不得重置");
             }
             u.setPassword(new BCryptPasswordEncoder().encode("123456"));
             userService.update(u);

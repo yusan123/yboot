@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class RestCtrlExceptionHandler {
 
-    @ExceptionHandler(XbootException.class)
+    @ExceptionHandler(YbootException.class)
     @ResponseStatus(value = HttpStatus.OK)
-    public Result<Object> handleXbootException(XbootException e) {
+    public Result<Object> handleYbootException(YbootException e) {
 
-        String errorMsg = "XBoot exception";
+        String errorMsg = "Yboot exception";
         if (e!=null){
             errorMsg = e.getMsg();
             log.error(e.toString(), e);

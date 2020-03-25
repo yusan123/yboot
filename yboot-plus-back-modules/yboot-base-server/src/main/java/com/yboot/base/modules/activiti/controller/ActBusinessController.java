@@ -1,7 +1,7 @@
 package com.yboot.base.modules.activiti.controller;
 
 import com.yboot.common.common.constant.ActivitiConstant;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.common.common.utils.PageUtil;
 import com.yboot.common.common.utils.ResultUtil;
 import com.yboot.common.common.vo.PageVo;
@@ -139,7 +139,7 @@ public class ActBusinessController {
     public ActBusiness putParams(ActBusiness act){
 
         if(StrUtil.isBlank(act.getTableId())){
-            throw new XbootException("关联业务表TableId不能为空");
+            throw new YbootException("关联业务表TableId不能为空");
         }
         // 如果属于请假流程
         Leave leave = leaveService.get(act.getTableId());

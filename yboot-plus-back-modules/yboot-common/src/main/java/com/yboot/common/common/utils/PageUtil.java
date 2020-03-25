@@ -3,7 +3,7 @@ package com.yboot.common.common.utils;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.common.common.vo.PageVo;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -175,7 +175,7 @@ public class PageUtil {
         // 判断是否包含非法字符
         for (String keyword : KEYWORDS) {
             if (param.contains(keyword)) {
-                throw new XbootException(param + "包含非法字符");
+                throw new YbootException(param + "包含非法字符");
             }
         }
     }

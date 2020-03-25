@@ -17,7 +17,7 @@ import com.yboot.base.modules.base.service.DepartmentHeaderService;
 import com.yboot.base.modules.base.service.UserRoleService;
 import com.yboot.base.modules.base.service.UserService;
 import com.yboot.common.common.constant.ActivitiConstant;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.common.common.vo.SearchVo;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.bpmn.model.Process;
@@ -203,7 +203,7 @@ public class ActProcessServiceImpl implements ActProcessService {
                 List<User> users = getNode(task.getTaskDefinitionKey()).getUsers();
                 // 如果下个节点未分配审批人为空 取消结束流程
                 if(users==null||users.size()==0){
-                    throw new XbootException("任务节点未分配任何候选审批人，发起流程失败");
+                    throw new YbootException("任务节点未分配任何候选审批人，发起流程失败");
                 }else{
                     // 分配了节点负责人分发给全部
                     for(User user : users){
@@ -263,7 +263,7 @@ public class ActProcessServiceImpl implements ActProcessService {
                     node.setType(ActivitiConstant.NODE_TYPE_PG);
                     break;
                 }else{
-                    throw new XbootException("流程设计错误，开始节点后只能是用户任务节点、排他网关、并行网关");
+                    throw new YbootException("流程设计错误，开始节点后只能是用户任务节点、排他网关、并行网关");
                 }
             }
         }
@@ -313,7 +313,7 @@ public class ActProcessServiceImpl implements ActProcessService {
                     // 结束
                     node.setType(ActivitiConstant.NODE_TYPE_END);
                 }else{
-                    throw new XbootException("流程设计错误，包含无法处理的节点");
+                    throw new YbootException("流程设计错误，包含无法处理的节点");
                 }
                 break;
             }

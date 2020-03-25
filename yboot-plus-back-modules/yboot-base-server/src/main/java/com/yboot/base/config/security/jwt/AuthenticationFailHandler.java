@@ -2,7 +2,7 @@ package com.yboot.base.config.security.jwt;
 
 import com.yboot.common.common.exception.LoginFailLimitException;
 import com.yboot.common.common.utils.ResponseUtil;
-import com.yboot.base.config.properties.XbootTokenProperties;
+import com.yboot.base.config.properties.YbootTokenProperties;
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 public class AuthenticationFailHandler extends SimpleUrlAuthenticationFailureHandler {
 
     @Autowired
-    private XbootTokenProperties tokenProperties;
+    private YbootTokenProperties tokenProperties;
 
     @Autowired
     private StringRedisTemplate redisTemplate;

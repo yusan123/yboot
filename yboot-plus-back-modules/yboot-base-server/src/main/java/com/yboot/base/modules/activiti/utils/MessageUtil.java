@@ -13,7 +13,7 @@ import com.yboot.base.modules.base.service.UserService;
 import com.yboot.base.modules.base.vo.OtherSetting;
 import com.yboot.common.common.constant.ActivitiConstant;
 import com.yboot.common.common.constant.SettingConstant;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -48,7 +48,7 @@ public class MessageUtil {
 
         String v = redisTemplate.opsForValue().get(SettingConstant.OTHER_SETTING);
         if(StrUtil.isBlank(v)){
-            throw new XbootException("系统未配置访问域名");
+            throw new YbootException("系统未配置访问域名");
         }
         return new Gson().fromJson(v, OtherSetting.class);
     }
@@ -99,7 +99,7 @@ public class MessageUtil {
             e.setUsername(user.getUsername());
             e.setContent(content);
             e.setFullUrl(getOtherSetting().getDomain());
-            emailUtil.sendTemplateEmail(user.getEmail(), "【XBoot】工作流通知提醒", "act-message-email", e);
+            emailUtil.sendTemplateEmail(user.getEmail(), "【YBoot】工作流通知提醒", "act-message-email", e);
         }
     }
 }

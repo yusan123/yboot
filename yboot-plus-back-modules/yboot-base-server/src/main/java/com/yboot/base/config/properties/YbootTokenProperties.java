@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "base.token")
-public class XbootTokenProperties {
+public class YbootTokenProperties {
 
     /**
      * 使用redis存储token

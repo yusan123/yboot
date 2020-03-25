@@ -1,7 +1,7 @@
 package com.yboot.base.modules.file.manage.impl;
 
 import com.yboot.common.common.constant.SettingConstant;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.base.modules.base.entity.Setting;
 import com.yboot.base.modules.base.service.SettingService;
 import com.yboot.base.modules.base.vo.OssSetting;
@@ -37,7 +37,7 @@ public class TencentFileManage implements FileManage {
 
         Setting setting = settingService.get(SettingConstant.TENCENT_OSS);
         if(setting==null|| StrUtil.isBlank(setting.getValue())){
-            throw new XbootException("您还未配置腾讯云COS存储");
+            throw new YbootException("您还未配置腾讯云COS存储");
         }
         return new Gson().fromJson(setting.getValue(), OssSetting.class);
     }
@@ -102,7 +102,7 @@ public class TencentFileManage implements FileManage {
             CopyResult copyResult = copy.waitForCopyResult();
         } catch (Exception e) {
             e.printStackTrace();
-            throw new XbootException("复制文件失败");
+            throw new YbootException("复制文件失败");
         }
         transferManager.shutdownNow();
         cosClient.shutdown();

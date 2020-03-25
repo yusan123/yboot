@@ -3,8 +3,8 @@ package com.yboot.base.config.interceptor;
 import cn.hutool.core.util.StrUtil;
 import com.google.gson.Gson;
 import com.yboot.base.common.utils.IpInfoUtil;
-import com.yboot.base.config.properties.XbootIpLimitProperties;
-import com.yboot.base.config.properties.XbootLimitProperties;
+import com.yboot.base.config.properties.YbootIpLimitProperties;
+import com.yboot.base.config.properties.YbootLimitProperties;
 import com.yboot.base.modules.base.entity.Setting;
 import com.yboot.base.modules.base.service.SettingService;
 import com.yboot.base.modules.base.vo.OtherSetting;
@@ -33,10 +33,10 @@ import java.lang.reflect.Method;
 public class LimitRaterInterceptor extends HandlerInterceptorAdapter {
 
     @Autowired
-    private XbootLimitProperties limitProperties;
+    private YbootLimitProperties limitProperties;
 
     @Autowired
-    private XbootIpLimitProperties ipLimitProperties;
+    private YbootIpLimitProperties ipLimitProperties;
 
     @Autowired
     private RedisRaterLimiter redisRaterLimiter;

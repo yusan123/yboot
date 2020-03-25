@@ -2,7 +2,7 @@ package com.yboot.base.modules.file.controller;
 
 import com.yboot.common.common.constant.CommonConstant;
 import com.yboot.common.common.constant.SettingConstant;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.common.common.utils.*;
 import com.yboot.common.common.vo.PageVo;
 import com.yboot.common.common.vo.Result;
@@ -156,7 +156,7 @@ public class FileController {
 
         File file = fileService.get(id);
         if(file==null){
-            throw new XbootException("文件ID:"+id+"不存在");
+            throw new YbootException("文件ID:"+id+"不存在");
         }
         response.addHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(file.getFKey(), "UTF-8"));
         response.setContentLengthLong(file.getSize());

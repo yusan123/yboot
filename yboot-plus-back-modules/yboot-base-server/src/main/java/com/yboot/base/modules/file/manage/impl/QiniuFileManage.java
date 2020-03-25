@@ -1,7 +1,7 @@
 package com.yboot.base.modules.file.manage.impl;
 
 import com.yboot.common.common.constant.SettingConstant;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.base.modules.base.entity.Setting;
 import com.yboot.base.modules.base.service.SettingService;
 import com.yboot.base.modules.base.vo.OssSetting;
@@ -39,7 +39,7 @@ public class QiniuFileManage implements FileManage {
 
         Setting setting = settingService.get(SettingConstant.QINIU_OSS);
         if(setting==null|| StrUtil.isBlank(setting.getValue())){
-            throw new XbootException("您还未配置七牛云对象存储");
+            throw new YbootException("您还未配置七牛云对象存储");
         }
         return new Gson().fromJson(setting.getValue(), OssSetting.class);
     }
@@ -81,7 +81,7 @@ public class QiniuFileManage implements FileManage {
             return os.getHttp() + os.getEndpoint() + "/" + putRet.key;
         } catch (QiniuException ex) {
             Response r = ex.response;
-            throw new XbootException("上传文件出错，请检查七牛云配置，" + r.toString());
+            throw new YbootException("上传文件出错，请检查七牛云配置，" + r.toString());
         }
     }
 
@@ -97,7 +97,7 @@ public class QiniuFileManage implements FileManage {
             return os.getHttp() + os.getEndpoint() + "/" + putRet.key;
         } catch (QiniuException ex) {
             Response r = ex.response;
-            throw new XbootException("上传文件出错，请检查七牛云配置，" + r.toString());
+            throw new YbootException("上传文件出错，请检查七牛云配置，" + r.toString());
         }
     }
 
@@ -111,7 +111,7 @@ public class QiniuFileManage implements FileManage {
             bucketManager.move(os.getBucket(), fromKey, os.getBucket(), toKey);
             return os.getHttp() + os.getEndpoint() + "/" + toKey;
         } catch (QiniuException ex) {
-            throw new XbootException("重命名文件失败，" + ex.response.error);
+            throw new YbootException("重命名文件失败，" + ex.response.error);
         }
     }
 
@@ -125,7 +125,7 @@ public class QiniuFileManage implements FileManage {
             bucketManager.copy(os.getBucket(), fromKey, os.getBucket(), toKey);
             return os.getHttp() + os.getEndpoint() + "/" + toKey;
         } catch (QiniuException ex) {
-            throw new XbootException("复制文件失败，" + ex.response.error);
+            throw new YbootException("复制文件失败，" + ex.response.error);
         }
     }
 
@@ -146,7 +146,7 @@ public class QiniuFileManage implements FileManage {
                 bucketManager.delete(os.getBucket(), key);
             }
         } catch (QiniuException ex) {
-            throw new XbootException("删除文件失败，" + ex.response.error);
+            throw new YbootException("删除文件失败，" + ex.response.error);
         }
     }
 }

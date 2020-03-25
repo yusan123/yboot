@@ -1,7 +1,7 @@
 package com.yboot.base.modules.activiti.controller;
 
 import com.yboot.common.common.constant.ActivitiConstant;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.common.common.utils.PageUtil;
 import com.yboot.common.common.utils.ResultUtil;
 import com.yboot.common.common.vo.PageVo;
@@ -149,7 +149,7 @@ public class ActProcessController {
         } else if (ActivitiConstant.RESOURCE_TYPE_IMAGE.equals(type)) {
             resourceName = pd.getDiagramResourceName();
         } else{
-          throw new XbootException("类型type不正确");
+          throw new YbootException("类型type不正确");
         }
         InputStream inputStream = repositoryService.getResourceAsStream(pd.getDeploymentId(),
                 resourceName);
@@ -165,7 +165,7 @@ public class ActProcessController {
             response.flushBuffer();
         } catch (IOException e) {
             log.error(e.toString());
-            throw new XbootException("导出部署流程资源失败");
+            throw new YbootException("导出部署流程资源失败");
         }
     }
 

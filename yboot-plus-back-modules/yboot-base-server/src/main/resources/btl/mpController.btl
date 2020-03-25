@@ -1,9 +1,9 @@
 package ${entity.controllerPackage};
 
-import com.yboot.base.common.utils.PageUtil;
-import com.yboot.base.common.utils.ResultUtil;
-import com.yboot.base.common.vo.PageVo;
-import com.yboot.base.common.vo.Result;
+import com.yboot.common.common.utils.PageUtil;
+import com.yboot.common.common.utils.ResultUtil;
+import com.yboot.common.common.vo.PageVo;
+import com.yboot.common.common.vo.Result;
 import ${entity.entityPackage}.${entity.className};
 import ${entity.servicePackage}.I${entity.className}Service;
 import cn.hutool.core.util.StrUtil;
@@ -24,7 +24,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @Api(description = "${entity.description}管理接口")
-@RequestMapping("/xboot/${entity.classNameLowerCase}")
+@RequestMapping("/Yboot/${entity.classNameLowerCase}")
 @Transactional
 public class ${entity.className}Controller {
 

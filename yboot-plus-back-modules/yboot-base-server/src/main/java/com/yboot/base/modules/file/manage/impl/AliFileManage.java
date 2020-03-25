@@ -1,7 +1,7 @@
 package com.yboot.base.modules.file.manage.impl;
 
 import com.yboot.common.common.constant.SettingConstant;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.base.modules.base.entity.Setting;
 import com.yboot.base.modules.base.service.SettingService;
 import com.yboot.base.modules.base.vo.OssSetting;
@@ -31,7 +31,7 @@ public class AliFileManage implements FileManage {
 
         Setting setting = settingService.get(SettingConstant.ALI_OSS);
         if(setting==null|| StrUtil.isBlank(setting.getValue())){
-            throw new XbootException("您还未配置阿里云OSS存储");
+            throw new YbootException("您还未配置阿里云OSS存储");
         }
         return new Gson().fromJson(setting.getValue(), OssSetting.class);
     }

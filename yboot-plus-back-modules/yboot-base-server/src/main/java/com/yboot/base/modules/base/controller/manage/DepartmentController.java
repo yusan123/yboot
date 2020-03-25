@@ -14,7 +14,7 @@ import com.yboot.base.modules.base.service.DepartmentService;
 import com.yboot.base.modules.base.service.RoleDepartmentService;
 import com.yboot.base.modules.base.service.UserService;
 import com.yboot.common.common.constant.CommonConstant;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.common.common.redis.RedisTemplateHelper;
 import com.yboot.common.common.utils.CommonUtil;
 import com.yboot.common.common.utils.HibernateProxyTypeAdapter;
@@ -162,7 +162,7 @@ public class DepartmentController {
 
         List<User> list = userService.findByDepartmentId(id);
         if(list!=null&&list.size()>0){
-            throw new XbootException("删除失败，包含正被用户使用关联的部门");
+            throw new YbootException("删除失败，包含正被用户使用关联的部门");
         }
         // 获得其父节点
         Department dep = departmentService.get(id);

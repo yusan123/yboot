@@ -25,7 +25,7 @@ import java.util.List;
 @EnableSwagger2
 public class Swagger2Config {
 
-    @Value("${swagger.title:XBoot}")
+    @Value("${swagger.title:YBoot}")
     private String title;
 
     @Value("${swagger.description:Api Documentation}")

@@ -17,7 +17,7 @@ import com.yboot.base.modules.activiti.vo.TaskVo;
 import com.yboot.base.modules.base.entity.User;
 import com.yboot.base.modules.base.service.UserService;
 import com.yboot.common.common.constant.ActivitiConstant;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.common.common.utils.ResultUtil;
 import com.yboot.common.common.utils.SnowFlakeUtil;
 import com.yboot.common.common.vo.PageVo;
@@ -582,7 +582,7 @@ public class ActTaskController {
             try {
                 runtimeService.deleteProcessInstance(procInstId, ActivitiConstant.BACKED_FLAG);
             }catch (Exception e){
-                throw new XbootException("请确保无重复所属的流程，或尝试对单条数据进行驳回");
+                throw new YbootException("请确保无重复所属的流程，或尝试对单条数据进行驳回");
             }
             ActBusiness actBusiness = actBusinessService.get(pi.getBusinessKey());
             actBusiness.setStatus(ActivitiConstant.STATUS_FINISH);

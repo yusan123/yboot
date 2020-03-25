@@ -3,7 +3,7 @@ package com.yboot.base.config.security.jwt;
 import cn.hutool.core.util.StrUtil;
 import com.google.gson.Gson;
 import com.yboot.base.common.utils.IpInfoUtil;
-import com.yboot.base.config.properties.XbootTokenProperties;
+import com.yboot.base.config.properties.YbootTokenProperties;
 import com.yboot.common.common.annotation.SystemLog;
 import com.yboot.common.common.constant.SecurityConstant;
 import com.yboot.common.common.enums.LogType;
@@ -39,7 +39,7 @@ import java.util.concurrent.TimeUnit;
 public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
     @Autowired
-    private XbootTokenProperties tokenProperties;
+    private YbootTokenProperties tokenProperties;
 
     @Autowired
     private IpInfoUtil ipInfoUtil;

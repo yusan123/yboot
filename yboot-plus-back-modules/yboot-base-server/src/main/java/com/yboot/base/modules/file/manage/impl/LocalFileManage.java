@@ -1,7 +1,7 @@
 package com.yboot.base.modules.file.manage.impl;
 
 import com.yboot.common.common.constant.SettingConstant;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.base.modules.base.entity.Setting;
 import com.yboot.base.modules.base.service.SettingService;
 import com.yboot.base.modules.base.vo.OssSetting;
@@ -32,7 +32,7 @@ public class LocalFileManage implements FileManage {
 
         Setting setting = settingService.get(SettingConstant.LOCAL_OSS);
         if(setting==null|| StrUtil.isBlank(setting.getValue())){
-            throw new XbootException("您还未配置本地存储");
+            throw new YbootException("您还未配置本地存储");
         }
         return new Gson().fromJson(setting.getValue(), OssSetting.class);
     }
@@ -41,7 +41,7 @@ public class LocalFileManage implements FileManage {
     @Deprecated
     public String pathUpload(String filePath, String key) {
 
-        throw new XbootException("暂不支持");
+        throw new YbootException("暂不支持");
     }
 
     /**
@@ -63,14 +63,14 @@ public class LocalFileManage implements FileManage {
         }
         File f = new File(path + "/" + key);
         if(f.exists()){
-            throw new XbootException("文件名已存在");
+            throw new YbootException("文件名已存在");
         }
         try {
             file.transferTo(f);
             return path + "/" + key;
         } catch (IOException e) {
             log.error(e.toString());
-            throw new XbootException("上传文件出错");
+            throw new YbootException("上传文件出错");
         }
     }
 
@@ -117,7 +117,7 @@ public class LocalFileManage implements FileManage {
             return file.getParentFile() + "/" + toKey;
         } catch (IOException e) {
             log.error(e.toString());
-            throw new XbootException("复制文件出错");
+            throw new YbootException("复制文件出错");
         }
     }
 

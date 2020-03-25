@@ -2,7 +2,7 @@ package com.yboot.base.modules.file.manage;
 
 import com.yboot.common.common.constant.CommonConstant;
 import com.yboot.common.common.constant.SettingConstant;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.base.modules.base.entity.Setting;
 import com.yboot.base.modules.base.service.SettingService;
 import com.yboot.base.modules.file.manage.impl.*;
@@ -44,7 +44,7 @@ public class FileManageFactory {
 
         Setting setting = settingService.get(SettingConstant.OSS_USED);
         if(setting==null|| StrUtil.isBlank(setting.getValue())){
-            throw new XbootException("您还未配置OSS存储服务");
+            throw new YbootException("您还未配置OSS存储服务");
         }
         String type = setting.getValue();
         if((type.equals(SettingConstant.QINIU_OSS)&&location==null)||CommonConstant.OSS_QINIU.equals(location)){
@@ -58,7 +58,7 @@ public class FileManageFactory {
         }else if((type.equals(SettingConstant.LOCAL_OSS)&&location==null)||CommonConstant.OSS_LOCAL.equals(location)){
             return localFileManage;
         }else{
-            throw new XbootException("暂不支持该存储配置，请检查配置");
+            throw new YbootException("暂不支持该存储配置，请检查配置");
         }
     }
 }

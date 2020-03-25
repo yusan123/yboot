@@ -2,7 +2,7 @@ package com.yboot.base.config.security;
 
 import com.yboot.base.common.utils.SecurityUtil;
 import com.yboot.base.config.properties.IgnoredUrlsProperties;
-import com.yboot.base.config.properties.XbootTokenProperties;
+import com.yboot.base.config.properties.YbootTokenProperties;
 import com.yboot.base.config.security.jwt.AuthenticationFailHandler;
 import com.yboot.base.config.security.jwt.AuthenticationSuccessHandler;
 import com.yboot.base.config.security.jwt.RestAccessDeniedHandler;
@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    private XbootTokenProperties tokenProperties;
+    private YbootTokenProperties tokenProperties;
 
     @Autowired
     private IgnoredUrlsProperties ignoredUrlsProperties;

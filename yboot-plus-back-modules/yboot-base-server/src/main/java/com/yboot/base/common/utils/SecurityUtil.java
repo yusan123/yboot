@@ -4,7 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yboot.base.config.interceptor.Jwt2UserInterceptorAdapter;
-import com.yboot.base.config.properties.XbootTokenProperties;
+import com.yboot.base.config.properties.YbootTokenProperties;
 import com.yboot.base.modules.base.entity.Department;
 import com.yboot.base.modules.base.entity.Permission;
 import com.yboot.base.modules.base.entity.Role;
@@ -14,7 +14,7 @@ import com.yboot.base.modules.base.service.UserService;
 import com.yboot.base.modules.base.service.mybatis.IUserRoleService;
 import com.yboot.common.common.constant.CommonConstant;
 import com.yboot.common.common.constant.SecurityConstant;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.common.common.vo.TokenUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -35,7 +35,7 @@ import java.util.concurrent.TimeUnit;
 public class SecurityUtil {
 
     @Autowired
-    private XbootTokenProperties tokenProperties;
+    private YbootTokenProperties tokenProperties;
 
     @Autowired
     private UserService userService;
@@ -52,7 +52,7 @@ public class SecurityUtil {
     public String getToken(String username, Boolean saveLogin){
 
         if(StrUtil.isBlank(username)){
-            throw new XbootException("username不能为空");
+            throw new YbootException("username不能为空");
         }
         Boolean saved = false;
         if(saveLogin==null||saveLogin){

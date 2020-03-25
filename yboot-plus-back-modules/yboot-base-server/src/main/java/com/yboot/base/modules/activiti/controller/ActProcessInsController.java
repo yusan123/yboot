@@ -1,7 +1,7 @@
 package com.yboot.base.modules.activiti.controller;
 
 import com.yboot.common.common.constant.ActivitiConstant;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.common.common.utils.ResultUtil;
 import com.yboot.common.common.vo.PageVo;
 import com.yboot.common.common.vo.Result;
@@ -295,7 +295,7 @@ public class ActProcessInsController {
             response.flushBuffer();
         } catch (IOException e) {
             log.error(e.toString());
-            throw new XbootException("读取流程图片失败");
+            throw new YbootException("读取流程图片失败");
         }
     }
 

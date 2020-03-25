@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "base.iplimit")
-public class XbootIpLimitProperties {
+public class YbootIpLimitProperties {
 
     /**
      * 是否开启IP限流

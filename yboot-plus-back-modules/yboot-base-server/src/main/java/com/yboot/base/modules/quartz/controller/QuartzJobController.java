@@ -1,7 +1,7 @@
 package com.yboot.base.modules.quartz.controller;
 
 import com.yboot.common.common.constant.CommonConstant;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.common.common.utils.PageUtil;
 import com.yboot.common.common.utils.ResultUtil;
 import com.yboot.common.common.vo.PageVo;
@@ -77,7 +77,7 @@ public class QuartzJobController {
         try {
             scheduler.pauseJob(JobKey.jobKey(job.getJobClassName()));
         } catch (SchedulerException e) {
-            throw new XbootException("暂停定时任务失败");
+            throw new YbootException("暂停定时任务失败");
         }
         job.setStatus(CommonConstant.STATUS_DISABLE);
         quartzJobService.update(job);
@@ -91,7 +91,7 @@ public class QuartzJobController {
         try {
             scheduler.resumeJob(JobKey.jobKey(job.getJobClassName()));
         } catch (SchedulerException e) {
-            throw new XbootException("恢复定时任务失败");
+            throw new YbootException("恢复定时任务失败");
         }
         job.setStatus(CommonConstant.STATUS_NORMAL);
         quartzJobService.update(job);
@@ -135,9 +135,9 @@ public class QuartzJobController {
             scheduler.scheduleJob(jobDetail, trigger);
         } catch (SchedulerException e) {
             log.error(e.toString());
-            throw new XbootException("创建定时任务失败");
+            throw new YbootException("创建定时任务失败");
         } catch (Exception e){
-            throw new XbootException("后台找不到该类名任务");
+            throw new YbootException("后台找不到该类名任务");
         }
     }
 
@@ -152,7 +152,7 @@ public class QuartzJobController {
             scheduler.unscheduleJob(TriggerKey.triggerKey(jobClassName));
             scheduler.deleteJob(JobKey.jobKey(jobClassName));
         } catch (Exception e) {
-            throw new XbootException("删除定时任务失败");
+            throw new YbootException("删除定时任务失败");
         }
     }
 

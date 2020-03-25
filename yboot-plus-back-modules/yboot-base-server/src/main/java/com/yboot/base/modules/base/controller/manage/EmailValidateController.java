@@ -12,7 +12,7 @@ import com.yboot.base.modules.base.service.UserService;
 import com.yboot.base.modules.base.vo.OtherSetting;
 import com.yboot.common.common.constant.CommonConstant;
 import com.yboot.common.common.constant.SettingConstant;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.common.common.utils.CommonUtil;
 import com.yboot.common.common.utils.ResultUtil;
 import com.yboot.common.common.vo.EmailValidate;
@@ -61,7 +61,7 @@ public class EmailValidateController {
 
         Setting setting = settingService.get(SettingConstant.OTHER_SETTING);
         if(StrUtil.isBlank(setting.getValue())){
-            throw new XbootException("系统未配置访问域名，请联系管理员");
+            throw new YbootException("系统未配置访问域名，请联系管理员");
         }
         return new Gson().fromJson(setting.getValue(), OtherSetting.class);
     }
@@ -71,7 +71,7 @@ public class EmailValidateController {
     public Result<Object> sendEditCode(@PathVariable String email,
                                        HttpServletRequest request){
 
-        return sendEmailCode(email, "修改邮箱", "【XBoot】修改邮箱验证","code-email", request);
+        return sendEmailCode(email, "修改邮箱", "【YBoot】修改邮箱验证","code-email", request);
     }
 
     @RequestMapping(value = "/sendResetCode/{email}", method = RequestMethod.GET)
@@ -79,7 +79,7 @@ public class EmailValidateController {
     public Result<Object> sendResetCode(@PathVariable String email,
                                         HttpServletRequest request){
 
-        return sendEmailCode(email, "重置密码", "【XBoot】重置密码邮箱验证", "code-email", request);
+        return sendEmailCode(email, "重置密码", "【YBoot】重置密码邮箱验证", "code-email", request);
     }
 
     /**

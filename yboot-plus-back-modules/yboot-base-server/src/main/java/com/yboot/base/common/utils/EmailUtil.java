@@ -6,7 +6,7 @@ import com.yboot.base.modules.base.entity.Setting;
 import com.yboot.base.modules.base.service.SettingService;
 import com.yboot.base.modules.base.vo.EmailSetting;
 import com.yboot.common.common.constant.SettingConstant;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.common.common.utils.ObjectUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ public class EmailUtil {
 
         Setting setting = settingService.get(SettingConstant.EMAIL_SETTING);
         if(StrUtil.isBlank(setting.getValue())){
-            throw new XbootException("您还未配置邮件发送相关配置");
+            throw new YbootException("您还未配置邮件发送相关配置");
         }
         return new Gson().fromJson(setting.getValue(), EmailSetting.class);
     }
@@ -91,7 +91,7 @@ public class EmailUtil {
             senderImpl.send(mailMessage);
         } catch (Exception e) {
             log.error(e.toString());
-            throw new XbootException("发送邮件失败，请检查邮件配置");
+            throw new YbootException("发送邮件失败，请检查邮件配置");
         }
     }
 }

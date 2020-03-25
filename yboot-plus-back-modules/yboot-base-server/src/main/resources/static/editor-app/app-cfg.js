@@ -21,5 +21,5 @@
 var ACTIVITI = ACTIVITI || {};
 
 ACTIVITI.CONFIG = {
-	'contextRoot' : '/xboot/act',
+	'contextRoot' : '/Yboot/act',
 };

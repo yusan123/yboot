@@ -1,6 +1,6 @@
 package com.yboot.base.modules.activiti.controller;
 
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.common.common.utils.PageUtil;
 import com.yboot.common.common.utils.ResultUtil;
 import com.yboot.common.common.vo.PageVo;
@@ -219,7 +219,7 @@ public class ActModelController {
             // 获取节点信息
             byte[] nodeBytes = repositoryService.getModelEditorSource(modelData.getId());
             if (nodeBytes == null) {
-                throw new XbootException("导出失败，模型数据为空");
+                throw new YbootException("导出失败，模型数据为空");
             }
             BpmnJsonConverter jsonConverter = new BpmnJsonConverter();
             JsonNode editorNode = new ObjectMapper().readTree(nodeBytes);
@@ -238,7 +238,7 @@ public class ActModelController {
             response.flushBuffer();
         } catch (Exception e){
             log.error(e.toString());
-            throw new XbootException("导出模型出错");
+            throw new YbootException("导出模型出错");
         }
     }
 

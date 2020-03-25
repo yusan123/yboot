@@ -1,7 +1,7 @@
 package com.yboot.base.modules.file.manage.impl;
 
 import com.yboot.common.common.constant.SettingConstant;
-import com.yboot.common.common.exception.XbootException;
+import com.yboot.common.common.exception.YbootException;
 import com.yboot.base.modules.base.entity.Setting;
 import com.yboot.base.modules.base.service.SettingService;
 import com.yboot.base.modules.base.vo.OssSetting;
@@ -31,7 +31,7 @@ public class MinioFileManage implements FileManage {
 
         Setting setting = settingService.get(SettingConstant.MINIO_OSS);
         if(setting==null|| StrUtil.isBlank(setting.getValue())){
-            throw new XbootException("您还未配置MinIO存储");
+            throw new YbootException("您还未配置MinIO存储");
         }
         return new Gson().fromJson(setting.getValue(), OssSetting.class);
     }
@@ -82,7 +82,7 @@ public class MinioFileManage implements FileManage {
             checkBucket(os, minioClient);
             minioClient.putObject(os.getBucket(), key, filePath, null, null, null, null);
         } catch (Exception e) {
-            throw new XbootException("上传出错，请检查MinIO配置");
+            throw new YbootException("上传出错，请检查MinIO配置");
         }
         return os.getHttp() + os.getEndpoint() + "/" + os.getBucket() + "/" + key;
     }
@@ -96,7 +96,7 @@ public class MinioFileManage implements FileManage {
             checkBucket(os, minioClient);
             minioClient.putObject(os.getBucket(), key, inputStream, file.getSize(), null, null, file.getContentType());
         } catch (Exception e) {
-            throw new XbootException("上传出错，请检查MinIO配置");
+            throw new YbootException("上传出错，请检查MinIO配置");
         }
         return os.getHttp() + os.getEndpoint() + "/" + os.getBucket() + "/" + key;
     }
@@ -119,7 +119,7 @@ public class MinioFileManage implements FileManage {
             checkBucket(os, minioClient);
             minioClient.copyObject(os.getBucket(), fromKey, null, null, os.getBucket(), toKey, null, null);
         } catch (Exception e) {
-            throw new XbootException("拷贝文件出错，请检查MinIO配置");
+            throw new YbootException("拷贝文件出错，请检查MinIO配置");
         }
         return os.getHttp() + os.getEndpoint() + "/" + os.getBucket() + "/" + toKey;
     }
@@ -141,7 +141,7 @@ public class MinioFileManage implements FileManage {
                 minioClient.removeObject(os.getBucket(), key);
             }
         } catch (Exception e) {
-            throw new XbootException("删除文件出错，请检查MinIO配置");
+            throw new YbootException("删除文件出错，请检查MinIO配置");
         }
     }
 }
