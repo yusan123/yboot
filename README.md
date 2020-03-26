@@ -26,5 +26,9 @@
 3. 提交代码
 4. 新建 Pull Request
 
+#### 欢迎关注公众号
 
+欢迎关注本人公众号，后面会将开发文档上传至公众号，也会提供一些好玩有趣的科技资讯。
+
+![](https://img-blog.csdnimg.cn/20200220102915639.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTEyOTYxNjU=,size_16,color_FFFFFF,t_70)
 
