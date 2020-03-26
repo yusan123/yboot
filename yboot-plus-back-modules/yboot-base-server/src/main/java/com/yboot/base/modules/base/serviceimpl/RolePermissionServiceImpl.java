@@ -1,6 +1,8 @@
 package com.yboot.base.modules.base.serviceimpl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yboot.base.modules.base.dao.RolePermissionDao;
+import com.yboot.base.modules.base.dao.mapper.RolePermissionMapper;
 import com.yboot.base.modules.base.entity.RolePermission;
 import com.yboot.base.modules.base.service.RolePermissionService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,10 +19,13 @@ import java.util.List;
 @Slf4j
 @Service
 @Transactional
-public class RolePermissionServiceImpl implements RolePermissionService {
+public class RolePermissionServiceImpl implements RolePermissionService  {
 
     @Autowired
     private RolePermissionDao rolePermissionDao;
+
+    @Autowired
+    private RolePermissionMapper rolePermissionMapper;
 
     @Override
     public RolePermissionDao getRepository() {
@@ -44,4 +49,12 @@ public class RolePermissionServiceImpl implements RolePermissionService {
 
         rolePermissionDao.deleteByRoleId(roleId);
     }
+
+    @Override
+    public void insertBatch(List<RolePermission> list) {
+
+        rolePermissionMapper.insertBatch(list);
+    }
+
+
 }

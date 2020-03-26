@@ -21,8 +21,10 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 /**
@@ -101,14 +103,15 @@ public class RoleController {
 
         //删除其关联权限
         rolePermissionService.deleteByRoleId(roleId);
-        //分配新权限
-        for(String permId : permIds){
+
+        List<RolePermission> rolePermissionList = Arrays.asList(permIds).stream().map(permId -> {
             RolePermission rolePermission = new RolePermission();
             rolePermission.setRoleId(roleId);
             rolePermission.setPermissionId(permId);
-            rolePermissionService.save(rolePermission);
-        }
-        //手动批量删除缓存
+            return rolePermission;
+        }).collect(Collectors.toList());
+        rolePermissionService.insertBatch(rolePermissionList);
+        //        手动批量删除缓存
         Set<String> keysUser = redisTemplateHelper.keys("user:" + "*");
         redisTemplate.delete(keysUser);
         Set<String> keysUserRole = redisTemplateHelper.keys("userRole:" + "*");

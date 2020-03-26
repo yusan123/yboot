@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yboot.base.modules.base.dao.mapper.RolePermissionMapper">
+
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO t_role_permission
+        ( create_by, create_time, del_flag, update_by, update_time,
+            permission_id,
+         role_id, id )
+            VALUES
+            <foreach collection="list" item="perm" index="index" separator=",">
+                (
+                #{perm.createBy},
+                #{perm.createTime},
+                #{perm.delFlag},
+                #{perm.updateBy},
+                #{perm.updateTime},
+                #{perm.permissionId},
+                #{perm.roleId},
+                #{perm.id}
+                )
+            </foreach>
+    </insert>
+</mapper>
