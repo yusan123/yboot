@@ -12,6 +12,14 @@
 
 ![工作流](https://ae01.alicdn.com/kf/H62eeaf33f5444d1896c91461a9f9851a2.png)
 
+
+
+1. 新添加支付功能（2020年3月31日）
+
+![img](https://www.cloudbed.vip/file/2020/3/31/49fb944b031642adb30da0f6bbae6e3f.png)
+
+
+
 #### 安装教程
 
 1.  启动nacos项目这里使用的是windows版本的,启动时找到bin目录双击startup.cmd即可。
