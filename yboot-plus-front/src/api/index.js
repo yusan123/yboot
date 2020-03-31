@@ -548,3 +548,8 @@ export const getEntityData = (path, params) => {
 export const base64Upload = (params) => {
     return postRequest('/upload/file', params)
 }
+
+//　创建支付定单
+export const getPayOrder = (params) => {
+    return getRequest('/pay/create', params)
+}
