@@ -31,7 +31,7 @@ public class YbootMPGenerator {
      * 实体类名
      * 建议仅需修改
      */
-    private static final String className = "Student";
+    private static final String className = "PayInfo";
 
     /**
      * 类说明描述

@@ -46,6 +46,7 @@ ignored:
   # 无需登录认证的请求
   urls:
     - /base/oauth2/**
+    - /base/pay/notify
     - /base/actuator/**
     - /base/admin/**
     - /editor-app/**
