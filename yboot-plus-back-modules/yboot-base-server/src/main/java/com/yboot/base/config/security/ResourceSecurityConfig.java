@@ -42,8 +42,12 @@ public class ResourceSecurityConfig extends ResourceServerConfigurerAdapter {
         }
         registry
                 .and()
+//                // 允许网页iframe
+                .headers().frameOptions().disable()
+                .and()
                 .authorizeRequests().anyRequest().authenticated()
                 .and()
+
                 // 自定义权限拒绝处理类
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
 
