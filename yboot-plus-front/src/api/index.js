@@ -4,7 +4,7 @@ import { getStore, setStore } from '@/libs/storage';
 import axios from 'axios';
 
 // Vaptcha ID
-export const vaptchaID = "5dce36188713b71e70a41eb7"
+export const vaptchaID = "5e85ce1255d0def9521469ac"
 // 文件上传接口
 export const uploadFile = "/base/upload/file"
 // 验证码渲染图片接口

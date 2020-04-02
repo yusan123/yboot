@@ -210,6 +210,7 @@ export default {
         offline_server: "你的离线验证接口地址 可选但此处不能为空"
       }).then(function(vaptchaObj) {
         vaptchaObject = vaptchaObj;
+
         vaptchaObj.listen("pass", function() {
           that.form.token = vaptchaObj.getToken();
           // 验证成功 发送验证码
@@ -256,6 +257,7 @@ export default {
       });
     },
     sendEmailCode() {
+      debugger
       this.sending = true;
       this.getSms = "发送中";
       sendResetEmail(this.form.email, this.form).then(res => {

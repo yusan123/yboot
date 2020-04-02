@@ -47,11 +47,9 @@ public class ResourceSecurityConfig extends ResourceServerConfigurerAdapter {
                 .and()
                 .authorizeRequests().anyRequest().authenticated()
                 .and()
-
                 // 自定义权限拒绝处理类
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
-
-        registry.and().
+                registry.and().
                 addFilterBefore(imageValidateFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }

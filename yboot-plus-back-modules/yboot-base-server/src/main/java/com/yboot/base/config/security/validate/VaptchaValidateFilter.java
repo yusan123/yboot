@@ -10,6 +10,7 @@ import com.yboot.base.modules.base.service.SettingService;
 import com.yboot.base.modules.base.vo.VaptchaSetting;
 import com.yboot.common.common.constant.SettingConstant;
 import com.yboot.common.common.utils.ResponseUtil;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -70,8 +71,10 @@ public class VaptchaValidateFilter extends OncePerRequestFilter {
             String params = "id=" + vs.getVid() + "&secretkey=" + vs.getSecretKey() + "&token=" + token
                     + "&ip=" + ipInfoUtil.getIpAddr(request);
             String result = HttpUtil.post(SettingConstant.VAPTCHA_URL, params);
+
+            Result resultObject = new Gson().fromJson(result, Result.class);
             if(!result.contains("\"success\":1")){
-                ResponseUtil.out(response, ResponseUtil.resultMap(false,500,"Vaptcha验证码验证失败"));
+                ResponseUtil.out(response, ResponseUtil.resultMap(false,500,"Vaptcha验证码验证失败"+resultObject.getMsg()));
                 return;
             }
             // 验证成功 放行
@@ -81,4 +84,11 @@ public class VaptchaValidateFilter extends OncePerRequestFilter {
         // 无需验证 放行
         chain.doFilter(request, response);
     }
+
+}
+@Data
+class Result{
+    private String msg;
+    private String success;
+    private String score;
 }
