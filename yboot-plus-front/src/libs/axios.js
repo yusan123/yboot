@@ -63,13 +63,14 @@ axios.interceptors.response.use(response => {
 
 export const getRequest = (url, params) => {
     let accessToken = getStore('accessToken');
+
     return axios({
         method: 'get',
         url: `${base}${url}`,
         params: params,
         headers: {
             'accessToken': accessToken,
-            'Authorization': 'bearer '+ accessToken
+            'Authorization': accessToken? 'bearer '+ accessToken: ''
         }
     });
 };
