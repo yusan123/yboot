@@ -70,7 +70,7 @@ export const getRequest = (url, params) => {
         params: params,
         headers: {
             'accessToken': accessToken,
-            'Authorization': accessToken? 'bearer '+ accessToken: ''
+            'Authorization': accessToken ?  accessToken ? 'bearer '+ accessToken: '': ''
         }
     });
 };
@@ -92,7 +92,7 @@ export const postRequest = (url, params) => {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'accessToken': accessToken,
-            'Authorization': 'bearer '+ accessToken
+            'Authorization':  accessToken ? 'bearer '+ accessToken: ''
         }
     });
 };
@@ -114,7 +114,7 @@ export const putRequest = (url, params) => {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'accessToken': accessToken,
-            'Authorization': 'bearer '+ accessToken
+            'Authorization':  accessToken ? 'bearer '+ accessToken: ''
         }
     });
 };
@@ -127,7 +127,7 @@ export const deleteRequest = (url, params) => {
         params: params,
         headers: {
             'accessToken': accessToken,
-            'Authorization': 'bearer '+ accessToken
+            'Authorization':  accessToken ? 'bearer '+ accessToken: ''
         }
     });
 };
@@ -140,7 +140,7 @@ export const importRequest = (url, params) => {
         data: params,
         headers: {
             'accessToken': accessToken,
-            'Authorization': 'bearer '+ accessToken
+            'Authorization':  accessToken ? 'bearer '+ accessToken: ''
         }
     });
 };
@@ -153,7 +153,7 @@ export const uploadFileRequest = (url, params) => {
         params: params,
         headers: {
             'accessToken': accessToken,
-            'Authorization': 'bearer '+ accessToken
+            'Authorization':  accessToken ? 'bearer '+ accessToken: ''
         }
     });
 };

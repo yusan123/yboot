@@ -257,7 +257,7 @@ export default {
       });
     },
     sendEmailCode() {
-      debugger
+      
       this.sending = true;
       this.getSms = "发送中";
       sendResetEmail(this.form.email, this.form).then(res => {
