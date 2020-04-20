@@ -17,7 +17,7 @@ spring:
           uri: lb://yboot-base-server
           predicates:
             # 断言，路径相匹配的进行路由  匹配base请求路径后面的接口
-            - Path=/base/**
+            - Path=/base/**,/editor-app/**,/diagram-viewer/**,/modeler.html
         - id: business-router
           uri: lb://yboot-business-server
           predicates:
@@ -71,6 +71,7 @@ ignored:
     - /**/*.png
     - /**/*.ico
     - /base/test/**
+    - /modeler.html
   # 限流及黑名单不拦截的路径
   limitUrls:
     - /**/*.js
