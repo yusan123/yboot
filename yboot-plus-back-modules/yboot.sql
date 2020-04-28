@@ -1,573 +1,30 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         :
+ Source Server         : 杨国栋mysql
  Source Server Type    : MySQL
  Source Server Version : 50725
- Source Host           :
+ Source Host           : rm-bp1ajd206kzn2wcfxto.mysql.rds.aliyuncs.com:3306
  Source Schema         : yboot
 
  Target Server Type    : MySQL
  Target Server Version : 50725
  File Encoding         : 65001
 
- Date: 18/03/2020 09:01:41
+ Date: 28/04/2020 17:05:11
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
--- ----------------------------
--- Table structure for act_evt_log
--- ----------------------------
-DROP TABLE IF EXISTS `act_evt_log`;
-CREATE TABLE `act_evt_log`  (
-  `LOG_NR_` bigint(20) NOT NULL AUTO_INCREMENT,
-  `TYPE_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PROC_DEF_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PROC_INST_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `EXECUTION_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TASK_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TIME_STAMP_` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
-  `USER_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `DATA_` longblob NULL,
-  `LOCK_OWNER_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `LOCK_TIME_` timestamp(3) NULL DEFAULT NULL,
-  `IS_PROCESSED_` tinyint(4) NULL DEFAULT 0,
-  PRIMARY KEY (`LOG_NR_`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_ge_bytearray
--- ----------------------------
-DROP TABLE IF EXISTS `act_ge_bytearray`;
-CREATE TABLE `act_ge_bytearray`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `REV_` int(11) NULL DEFAULT NULL,
-  `NAME_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `DEPLOYMENT_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `BYTES_` longblob NULL,
-  `GENERATED_` tinyint(4) NULL DEFAULT NULL,
-  PRIMARY KEY (`ID_`) USING BTREE,
-  INDEX `ACT_FK_BYTEARR_DEPL`(`DEPLOYMENT_ID_`) USING BTREE,
-  CONSTRAINT `ACT_FK_BYTEARR_DEPL` FOREIGN KEY (`DEPLOYMENT_ID_`) REFERENCES `act_re_deployment` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_ge_property
--- ----------------------------
-DROP TABLE IF EXISTS `act_ge_property`;
-CREATE TABLE `act_ge_property`  (
-  `NAME_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `VALUE_` varchar(300) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `REV_` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`NAME_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of act_ge_property
--- ----------------------------
-INSERT INTO `act_ge_property` VALUES ('next.dbid', '1', 1);
-INSERT INTO `act_ge_property` VALUES ('schema.history', 'create(5.22.0.0)', 1);
-INSERT INTO `act_ge_property` VALUES ('schema.version', '5.22.0.0', 1);
-
--- ----------------------------
--- Table structure for act_hi_actinst
--- ----------------------------
-DROP TABLE IF EXISTS `act_hi_actinst`;
-CREATE TABLE `act_hi_actinst`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `PROC_DEF_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `PROC_INST_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `EXECUTION_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `ACT_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `TASK_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `CALL_PROC_INST_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `ACT_NAME_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `ACT_TYPE_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `ASSIGNEE_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `START_TIME_` datetime(3) NULL,
-  `END_TIME_` datetime(3) NULL DEFAULT NULL,
-  `DURATION_` bigint(20) NULL DEFAULT NULL,
-  `TENANT_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '',
-  PRIMARY KEY (`ID_`) USING BTREE,
-  INDEX `ACT_IDX_HI_ACT_INST_START`(`START_TIME_`) USING BTREE,
-  INDEX `ACT_IDX_HI_ACT_INST_END`(`END_TIME_`) USING BTREE,
-  INDEX `ACT_IDX_HI_ACT_INST_PROCINST`(`PROC_INST_ID_`, `ACT_ID_`) USING BTREE,
-  INDEX `ACT_IDX_HI_ACT_INST_EXEC`(`EXECUTION_ID_`, `ACT_ID_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_hi_attachment
--- ----------------------------
-DROP TABLE IF EXISTS `act_hi_attachment`;
-CREATE TABLE `act_hi_attachment`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `REV_` int(11) NULL DEFAULT NULL,
-  `USER_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `NAME_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `DESCRIPTION_` varchar(4000) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TYPE_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TASK_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PROC_INST_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `URL_` varchar(4000) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `CONTENT_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TIME_` datetime(3) NULL DEFAULT NULL,
-  PRIMARY KEY (`ID_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_hi_comment
--- ----------------------------
-DROP TABLE IF EXISTS `act_hi_comment`;
-CREATE TABLE `act_hi_comment`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `TYPE_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TIME_` datetime(3) NULL,
-  `USER_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TASK_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PROC_INST_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `ACTION_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `MESSAGE_` varchar(4000) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `FULL_MSG_` longblob NULL,
-  PRIMARY KEY (`ID_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_hi_detail
--- ----------------------------
-DROP TABLE IF EXISTS `act_hi_detail`;
-CREATE TABLE `act_hi_detail`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `TYPE_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `PROC_INST_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `EXECUTION_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TASK_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `ACT_INST_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `NAME_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `VAR_TYPE_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `REV_` int(11) NULL DEFAULT NULL,
-  `TIME_` datetime(3) NULL,
-  `BYTEARRAY_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `DOUBLE_` double NULL DEFAULT NULL,
-  `LONG_` bigint(20) NULL DEFAULT NULL,
-  `TEXT_` varchar(4000) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TEXT2_` varchar(4000) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  PRIMARY KEY (`ID_`) USING BTREE,
-  INDEX `ACT_IDX_HI_DETAIL_PROC_INST`(`PROC_INST_ID_`) USING BTREE,
-  INDEX `ACT_IDX_HI_DETAIL_ACT_INST`(`ACT_INST_ID_`) USING BTREE,
-  INDEX `ACT_IDX_HI_DETAIL_TIME`(`TIME_`) USING BTREE,
-  INDEX `ACT_IDX_HI_DETAIL_NAME`(`NAME_`) USING BTREE,
-  INDEX `ACT_IDX_HI_DETAIL_TASK_ID`(`TASK_ID_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_hi_identitylink
--- ----------------------------
-DROP TABLE IF EXISTS `act_hi_identitylink`;
-CREATE TABLE `act_hi_identitylink`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `GROUP_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TYPE_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `USER_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TASK_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PROC_INST_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  PRIMARY KEY (`ID_`) USING BTREE,
-  INDEX `ACT_IDX_HI_IDENT_LNK_USER`(`USER_ID_`) USING BTREE,
-  INDEX `ACT_IDX_HI_IDENT_LNK_TASK`(`TASK_ID_`) USING BTREE,
-  INDEX `ACT_IDX_HI_IDENT_LNK_PROCINST`(`PROC_INST_ID_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_hi_procinst
--- ----------------------------
-DROP TABLE IF EXISTS `act_hi_procinst`;
-CREATE TABLE `act_hi_procinst`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `PROC_INST_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `BUSINESS_KEY_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PROC_DEF_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `START_TIME_` datetime(3) NULL,
-  `END_TIME_` datetime(3) NULL DEFAULT NULL,
-  `DURATION_` bigint(20) NULL DEFAULT NULL,
-  `START_USER_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `START_ACT_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `END_ACT_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `SUPER_PROCESS_INSTANCE_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `DELETE_REASON_` varchar(4000) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TENANT_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '',
-  `NAME_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  PRIMARY KEY (`ID_`) USING BTREE,
-  UNIQUE INDEX `PROC_INST_ID_`(`PROC_INST_ID_`) USING BTREE,
-  INDEX `ACT_IDX_HI_PRO_INST_END`(`END_TIME_`) USING BTREE,
-  INDEX `ACT_IDX_HI_PRO_I_BUSKEY`(`BUSINESS_KEY_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_hi_taskinst
--- ----------------------------
-DROP TABLE IF EXISTS `act_hi_taskinst`;
-CREATE TABLE `act_hi_taskinst`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `PROC_DEF_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TASK_DEF_KEY_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PROC_INST_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `EXECUTION_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `NAME_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PARENT_TASK_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `DESCRIPTION_` varchar(4000) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `OWNER_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `ASSIGNEE_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `START_TIME_` datetime(3) NULL,
-  `CLAIM_TIME_` datetime(3) NULL DEFAULT NULL,
-  `END_TIME_` datetime(3) NULL DEFAULT NULL,
-  `DURATION_` bigint(20) NULL DEFAULT NULL,
-  `DELETE_REASON_` varchar(4000) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PRIORITY_` int(11) NULL DEFAULT NULL,
-  `DUE_DATE_` datetime(3) NULL DEFAULT NULL,
-  `FORM_KEY_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `CATEGORY_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TENANT_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '',
-  PRIMARY KEY (`ID_`) USING BTREE,
-  INDEX `ACT_IDX_HI_TASK_INST_PROCINST`(`PROC_INST_ID_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_hi_varinst
--- ----------------------------
-DROP TABLE IF EXISTS `act_hi_varinst`;
-CREATE TABLE `act_hi_varinst`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `PROC_INST_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `EXECUTION_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TASK_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `NAME_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `VAR_TYPE_` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `REV_` int(11) NULL DEFAULT NULL,
-  `BYTEARRAY_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `DOUBLE_` double NULL DEFAULT NULL,
-  `LONG_` bigint(20) NULL DEFAULT NULL,
-  `TEXT_` varchar(4000) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TEXT2_` varchar(4000) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `CREATE_TIME_` datetime(3) NULL DEFAULT NULL,
-  `LAST_UPDATED_TIME_` datetime(3) NULL DEFAULT NULL,
-  PRIMARY KEY (`ID_`) USING BTREE,
-  INDEX `ACT_IDX_HI_PROCVAR_PROC_INST`(`PROC_INST_ID_`) USING BTREE,
-  INDEX `ACT_IDX_HI_PROCVAR_NAME_TYPE`(`NAME_`, `VAR_TYPE_`) USING BTREE,
-  INDEX `ACT_IDX_HI_PROCVAR_TASK_ID`(`TASK_ID_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_id_group
--- ----------------------------
-DROP TABLE IF EXISTS `act_id_group`;
-CREATE TABLE `act_id_group`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `REV_` int(11) NULL DEFAULT NULL,
-  `NAME_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TYPE_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  PRIMARY KEY (`ID_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_id_info
--- ----------------------------
-DROP TABLE IF EXISTS `act_id_info`;
-CREATE TABLE `act_id_info`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `REV_` int(11) NULL DEFAULT NULL,
-  `USER_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TYPE_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `KEY_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `VALUE_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PASSWORD_` longblob NULL,
-  `PARENT_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  PRIMARY KEY (`ID_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_id_membership
--- ----------------------------
-DROP TABLE IF EXISTS `act_id_membership`;
-CREATE TABLE `act_id_membership`  (
-  `USER_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `GROUP_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`USER_ID_`, `GROUP_ID_`) USING BTREE,
-  INDEX `ACT_FK_MEMB_GROUP`(`GROUP_ID_`) USING BTREE,
-  CONSTRAINT `ACT_FK_MEMB_GROUP` FOREIGN KEY (`GROUP_ID_`) REFERENCES `act_id_group` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `ACT_FK_MEMB_USER` FOREIGN KEY (`USER_ID_`) REFERENCES `act_id_user` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_id_user
--- ----------------------------
-DROP TABLE IF EXISTS `act_id_user`;
-CREATE TABLE `act_id_user`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `REV_` int(11) NULL DEFAULT NULL,
-  `FIRST_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `LAST_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `EMAIL_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PWD_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PICTURE_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  PRIMARY KEY (`ID_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_procdef_info
--- ----------------------------
-DROP TABLE IF EXISTS `act_procdef_info`;
-CREATE TABLE `act_procdef_info`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `PROC_DEF_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `REV_` int(11) NULL DEFAULT NULL,
-  `INFO_JSON_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  PRIMARY KEY (`ID_`) USING BTREE,
-  UNIQUE INDEX `ACT_UNIQ_INFO_PROCDEF`(`PROC_DEF_ID_`) USING BTREE,
-  INDEX `ACT_IDX_INFO_PROCDEF`(`PROC_DEF_ID_`) USING BTREE,
-  INDEX `ACT_FK_INFO_JSON_BA`(`INFO_JSON_ID_`) USING BTREE,
-  CONSTRAINT `ACT_FK_INFO_JSON_BA` FOREIGN KEY (`INFO_JSON_ID_`) REFERENCES `act_ge_bytearray` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `ACT_FK_INFO_PROCDEF` FOREIGN KEY (`PROC_DEF_ID_`) REFERENCES `act_re_procdef` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_re_deployment
--- ----------------------------
-DROP TABLE IF EXISTS `act_re_deployment`;
-CREATE TABLE `act_re_deployment`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `NAME_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `CATEGORY_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TENANT_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '',
-  `DEPLOY_TIME_` timestamp(3) NULL DEFAULT NULL,
-  PRIMARY KEY (`ID_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_re_model
--- ----------------------------
-DROP TABLE IF EXISTS `act_re_model`;
-CREATE TABLE `act_re_model`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `REV_` int(11) NULL DEFAULT NULL,
-  `NAME_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `KEY_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `CATEGORY_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `CREATE_TIME_` timestamp(3) NULL DEFAULT NULL,
-  `LAST_UPDATE_TIME_` timestamp(3) NULL DEFAULT NULL,
-  `VERSION_` int(11) NULL DEFAULT NULL,
-  `META_INFO_` varchar(4000) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `DEPLOYMENT_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `EDITOR_SOURCE_VALUE_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `EDITOR_SOURCE_EXTRA_VALUE_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TENANT_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '',
-  PRIMARY KEY (`ID_`) USING BTREE,
-  INDEX `ACT_FK_MODEL_SOURCE`(`EDITOR_SOURCE_VALUE_ID_`) USING BTREE,
-  INDEX `ACT_FK_MODEL_SOURCE_EXTRA`(`EDITOR_SOURCE_EXTRA_VALUE_ID_`) USING BTREE,
-  INDEX `ACT_FK_MODEL_DEPLOYMENT`(`DEPLOYMENT_ID_`) USING BTREE,
-  CONSTRAINT `ACT_FK_MODEL_DEPLOYMENT` FOREIGN KEY (`DEPLOYMENT_ID_`) REFERENCES `act_re_deployment` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `ACT_FK_MODEL_SOURCE` FOREIGN KEY (`EDITOR_SOURCE_VALUE_ID_`) REFERENCES `act_ge_bytearray` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `ACT_FK_MODEL_SOURCE_EXTRA` FOREIGN KEY (`EDITOR_SOURCE_EXTRA_VALUE_ID_`) REFERENCES `act_ge_bytearray` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_re_procdef
--- ----------------------------
-DROP TABLE IF EXISTS `act_re_procdef`;
-CREATE TABLE `act_re_procdef`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `REV_` int(11) NULL DEFAULT NULL,
-  `CATEGORY_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `NAME_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `KEY_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `VERSION_` int(11) NOT NULL,
-  `DEPLOYMENT_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `RESOURCE_NAME_` varchar(4000) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `DGRM_RESOURCE_NAME_` varchar(4000) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `DESCRIPTION_` varchar(4000) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `HAS_START_FORM_KEY_` tinyint(4) NULL DEFAULT NULL,
-  `HAS_GRAPHICAL_NOTATION_` tinyint(4) NULL DEFAULT NULL,
-  `SUSPENSION_STATE_` int(11) NULL DEFAULT NULL,
-  `TENANT_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '',
-  PRIMARY KEY (`ID_`) USING BTREE,
-  UNIQUE INDEX `ACT_UNIQ_PROCDEF`(`KEY_`, `VERSION_`, `TENANT_ID_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_ru_event_subscr
--- ----------------------------
-DROP TABLE IF EXISTS `act_ru_event_subscr`;
-CREATE TABLE `act_ru_event_subscr`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `REV_` int(11) NULL DEFAULT NULL,
-  `EVENT_TYPE_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `EVENT_NAME_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `EXECUTION_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PROC_INST_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `ACTIVITY_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `CONFIGURATION_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `CREATED_` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-  `PROC_DEF_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TENANT_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '',
-  PRIMARY KEY (`ID_`) USING BTREE,
-  INDEX `ACT_IDX_EVENT_SUBSCR_CONFIG_`(`CONFIGURATION_`) USING BTREE,
-  INDEX `ACT_FK_EVENT_EXEC`(`EXECUTION_ID_`) USING BTREE,
-  CONSTRAINT `ACT_FK_EVENT_EXEC` FOREIGN KEY (`EXECUTION_ID_`) REFERENCES `act_ru_execution` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_ru_execution
--- ----------------------------
-DROP TABLE IF EXISTS `act_ru_execution`;
-CREATE TABLE `act_ru_execution`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `REV_` int(11) NULL DEFAULT NULL,
-  `PROC_INST_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `BUSINESS_KEY_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PARENT_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PROC_DEF_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `SUPER_EXEC_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `ACT_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `IS_ACTIVE_` tinyint(4) NULL DEFAULT NULL,
-  `IS_CONCURRENT_` tinyint(4) NULL DEFAULT NULL,
-  `IS_SCOPE_` tinyint(4) NULL DEFAULT NULL,
-  `IS_EVENT_SCOPE_` tinyint(4) NULL DEFAULT NULL,
-  `SUSPENSION_STATE_` int(11) NULL DEFAULT NULL,
-  `CACHED_ENT_STATE_` int(11) NULL DEFAULT NULL,
-  `TENANT_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '',
-  `NAME_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `LOCK_TIME_` timestamp(3) NULL DEFAULT NULL,
-  PRIMARY KEY (`ID_`) USING BTREE,
-  INDEX `ACT_IDX_EXEC_BUSKEY`(`BUSINESS_KEY_`) USING BTREE,
-  INDEX `ACT_FK_EXE_PROCINST`(`PROC_INST_ID_`) USING BTREE,
-  INDEX `ACT_FK_EXE_PARENT`(`PARENT_ID_`) USING BTREE,
-  INDEX `ACT_FK_EXE_SUPER`(`SUPER_EXEC_`) USING BTREE,
-  INDEX `ACT_FK_EXE_PROCDEF`(`PROC_DEF_ID_`) USING BTREE,
-  CONSTRAINT `ACT_FK_EXE_PARENT` FOREIGN KEY (`PARENT_ID_`) REFERENCES `act_ru_execution` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `ACT_FK_EXE_PROCDEF` FOREIGN KEY (`PROC_DEF_ID_`) REFERENCES `act_re_procdef` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `ACT_FK_EXE_PROCINST` FOREIGN KEY (`PROC_INST_ID_`) REFERENCES `act_ru_execution` (`ID_`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `ACT_FK_EXE_SUPER` FOREIGN KEY (`SUPER_EXEC_`) REFERENCES `act_ru_execution` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_ru_identitylink
--- ----------------------------
-DROP TABLE IF EXISTS `act_ru_identitylink`;
-CREATE TABLE `act_ru_identitylink`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `REV_` int(11) NULL DEFAULT NULL,
-  `GROUP_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TYPE_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `USER_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TASK_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PROC_INST_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PROC_DEF_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  PRIMARY KEY (`ID_`) USING BTREE,
-  INDEX `ACT_IDX_IDENT_LNK_USER`(`USER_ID_`) USING BTREE,
-  INDEX `ACT_IDX_IDENT_LNK_GROUP`(`GROUP_ID_`) USING BTREE,
-  INDEX `ACT_IDX_ATHRZ_PROCEDEF`(`PROC_DEF_ID_`) USING BTREE,
-  INDEX `ACT_FK_TSKASS_TASK`(`TASK_ID_`) USING BTREE,
-  INDEX `ACT_FK_IDL_PROCINST`(`PROC_INST_ID_`) USING BTREE,
-  CONSTRAINT `ACT_FK_ATHRZ_PROCEDEF` FOREIGN KEY (`PROC_DEF_ID_`) REFERENCES `act_re_procdef` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `ACT_FK_IDL_PROCINST` FOREIGN KEY (`PROC_INST_ID_`) REFERENCES `act_ru_execution` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `ACT_FK_TSKASS_TASK` FOREIGN KEY (`TASK_ID_`) REFERENCES `act_ru_task` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_ru_job
--- ----------------------------
-DROP TABLE IF EXISTS `act_ru_job`;
-CREATE TABLE `act_ru_job`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `REV_` int(11) NULL DEFAULT NULL,
-  `TYPE_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `LOCK_EXP_TIME_` timestamp(3) NULL DEFAULT NULL,
-  `LOCK_OWNER_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `EXCLUSIVE_` tinyint(1) NULL DEFAULT NULL,
-  `EXECUTION_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PROCESS_INSTANCE_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PROC_DEF_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `RETRIES_` int(11) NULL DEFAULT NULL,
-  `EXCEPTION_STACK_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `EXCEPTION_MSG_` varchar(4000) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `DUEDATE_` timestamp(3) NULL DEFAULT NULL,
-  `REPEAT_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `HANDLER_TYPE_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `HANDLER_CFG_` varchar(4000) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TENANT_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '',
-  PRIMARY KEY (`ID_`) USING BTREE,
-  INDEX `ACT_FK_JOB_EXCEPTION`(`EXCEPTION_STACK_ID_`) USING BTREE,
-  CONSTRAINT `ACT_FK_JOB_EXCEPTION` FOREIGN KEY (`EXCEPTION_STACK_ID_`) REFERENCES `act_ge_bytearray` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_ru_task
--- ----------------------------
-DROP TABLE IF EXISTS `act_ru_task`;
-CREATE TABLE `act_ru_task`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `REV_` int(11) NULL DEFAULT NULL,
-  `EXECUTION_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PROC_INST_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PROC_DEF_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `NAME_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PARENT_TASK_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `DESCRIPTION_` varchar(4000) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TASK_DEF_KEY_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `OWNER_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `ASSIGNEE_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `DELEGATION_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PRIORITY_` int(11) NULL DEFAULT NULL,
-  `CREATE_TIME_` timestamp(3) NULL DEFAULT NULL,
-  `DUE_DATE_` datetime(3) NULL DEFAULT NULL,
-  `CATEGORY_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `SUSPENSION_STATE_` int(11) NULL DEFAULT NULL,
-  `TENANT_ID_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '',
-  `FORM_KEY_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  PRIMARY KEY (`ID_`) USING BTREE,
-  INDEX `ACT_IDX_TASK_CREATE`(`CREATE_TIME_`) USING BTREE,
-  INDEX `ACT_FK_TASK_EXE`(`EXECUTION_ID_`) USING BTREE,
-  INDEX `ACT_FK_TASK_PROCINST`(`PROC_INST_ID_`) USING BTREE,
-  INDEX `ACT_FK_TASK_PROCDEF`(`PROC_DEF_ID_`) USING BTREE,
-  CONSTRAINT `ACT_FK_TASK_EXE` FOREIGN KEY (`EXECUTION_ID_`) REFERENCES `act_ru_execution` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `ACT_FK_TASK_PROCDEF` FOREIGN KEY (`PROC_DEF_ID_`) REFERENCES `act_re_procdef` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `ACT_FK_TASK_PROCINST` FOREIGN KEY (`PROC_INST_ID_`) REFERENCES `act_ru_execution` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for act_ru_variable
--- ----------------------------
-DROP TABLE IF EXISTS `act_ru_variable`;
-CREATE TABLE `act_ru_variable`  (
-  `ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `REV_` int(11) NULL DEFAULT NULL,
-  `TYPE_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `NAME_` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `EXECUTION_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `PROC_INST_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TASK_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `BYTEARRAY_ID_` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `DOUBLE_` double NULL DEFAULT NULL,
-  `LONG_` bigint(20) NULL DEFAULT NULL,
-  `TEXT_` varchar(4000) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `TEXT2_` varchar(4000) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  PRIMARY KEY (`ID_`) USING BTREE,
-  INDEX `ACT_IDX_VARIABLE_TASK_ID`(`TASK_ID_`) USING BTREE,
-  INDEX `ACT_FK_VAR_EXE`(`EXECUTION_ID_`) USING BTREE,
-  INDEX `ACT_FK_VAR_PROCINST`(`PROC_INST_ID_`) USING BTREE,
-  INDEX `ACT_FK_VAR_BYTEARRAY`(`BYTEARRAY_ID_`) USING BTREE,
-  CONSTRAINT `ACT_FK_VAR_BYTEARRAY` FOREIGN KEY (`BYTEARRAY_ID_`) REFERENCES `act_ge_bytearray` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `ACT_FK_VAR_EXE` FOREIGN KEY (`EXECUTION_ID_`) REFERENCES `act_ru_execution` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `ACT_FK_VAR_PROCINST` FOREIGN KEY (`PROC_INST_ID_`) REFERENCES `act_ru_execution` (`ID_`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for jdbc
 -- ----------------------------
 DROP TABLE IF EXISTS `jdbc`;
 CREATE TABLE `jdbc`  (
-  `next_val` bigint(20) NULL DEFAULT NULL
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `next_val` bigint(20) DEFAULT NULL
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of jdbc
@@ -580,16 +37,16 @@ INSERT INTO `jdbc` VALUES (1);
 DROP TABLE IF EXISTS `oauth_client_details`;
 CREATE TABLE `oauth_client_details`  (
   `client_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `resource_ids` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `client_secret` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '密码',
-  `scope` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `authorized_grant_types` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '支持的授权方式',
-  `web_server_redirect_uri` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `authorities` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `access_token_validity` int(11) NULL DEFAULT NULL COMMENT 'access_token有效期（单位秒）',
-  `refresh_token_validity` int(11) NULL DEFAULT NULL COMMENT 'refresh_token有效期（单位秒）',
-  `additional_information` varchar(4096) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `autoapprove` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `resource_ids` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `client_secret` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '密码',
+  `scope` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `authorized_grant_types` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '支持的授权方式',
+  `web_server_redirect_uri` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `authorities` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `access_token_validity` int(11) DEFAULT NULL COMMENT 'access_token有效期（单位秒）',
+  `refresh_token_validity` int(11) DEFAULT NULL COMMENT 'refresh_token有效期（单位秒）',
+  `additional_information` varchar(4096) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `autoapprove` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`client_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'oauth2的client表' ROW_FORMAT = Compact;
 
@@ -601,183 +58,7 @@ INSERT INTO `oauth_client_details` VALUES ('gateway', 'base-server,business-serv
 INSERT INTO `oauth_client_details` VALUES ('system', NULL, '$2a$10$QN9vg9iX3WFovHnDX7bJO.rWWDkS0VP7HYhV.HDiVEE56xPwZfjKe', 'app', 'authorization_code,password,refresh_token', NULL, NULL, 28800, NULL, NULL, NULL);
 INSERT INTO `oauth_client_details` VALUES ('yboot', 'base-server,business-server', '$2a$10$MGN6fWATnbOLU.zIvT2d1u9BPWJGQeJDx6qZ.H9HZ8bU3KLWNVQpK', 'read,write,all', 'authorization_code,password,refresh_token', NULL, NULL, 28800, 864000, NULL, NULL);
 
--- ----------------------------
--- Table structure for qrtz_blob_triggers
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_blob_triggers`;
-CREATE TABLE `qrtz_blob_triggers`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_GROUP` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `BLOB_DATA` blob NULL,
-  PRIMARY KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) USING BTREE,
-  CONSTRAINT `qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
--- ----------------------------
--- Table structure for qrtz_calendars
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_calendars`;
-CREATE TABLE `qrtz_calendars`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `CALENDAR_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `CALENDAR` blob NOT NULL,
-  PRIMARY KEY (`SCHED_NAME`, `CALENDAR_NAME`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for qrtz_cron_triggers
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_cron_triggers`;
-CREATE TABLE `qrtz_cron_triggers`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_GROUP` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `CRON_EXPRESSION` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TIME_ZONE_ID` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) USING BTREE,
-  CONSTRAINT `qrtz_cron_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for qrtz_fired_triggers
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_fired_triggers`;
-CREATE TABLE `qrtz_fired_triggers`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `ENTRY_ID` varchar(95) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_GROUP` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `INSTANCE_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `FIRED_TIME` bigint(13) NOT NULL,
-  `SCHED_TIME` bigint(13) NOT NULL,
-  `PRIORITY` int(11) NOT NULL,
-  `STATE` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `JOB_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `JOB_GROUP` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `IS_NONCONCURRENT` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `REQUESTS_RECOVERY` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`SCHED_NAME`, `ENTRY_ID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for qrtz_job_details
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_job_details`;
-CREATE TABLE `qrtz_job_details`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `JOB_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `JOB_GROUP` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `DESCRIPTION` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `JOB_CLASS_NAME` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `IS_DURABLE` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `IS_NONCONCURRENT` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `IS_UPDATE_DATA` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `REQUESTS_RECOVERY` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `JOB_DATA` blob NULL,
-  PRIMARY KEY (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for qrtz_locks
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_locks`;
-CREATE TABLE `qrtz_locks`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `LOCK_NAME` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`SCHED_NAME`, `LOCK_NAME`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of qrtz_locks
--- ----------------------------
-INSERT INTO `qrtz_locks` VALUES ('quartzScheduler', 'TRIGGER_ACCESS');
-
--- ----------------------------
--- Table structure for qrtz_paused_trigger_grps
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_paused_trigger_grps`;
-CREATE TABLE `qrtz_paused_trigger_grps`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_GROUP` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`SCHED_NAME`, `TRIGGER_GROUP`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for qrtz_scheduler_state
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_scheduler_state`;
-CREATE TABLE `qrtz_scheduler_state`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `INSTANCE_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `LAST_CHECKIN_TIME` bigint(13) NOT NULL,
-  `CHECKIN_INTERVAL` bigint(13) NOT NULL,
-  PRIMARY KEY (`SCHED_NAME`, `INSTANCE_NAME`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for qrtz_simple_triggers
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_simple_triggers`;
-CREATE TABLE `qrtz_simple_triggers`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_GROUP` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `REPEAT_COUNT` bigint(7) NOT NULL,
-  `REPEAT_INTERVAL` bigint(12) NOT NULL,
-  `TIMES_TRIGGERED` bigint(10) NOT NULL,
-  PRIMARY KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) USING BTREE,
-  CONSTRAINT `qrtz_simple_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for qrtz_simprop_triggers
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_simprop_triggers`;
-CREATE TABLE `qrtz_simprop_triggers`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_GROUP` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `STR_PROP_1` varchar(512) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `STR_PROP_2` varchar(512) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `STR_PROP_3` varchar(512) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `INT_PROP_1` int(11) NULL DEFAULT NULL,
-  `INT_PROP_2` int(11) NULL DEFAULT NULL,
-  `LONG_PROP_1` bigint(20) NULL DEFAULT NULL,
-  `LONG_PROP_2` bigint(20) NULL DEFAULT NULL,
-  `DEC_PROP_1` decimal(13, 4) NULL DEFAULT NULL,
-  `DEC_PROP_2` decimal(13, 4) NULL DEFAULT NULL,
-  `BOOL_PROP_1` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `BOOL_PROP_2` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) USING BTREE,
-  CONSTRAINT `qrtz_simprop_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for qrtz_triggers
--- ----------------------------
-DROP TABLE IF EXISTS `qrtz_triggers`;
-CREATE TABLE `qrtz_triggers`  (
-  `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_GROUP` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `JOB_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `JOB_GROUP` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `DESCRIPTION` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `NEXT_FIRE_TIME` bigint(13) NULL DEFAULT NULL,
-  `PREV_FIRE_TIME` bigint(13) NULL DEFAULT NULL,
-  `PRIORITY` int(11) NULL DEFAULT NULL,
-  `TRIGGER_STATE` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `TRIGGER_TYPE` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `START_TIME` bigint(13) NOT NULL,
-  `END_TIME` bigint(13) NULL DEFAULT NULL,
-  `CALENDAR_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `MISFIRE_INSTR` smallint(2) NULL DEFAULT NULL,
-  `JOB_DATA` blob NULL,
-  PRIMARY KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) USING BTREE,
-  INDEX `SCHED_NAME`(`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`) USING BTREE,
-  CONSTRAINT `qrtz_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`) REFERENCES `qrtz_job_details` (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for rocketmq_transaction_log
@@ -785,8 +66,8 @@ CREATE TABLE `qrtz_triggers`  (
 DROP TABLE IF EXISTS `rocketmq_transaction_log`;
 CREATE TABLE `rocketmq_transaction_log`  (
   `id` int(11) NOT NULL,
-  `log` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `transaction_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `log` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `transaction_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -796,22 +77,23 @@ CREATE TABLE `rocketmq_transaction_log`  (
 DROP TABLE IF EXISTS `t_act_business`;
 CREATE TABLE `t_act_business`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `proc_def_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `proc_inst_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `result` int(11) NULL DEFAULT NULL,
-  `status` int(11) NULL DEFAULT NULL,
-  `table_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `apply_time` datetime(0) NULL DEFAULT NULL,
-  `is_history` bit(1) NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `proc_def_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `proc_inst_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `result` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `table_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `apply_time` datetime(0) DEFAULT NULL,
+  `is_history` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
 
 -- ----------------------------
 -- Table structure for t_act_category
@@ -819,17 +101,17 @@ CREATE TABLE `t_act_business`  (
 DROP TABLE IF EXISTS `t_act_category`;
 CREATE TABLE `t_act_category`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `is_parent` bit(1) NULL DEFAULT NULL,
-  `parent_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `sort_order` decimal(10, 2) NULL DEFAULT NULL,
-  `status` int(11) NULL DEFAULT NULL,
-  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `type` int(11) NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `is_parent` bit(1) DEFAULT NULL,
+  `parent_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `sort_order` decimal(10, 2) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -849,17 +131,22 @@ INSERT INTO `t_act_category` VALUES ('80575163153780736', 'admin', '2018-11-29 2
 DROP TABLE IF EXISTS `t_act_model`;
 CREATE TABLE `t_act_model`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `model_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `version` int(11) NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `model_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of t_act_model
+-- ----------------------------
+INSERT INTO `t_act_model` VALUES ('12501', '682265633886208', '2020-04-20 16:53:09', 0, '682265633886208', '2020-04-20 17:37:32', '', 'Leave', '请假流程', 2);
 
 -- ----------------------------
 -- Table structure for t_act_node
@@ -867,16 +154,23 @@ CREATE TABLE `t_act_model`  (
 DROP TABLE IF EXISTS `t_act_node`;
 CREATE TABLE `t_act_node`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `node_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `relate_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `node_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `relate_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of t_act_node
+-- ----------------------------
+INSERT INTO `t_act_node` VALUES ('264600313976066048', '682265633886208', '2020-04-20 17:59:32', 0, '682265633886208', '2020-04-20 17:59:32', 'sid-386656E5-CCE7-4927-A5DC-FFAEF3409E0C', '1', '682265633886208');
+INSERT INTO `t_act_node` VALUES ('264601038906986496', '682265633886208', '2020-04-20 18:02:25', 0, '682265633886208', '2020-04-20 18:02:25', 'sid-DDA0EFCB-9CD3-4838-8048-D3444C8DA4A9', '1', '682265633886208');
+INSERT INTO `t_act_node` VALUES ('264601039070564352', '682265633886208', '2020-04-20 18:02:25', 0, '682265633886208', '2020-04-20 18:02:25', 'sid-DDA0EFCB-9CD3-4838-8048-D3444C8DA4A9', '1', '4363087427670016');
 
 -- ----------------------------
 -- Table structure for t_act_process
@@ -884,25 +178,30 @@ CREATE TABLE `t_act_node`  (
 DROP TABLE IF EXISTS `t_act_process`;
 CREATE TABLE `t_act_process`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `category_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `deployment_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `diagram_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `latest` bit(1) NULL DEFAULT NULL,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `process_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `status` int(11) NULL DEFAULT NULL,
-  `version` int(11) NULL DEFAULT NULL,
-  `xml_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `business_table` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `route_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `category_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `deployment_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `diagram_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `latest` bit(1) DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `process_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `xml_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `business_table` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `route_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of t_act_process
+-- ----------------------------
+INSERT INTO `t_act_process` VALUES ('Leave:1:12507', '682265633886208', '2020-04-20 17:41:11', 0, '682265633886208', '2020-04-20 18:00:09', '80544250063753216', '12504', '', '请假流程.Leave.png', b'1', '请假流程', 'Leave', 1, 1, '请假流程.bpmn20.xml', 't_leave', 'leave');
 
 -- ----------------------------
 -- Table structure for t_client
@@ -910,15 +209,15 @@ CREATE TABLE `t_act_process`  (
 DROP TABLE IF EXISTS `t_client`;
 CREATE TABLE `t_client`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(6) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(6) NULL DEFAULT NULL,
-  `client_secret` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `home_uri` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `redirect_uri` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(6) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(6) DEFAULT NULL,
+  `client_secret` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `home_uri` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `redirect_uri` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -928,16 +227,16 @@ CREATE TABLE `t_client`  (
 DROP TABLE IF EXISTS `t_department`;
 CREATE TABLE `t_department`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `parent_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `sort_order` decimal(10, 2) NULL DEFAULT NULL,
-  `status` int(11) NULL DEFAULT NULL,
-  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `is_parent` bit(1) NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `parent_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '父id',
+  `sort_order` decimal(10, 2) DEFAULT NULL COMMENT '排序值',
+  `status` int(11) DEFAULT NULL COMMENT '是否启用 0启用 -1禁用',
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'title',
+  `is_parent` bit(1) DEFAULT NULL COMMENT '是否为父节点(含子节点) 默认false',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -962,14 +261,14 @@ INSERT INTO `t_department` VALUES ('40681289119961088', '', '2018-08-11 20:25:16
 DROP TABLE IF EXISTS `t_department_header`;
 CREATE TABLE `t_department_header`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `department_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `type` int(11) NULL DEFAULT NULL,
-  `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `department_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '关联部门id',
+  `type` int(11) DEFAULT NULL COMMENT '负责人类型 默认0主要 1副职',
+  `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '关联部门负责人',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -979,15 +278,15 @@ CREATE TABLE `t_department_header`  (
 DROP TABLE IF EXISTS `t_dict`;
 CREATE TABLE `t_dict`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `sort_order` decimal(10, 2) NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `sort_order` decimal(10, 2) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -1010,17 +309,17 @@ INSERT INTO `t_dict` VALUES ('99020862912466944', 'admin', '2019-01-19 20:05:54'
 DROP TABLE IF EXISTS `t_dict_data`;
 CREATE TABLE `t_dict_data`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `dict_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `sort_order` decimal(10, 2) NULL DEFAULT NULL,
-  `status` int(11) NULL DEFAULT NULL,
-  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `dict_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `sort_order` decimal(10, 2) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -1089,17 +388,17 @@ INSERT INTO `t_dict_data` VALUES ('99021556704874496', 'admin', '2019-01-19 20:0
 DROP TABLE IF EXISTS `t_file`;
 CREATE TABLE `t_file`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `size` bigint(20) NULL DEFAULT NULL,
-  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `f_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `location` int(11) NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `size` bigint(20) DEFAULT NULL,
+  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `f_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `location` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -1109,16 +408,16 @@ CREATE TABLE `t_file`  (
 DROP TABLE IF EXISTS `t_github`;
 CREATE TABLE `t_github`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `is_related` bit(1) NULL DEFAULT NULL,
-  `open_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `relate_username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `is_related` bit(1) DEFAULT NULL,
+  `open_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `relate_username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -1128,19 +427,25 @@ CREATE TABLE `t_github`  (
 DROP TABLE IF EXISTS `t_leave`;
 CREATE TABLE `t_leave`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `end_date` datetime(0) NULL DEFAULT NULL,
-  `start_date` datetime(0) NULL DEFAULT NULL,
-  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `duration` int(11) NULL DEFAULT NULL,
-  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `end_date` datetime(0) DEFAULT NULL,
+  `start_date` datetime(0) DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `duration` int(11) DEFAULT NULL,
+  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of t_leave
+-- ----------------------------
+INSERT INTO `t_leave` VALUES ('264600714792144896', '682265633886208', '2020-04-20 18:01:08', 0, '682265633886208', '2020-04-20 18:01:08', '我想回家看看', '2020-04-28 00:00:00', '2020-04-20 00:00:00', '请假三天', 192, '事假');
+INSERT INTO `t_leave` VALUES ('264608670069821441', '682265633886208', '2020-04-20 18:32:48', 0, '682265633886208', '2020-04-20 18:32:48', '1', '2020-04-21 00:00:00', '2020-04-20 00:00:00', '请假', 24, '年假');
 
 -- ----------------------------
 -- Table structure for t_log
@@ -1148,20 +453,20 @@ CREATE TABLE `t_leave`  (
 DROP TABLE IF EXISTS `t_log`;
 CREATE TABLE `t_log`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `cost_time` int(11) NULL DEFAULT NULL,
-  `ip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ip_info` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `request_param` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-  `request_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `request_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `log_type` int(11) NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `cost_time` int(11) DEFAULT NULL,
+  `ip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `ip_info` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `request_param` longtext CHARACTER SET utf8 COLLATE utf8_general_ci,
+  `request_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `request_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `log_type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -1171,15 +476,15 @@ CREATE TABLE `t_log`  (
 DROP TABLE IF EXISTS `t_message`;
 CREATE TABLE `t_message`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `create_send` bit(1) NULL DEFAULT NULL,
-  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `create_send` bit(1) DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -1197,14 +502,14 @@ INSERT INTO `t_message` VALUES ('124744706050494464', 'admin', '2019-03-31 19:43
 DROP TABLE IF EXISTS `t_message_send`;
 CREATE TABLE `t_message_send`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `message_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `status` int(11) NULL DEFAULT NULL,
-  `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `message_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -1214,7 +519,43 @@ CREATE TABLE `t_message_send`  (
 INSERT INTO `t_message_send` VALUES ('43615268663988224', NULL, '2018-08-19 22:43:51', 0, NULL, '2018-08-19 22:43:51', '43615268366192640', 0, '682265633886209');
 INSERT INTO `t_message_send` VALUES ('43615268663988225', NULL, '2018-08-19 22:43:51', 0, NULL, '2018-08-19 22:43:51', '43615268366192640', 0, '16739222421508096');
 INSERT INTO `t_message_send` VALUES ('43615268663988226', '', '2018-08-19 22:43:51', 0, '', '2018-08-24 12:41:24', '43615268366192640', 2, '4363087427670016');
-INSERT INTO `t_message_send` VALUES ('43615268663988227', '', '2018-08-19 22:43:51', 0, 'admin', '2018-11-15 23:13:21', '43615268366192640', 2, '682265633886208');
+
+-- ----------------------------
+-- Table structure for t_pay_info
+-- ----------------------------
+DROP TABLE IF EXISTS `t_pay_info`;
+CREATE TABLE `t_pay_info`  (
+  `id` bigint(255) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '用户ID',
+  `order_id` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '业务订单ID',
+  `pay_platform` int(20) DEFAULT NULL COMMENT '支付平台1-支付宝  2-微信',
+  `platform_number` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '支付流水号',
+  `platform_status` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '支付状态',
+  `platform_amount` decimal(20, 2) NOT NULL COMMENT '支付金额',
+  `pay_order_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '支付订单ID',
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(6) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(6) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `platform_number`(`platform_number`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 264581481639186433 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of t_pay_info
+-- ----------------------------
+INSERT INTO `t_pay_info` VALUES (257234025691746308, '682265633886208', '12345', 2, NULL, 'NOTPAY', 0.01, 'a35ff2648e1c4bfd8741f5742e71607f', '682265633886208', '2020-03-31 10:08:31.913000', 1, '682265633886208', '2020-03-31 10:10:49.103000');
+INSERT INTO `t_pay_info` VALUES (257234601666154496, '682265633886208', '12345', 2, NULL, 'NOTPAY', 0.01, '94ba191e14d84afd9a276cecbc36add6', '682265633886208', '2020-03-31 10:10:49.238000', 1, '682265633886208', '2020-03-31 11:40:32.217000');
+INSERT INTO `t_pay_info` VALUES (257257180099514368, '682265633886208', '12345', 2, NULL, 'NOTPAY', 0.01, 'a285a6de9101421f906ae9b0010fa559', '682265633886208', '2020-03-31 11:40:32.357000', 1, '682265633886208', '2020-03-31 11:40:37.561000');
+INSERT INTO `t_pay_info` VALUES (257257202450960384, '682265633886208', '12345', 2, '4200000479202003314976947902', 'SUCCESS', 0.01, 'ceea7f7038d8441cbb71d65d71c2e95e', '682265633886208', '2020-03-31 11:40:37.682000', 0, NULL, '2020-03-31 11:41:54.879000');
+INSERT INTO `t_pay_info` VALUES (257308727974039552, '682265633886208', 'p6e2d9rozk', 2, NULL, 'NOTPAY', 0.01, '16626db7d30e4529940af30b5d274627', '682265633886208', '2020-03-31 15:05:22.328000', 0, NULL, NULL);
+INSERT INTO `t_pay_info` VALUES (257309098092007430, '682265633886208', 'tfjpnv0kyk', 2, NULL, 'NOTPAY', 0.01, 'd41659bb37fb4f5b99bdff783c547ee5', '682265633886208', '2020-03-31 15:06:50.568000', 0, NULL, NULL);
+INSERT INTO `t_pay_info` VALUES (258055661659623424, '682265633886208', 'at3hs1blkx', 2, NULL, 'NOTPAY', 0.01, 'ab3e15e245d24937be6bebbbb6e8cd57', '682265633886208', '2020-04-02 16:33:25.201000', 0, NULL, NULL);
+INSERT INTO `t_pay_info` VALUES (258056105421180928, '682265633886208', '0b11na0n29', 2, NULL, 'NOTPAY', 0.01, 'c3ccba30f92146ea8fa4a6a185ec2dd0', '682265633886208', '2020-04-02 16:35:10.993000', 0, NULL, NULL);
+INSERT INTO `t_pay_info` VALUES (258314813594144768, '682265633886208', 'eowrmeblwp', 2, NULL, 'NOTPAY', 0.01, '147fa80a31ca432a884bd47b62d4a8f2', '682265633886208', '2020-04-03 09:43:11.832000', 0, NULL, NULL);
+INSERT INTO `t_pay_info` VALUES (262669871567867904, '682265633886208', 'vcqyrv7v9a', 2, NULL, 'NOTPAY', 0.01, '7a9c20293a224aa6938ec2afd5e1dc06', '682265633886208', '2020-04-15 10:08:38.566000', 0, NULL, NULL);
+INSERT INTO `t_pay_info` VALUES (264581481639186432, '682265633886208', 'qdpwegpj4u', 2, NULL, 'NOTPAY', 0.01, '0a5eec650f5c448abb5b14428cac12c0', '682265633886208', '2020-04-20 16:44:41.922000', 0, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for t_permission
@@ -1222,25 +563,25 @@ INSERT INTO `t_message_send` VALUES ('43615268663988227', '', '2018-08-19 22:43:
 DROP TABLE IF EXISTS `t_permission`;
 CREATE TABLE `t_permission`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `parent_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `type` int(11) NULL DEFAULT NULL,
-  `sort_order` decimal(10, 2) NULL DEFAULT NULL,
-  `component` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `path` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `icon` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `level` int(11) NULL DEFAULT NULL,
-  `button_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `status` int(11) NULL DEFAULT NULL,
-  `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `show_always` bit(1) NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '说明备注',
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '菜单/权限名称',
+  `parent_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '父id',
+  `type` int(11) DEFAULT NULL COMMENT '类型 -1顶部菜单 0页面 1具体操作',
+  `sort_order` decimal(10, 2) DEFAULT NULL COMMENT '排序值',
+  `component` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '前端组件',
+  `path` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '页面路径/资源链接url',
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '菜单标题',
+  `icon` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '图标',
+  `level` int(11) DEFAULT NULL COMMENT '层级',
+  `button_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '按钮权限类型',
+  `status` int(11) DEFAULT NULL COMMENT '是否启用 0启用 -1禁用',
+  `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '网页链接',
+  `show_always` bit(1) DEFAULT NULL COMMENT '始终显示 默认是',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -1263,7 +604,7 @@ INSERT INTO `t_permission` VALUES ('129033675403694080', 'admin', '2019-04-12 15
 INSERT INTO `t_permission` VALUES ('149452775095275520', 'admin', '2019-06-08 00:04:19', 0, 'admin', '2019-06-08 00:04:19', NULL, 'admin', '39915540965232640', 0, 2.29, 'sys/monitor/monitor', '/admin', 'Admin监控', 'md-speedometer', 2, '', 0, 'http://127.0.0.1:8888/yboot/admin', b'1');
 INSERT INTO `t_permission` VALUES ('156365156580855808', 'admin', '2019-06-27 01:51:39', 0, 'admin', '2019-06-27 01:51:39', NULL, '', '5129710648430593', 1, 1.18, '', '/yboot/user/resetPass', '重置密码', '', 3, 'other', 0, NULL, b'1');
 INSERT INTO `t_permission` VALUES ('15701400130424832', '', '2018-06-03 22:04:06', 0, '', '2018-09-19 22:16:44', '', '', '5129710648430593', 1, 1.11, '', '/yboot/user/admin/add*', '添加用户', '', 3, 'add', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('15701915807518720', '', '2018-06-03 22:06:09', 0, '', '2018-06-06 14:46:51', '', '', '5129710648430593', 1, 1.13, '', '/yboot/user/admin/disable/**', '禁用用户', '', 3, 'disable', 0, NULL, b'1');
+INSERT INTO `t_permission` VALUES ('15701915807518720', '', '2018-06-03 22:06:09', 0, '4363087427670016', '2020-03-25 16:02:05', '', '', '5129710648430593', 1, 1.13, '', '/yboot/user/admin/disable/**', '禁用用户', '', 3, 'disable', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('15708892205944832', '', '2018-06-03 22:33:52', 0, '', '2018-06-28 16:44:48', '', '', '5129710648430593', 1, 1.14, '', '/yboot/user/admin/enable/**', '启用用户', '', 3, 'enable', 0, NULL, b'1');
 INSERT INTO `t_permission` VALUES ('16392452747300864', '', '2018-06-05 19:50:06', 0, 'admin', '2019-06-26 20:38:41', '', 'access', '125909152017944576', 0, 7.00, 'Main', '/access', '权限按钮测试页', 'md-lock', 1, '', 0, '', b'0');
 INSERT INTO `t_permission` VALUES ('16392767785668608', '', '2018-06-05 19:51:21', 0, 'admin', '2018-10-23 12:34:38', '', 'access_index', '16392452747300864', 0, 5.10, 'access/access', 'index', '权限按钮测试页', 'md-lock', 2, '', 0, '', b'1');
@@ -1286,6 +627,8 @@ INSERT INTO `t_permission` VALUES ('210156371755143168', 'admin', '2019-11-22 12
 INSERT INTO `t_permission` VALUES ('211251162815401984', 'admin', '2019-11-25 12:49:03', 0, 'admin', '2019-11-25 12:49:12', '', 'open', '125909152017944576', 0, 1.20, 'Main', '/open', '开放平台', 'ios-apps', 1, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('211251678651879424', 'admin', '2019-11-25 12:51:06', 0, 'admin', '2019-11-25 12:51:06', NULL, 'client', '211251162815401984', 0, 0.00, 'open/client/client', 'client', '接入网站管理', 'md-browsers', 2, '', 0, NULL, b'1');
 INSERT INTO `t_permission` VALUES ('25014528525733888', '', '2018-06-29 14:51:09', 0, '', '2018-10-08 11:13:27', '', '', '5129710648430593', 1, 1.16, '', '无', '上传图片', '', 3, 'upload', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('256539217813835777', '4363087427670016', '2020-03-29 12:07:37', 0, '4363087427670016', '2020-03-29 12:08:25', '', 'pay', '125909152017944576', 0, 2.00, 'Main', '/pay', '支付系统', 'ios-card', 1, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('256539894803861505', '4363087427670016', '2020-03-29 12:10:18', 0, '4363087427670016', '2020-03-29 12:10:18', NULL, 'pay-test', '256539217813835777', 0, 2.10, 'pay/pay-test/payTest', 'pay-test', '支付测试', 'ios-card', 2, '', 0, NULL, b'1');
 INSERT INTO `t_permission` VALUES ('39915540965232640', NULL, '2018-08-09 17:42:28', 0, NULL, '2018-08-09 17:42:28', NULL, 'monitor', '125909152017944576', 0, 2.00, 'Main', '/monitor', '系统监控', 'ios-analytics', 1, NULL, 0, NULL, b'1');
 INSERT INTO `t_permission` VALUES ('39916171171991552', '', '2018-08-09 17:44:57', 0, 'admin', '2019-01-20 00:37:29', '', 'druid', '39915540965232640', 0, 2.40, 'sys/monitor/monitor', 'druid', 'SQL监控', 'md-analytics', 2, '', 0, 'http://127.0.0.1:8888/druid/login.html', b'1');
 INSERT INTO `t_permission` VALUES ('39918482854252544', '', '2018-08-09 17:54:08', 0, 'admin', '2019-01-20 00:37:41', '', 'swagger', '39915540965232640', 0, 2.50, 'sys/monitor/monitor', 'swagger', '接口文档', 'md-document', 2, '', 0, 'http://127.0.0.1:8888/swagger-ui.html', b'1');
@@ -1302,7 +645,7 @@ INSERT INTO `t_permission` VALUES ('41377034236071936', '', '2018-08-13 18:29:54
 INSERT INTO `t_permission` VALUES ('41378916912336896', '', '2018-08-13 18:37:23', 0, 'admin', '2020-03-17 16:48:02', '', 'tree', '41373430515240960', 0, 3.22, 'yboot-vue-template/tree/tree', 'tree', '树形结构', 'ios-git-network', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('41469219249852416', NULL, '2018-08-14 00:36:13', 0, NULL, '2018-08-14 00:36:13', NULL, '', '41371711400054784', 1, 2.31, '', '无', '查看数据', '', 3, 'view', 0, NULL, b'1');
 INSERT INTO `t_permission` VALUES ('42082442672082944', '', '2018-08-15 17:12:57', 0, 'admin', '2020-03-17 16:47:50', '', 'new-window', '41373430515240960', 0, 3.21, 'yboot-vue-template/new-window/newWindow', 'new-window', '新窗口操作', 'ios-browsers', 2, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('43117268627886080', '', '2018-08-18 13:44:58', 0, '', '2018-08-18 20:55:04', '', 'message-manage', '5129710648430592', 0, 1.30, 'sys/message-manage/messageManage', 'message-manage', '消息管理[付费]', 'md-mail', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('43117268627886080', '', '2018-08-18 13:44:58', 0, '682265633886208', '2020-04-02 19:51:05', '', 'message-manage', '5129710648430592', 0, 1.30, 'sys/message-manage/messageManage', 'message-manage', '消息管理', 'md-mail', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('44986029924421632', '', '2018-08-23 17:30:46', 0, '', '2018-09-23 23:26:53', '', 'social-manage', '5129710648430592', 0, 1.50, 'sys/social-manage/socialManage', 'social-manage', '社交账号绑定[付费]', 'md-share', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('45069342940860416', '', '2018-08-23 23:01:49', 0, '', '2018-08-24 10:01:09', '', '', '44986029924421632', 1, 1.42, '', '无', '查看社交账号数据', '', 3, 'view', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('45235228800716800', '', '2018-08-24 10:01:00', 0, '', '2018-09-19 22:07:23', '', '', '44986029924421632', 1, 1.41, '', '/yboot/relate/delByIds*', '删除解绑', '', 3, 'delete', 0, '', b'1');
@@ -1321,7 +664,7 @@ INSERT INTO `t_permission` VALUES ('5129710648430592', '', '2018-06-04 19:02:29'
 INSERT INTO `t_permission` VALUES ('5129710648430593', '', '2018-06-04 19:02:32', 0, '', '2018-08-13 15:15:33', '', 'user-manage', '5129710648430592', 0, 1.10, 'sys/user-manage/userManage', 'user-manage', '用户管理', 'md-person', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('5129710648430594', '', '2018-06-04 19:02:35', 0, '', '2018-10-13 13:51:36', '', 'role-manage', '5129710648430592', 0, 1.60, 'sys/role-manage/roleManage', 'role-manage', '角色权限管理', 'md-contacts', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('5129710648430595', '', '2018-06-04 19:02:37', 0, '', '2018-09-23 23:32:02', '', 'menu-manage', '5129710648430592', 0, 1.70, 'sys/menu-manage/menuManage', 'menu-manage', '菜单权限管理', 'md-menu', 2, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('56309618086776832', '', '2018-09-23 23:26:40', 0, 'admin', '2018-11-15 15:17:43', '', 'oss-manage', '5129710648430592', 0, 1.40, 'sys/oss-manage/ossManage', 'oss-manage', '文件对象存储[付费]', 'ios-folder', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('56309618086776832', '', '2018-09-23 23:26:40', 0, '682265633886208', '2020-04-02 19:51:19', '', 'oss-manage', '5129710648430592', 0, 1.40, 'sys/oss-manage/ossManage', 'oss-manage', '文件对象存储', 'ios-folder', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('56898976661639168', '', '2018-09-25 14:28:34', 0, '', '2018-09-25 15:12:46', '', '', '5129710648430593', 1, 1.17, '', '/yboot/user/importData*', '导入用户', '', 3, 'input', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('56911328312299520', '', '2018-09-25 15:17:39', 0, 'admin', '2020-03-17 16:48:57', '', 'excel', '41373430515240960', 0, 3.60, 'yboot-vue-template/excel/excel', 'excel', 'Excel导入导出[付费]', 'md-exit', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('57009544286441472', NULL, '2018-09-25 21:47:55', 0, NULL, '2018-09-25 21:47:55', NULL, '', '43117268627886080', 1, 1.40, '', '/yboot/messageSend/save*', '添加已发送消息', '', 3, 'add', 0, NULL, b'1');
@@ -1382,16 +725,16 @@ INSERT INTO `t_permission` VALUES ('84087593041399808', 'admin', '2018-12-09 15:
 DROP TABLE IF EXISTS `t_qq`;
 CREATE TABLE `t_qq`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `is_related` bit(1) NULL DEFAULT NULL,
-  `open_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `relate_username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `is_related` bit(1) DEFAULT NULL,
+  `open_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `relate_username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -1401,16 +744,16 @@ CREATE TABLE `t_qq`  (
 DROP TABLE IF EXISTS `t_quartz_job`;
 CREATE TABLE `t_quartz_job`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `cron_expression` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `job_class_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `parameter` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `status` int(11) NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `cron_expression` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `job_class_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `parameter` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -1420,15 +763,15 @@ CREATE TABLE `t_quartz_job`  (
 DROP TABLE IF EXISTS `t_role`;
 CREATE TABLE `t_role`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `default_role` bit(1) NULL DEFAULT NULL,
-  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `data_type` int(11) NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '角色名 以ROLE_开头',
+  `del_flag` int(11) DEFAULT NULL,
+  `default_role` bit(1) DEFAULT NULL COMMENT '是否为注册默认角色',
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '备注',
+  `data_type` int(11) DEFAULT NULL COMMENT '数据权限类型 0全部默认 1自定义 2本部门及以下 3本部门 4仅本人',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -1445,13 +788,13 @@ INSERT INTO `t_role` VALUES ('496138616573953', '', '2018-05-02 21:40:03', 'admi
 DROP TABLE IF EXISTS `t_role_department`;
 CREATE TABLE `t_role_department`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `department_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `role_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `department_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '部门id',
+  `role_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '角色id',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -1468,147 +811,19 @@ INSERT INTO `t_role_department` VALUES ('70763874277658624', 'admin', '2018-11-0
 DROP TABLE IF EXISTS `t_role_permission`;
 CREATE TABLE `t_role_permission`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `permission_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `role_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `permission_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '权限ID',
+  `role_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_role_permission
 -- ----------------------------
-INSERT INTO `t_role_permission` VALUES ('252232241554395136', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '125909152017944576', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232241663447040', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '5129710648430592', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232241776693248', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '5129710648430593', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232241885745152', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '15701400130424832', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232241994797056', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '16678126574637056', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232242103848961', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '15701915807518720', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232242217095168', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '15708892205944832', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232242326147072', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '16678447719911424', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232242435198976', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '25014528525733888', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232242544250880', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '56898976661639168', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232242653302784', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '156365156580855808', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232242762354688', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '40238597734928384', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232242875600896', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '45235621697949696', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232242984652800', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '45235787867885568', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232243093704704', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '45235939278065664', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232243202756608', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '43117268627886080', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232243311808513', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '45236734832676864', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232243420860417', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '45237010692050944', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232243529912321', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '45237170029465600', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232243638964225', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '57009544286441472', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232243748016129', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '57009744761589760', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232243861262336', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '57009981228060672', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232243970314241', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '56309618086776832', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232244079366144', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '57212882168844288', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232244188418048', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '61560041605435392', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232244297469952', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '61560275261722624', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232244406521856', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '61560480518377472', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232244515573760', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '44986029924421632', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232244624625664', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '45235228800716800', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232244733677568', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '45069342940860416', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232244842729472', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '5129710648430594', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232244947587073', NULL, '2020-03-17 14:53:14', 0, NULL, '2020-03-17 14:53:14', '16687383932047360', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232245056638977', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '16689632049631232', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232245165690881', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '16689745006432256', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232245278937088', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '16689883993083904', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232245387988992', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '16690313745666048', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232245497040897', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '5129710648430595', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232245610287105', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '16694861252005888', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232245723533312', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '16695107491205120', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232245870333952', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '16695243126607872', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232245987774464', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '75002207560273920', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232246096826368', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '76215889006956544', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232246205878272', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '76216071333351424', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232246314930177', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '76216264070008832', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232246423982081', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '76216459709124608', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232246533033985', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '76216594207870976', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232246646280192', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '76216702639017984', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232246755332096', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '58480609315524608', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232246864384000', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '61394706252173312', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232246973435904', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '61417744146370560', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232247082487808', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '76606430504816640', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232247195734016', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '81558529864896512', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232247304785920', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '84082369492946944', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232247413837825', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '84082920431554560', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232247527084032', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '81716172680073216', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232247636135936', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '84083562503999488', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232247740993537', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '84083641302388736', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232247854239744', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '113601631450304512', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232247963291648', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '84084404707659776', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232248072343552', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '82269650301227008', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232248181395457', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '84084724590448640', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232248290447361', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '81319435670917120', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232248399499265', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '84084965817454592', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232248512745472', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '117806106536841216', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232248621797376', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '76914082455752704', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232248730849280', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '84085542324539392', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232248839901184', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '84085810797744128', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232248948953088', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '84085980943880192', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232249058004992', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '84086163001839616', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232249167056896', NULL, '2020-03-17 14:53:15', 0, NULL, '2020-03-17 14:53:15', '84086362248056832', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232249280303104', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '76607201262702592', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232249389355008', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '84086882907983872', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232249498406912', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '84087009940869120', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232249607458816', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '84087154040377344', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232249716510720', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '80539147005071360', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232249825562624', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '84087344352727040', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232249934614529', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '84087480852156416', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232250047860736', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '84087593041399808', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232250156912640', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '211251162815401984', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232250265964545', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '211251678651879424', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232250379210752', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '39915540965232640', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232250488262656', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '41370251991977984', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232250597314560', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '45264987354042368', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232250706366464', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '45265487029866496', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232250819612672', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '45265762415284224', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232250928664576', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '45265886315024384', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232251037716480', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '45266070000373760', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232251146768384', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '41363147411427328', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232251255820288', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '41363537456533504', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232251364872192', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '41364927394353152', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232251473924097', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '121426317022334976', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232251587170304', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '149452775095275520', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232251696222208', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '41371711400054784', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232251809468416', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '41469219249852416', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232251918520320', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '39916171171991552', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232252027572224', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '39918482854252544', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232252136624129', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '102235632889237504', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232252249870336', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '102237605176807424', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232252358922241', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '102240052523831296', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232252472168448', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '103658022701633536', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232252581220352', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '41373430515240960', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232252690272256', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '129033675403694080', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232252799324160', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '41375330996326400', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232252908376064', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '42082442672082944', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232253017427969', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '41378916912336896', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232253130674176', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '63741744973352960', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232253239726080', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '41376192166629376', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232253348777984', NULL, '2020-03-17 14:53:16', 0, NULL, '2020-03-17 14:53:16', '41377034236071936', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232253457829888', NULL, '2020-03-17 14:53:17', 0, NULL, '2020-03-17 14:53:17', '56911328312299520', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232253566881792', NULL, '2020-03-17 14:53:17', 0, NULL, '2020-03-17 14:53:17', '63482475359244288', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232253675933696', NULL, '2020-03-17 14:53:17', 0, NULL, '2020-03-17 14:53:17', '64290663792906240', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232253784985601', NULL, '2020-03-17 14:53:17', 0, NULL, '2020-03-17 14:53:17', '66790433014943744', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232253898231808', NULL, '2020-03-17 14:53:17', 0, NULL, '2020-03-17 14:53:17', '210154306362413056', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232254007283712', NULL, '2020-03-17 14:53:17', 0, NULL, '2020-03-17 14:53:17', '210155258859491329', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232254116335616', NULL, '2020-03-17 14:53:17', 0, NULL, '2020-03-17 14:53:17', '210156371755143168', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232254225387521', NULL, '2020-03-17 14:53:17', 0, NULL, '2020-03-17 14:53:17', '67027338952445952', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232254338633728', NULL, '2020-03-17 14:53:17', 0, NULL, '2020-03-17 14:53:17', '67027909637836800', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232254447685632', NULL, '2020-03-17 14:53:17', 0, NULL, '2020-03-17 14:53:17', '67042515441684480', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232254556737537', NULL, '2020-03-17 14:53:17', 0, NULL, '2020-03-17 14:53:17', '67082402312228864', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232254669983744', NULL, '2020-03-17 14:53:17', 0, NULL, '2020-03-17 14:53:17', '113602149589454848', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232254779035648', NULL, '2020-03-17 14:53:17', 0, NULL, '2020-03-17 14:53:17', '113602342657462272', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232254888087552', NULL, '2020-03-17 14:53:17', 0, NULL, '2020-03-17 14:53:17', '113603512293658624', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232254997139457', NULL, '2020-03-17 14:53:17', 0, NULL, '2020-03-17 14:53:17', '113603617897844736', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232255106191361', NULL, '2020-03-17 14:53:17', 0, NULL, '2020-03-17 14:53:17', '16392452747300864', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232255219437568', NULL, '2020-03-17 14:53:17', 0, NULL, '2020-03-17 14:53:17', '16392767785668608', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232255328489472', NULL, '2020-03-17 14:53:17', 0, NULL, '2020-03-17 14:53:17', '16438800255291392', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232255437541376', NULL, '2020-03-17 14:53:17', 0, NULL, '2020-03-17 14:53:17', '16438962738434048', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('252232255546593281', NULL, '2020-03-17 14:53:17', 0, NULL, '2020-03-17 14:53:17', '16439068543946752', '496138616573952');
 INSERT INTO `t_role_permission` VALUES ('252232314807914506', NULL, '2020-03-17 14:53:31', 0, NULL, '2020-03-17 14:53:31', '125909152017944576', '16457350655250432');
 INSERT INTO `t_role_permission` VALUES ('252232314921160704', NULL, '2020-03-17 14:53:31', 0, NULL, '2020-03-17 14:53:31', '5129710648430592', '16457350655250432');
 INSERT INTO `t_role_permission` VALUES ('252232315030212608', NULL, '2020-03-17 14:53:31', 0, NULL, '2020-03-17 14:53:31', '5129710648430593', '16457350655250432');
@@ -1677,6 +892,136 @@ INSERT INTO `t_role_permission` VALUES ('252232342528069632', NULL, '2020-03-17 
 INSERT INTO `t_role_permission` VALUES ('252232342637121536', NULL, '2020-03-17 14:53:38', 0, NULL, '2020-03-17 14:53:38', '16438800255291392', '496138616573953');
 INSERT INTO `t_role_permission` VALUES ('252232342746173440', NULL, '2020-03-17 14:53:38', 0, NULL, '2020-03-17 14:53:38', '16438962738434048', '496138616573953');
 INSERT INTO `t_role_permission` VALUES ('252232342855225344', NULL, '2020-03-17 14:53:38', 0, NULL, '2020-03-17 14:53:38', '16439068543946752', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('256540343267233792', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '125909152017944576', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233793', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '5129710648430592', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233794', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '5129710648430593', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233795', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '15701400130424832', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233796', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16678126574637056', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233797', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '15701915807518720', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233798', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '15708892205944832', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233799', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16678447719911424', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233800', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '25014528525733888', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233801', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '56898976661639168', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233802', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '156365156580855808', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233803', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '40238597734928384', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233804', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45235621697949696', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233805', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45235787867885568', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233806', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45235939278065664', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233807', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '43117268627886080', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233808', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45236734832676864', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233809', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45237010692050944', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233810', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45237170029465600', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233811', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '57009544286441472', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233812', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '57009744761589760', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233813', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '57009981228060672', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233814', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '56309618086776832', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233815', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '57212882168844288', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233816', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '61560041605435392', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233817', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '61560275261722624', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233818', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '61560480518377472', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233819', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '44986029924421632', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233820', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45235228800716800', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233821', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45069342940860416', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233822', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '5129710648430594', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233823', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16687383932047360', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233824', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16689632049631232', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233825', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16689745006432256', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233826', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16689883993083904', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233827', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16690313745666048', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233828', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '5129710648430595', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233829', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16694861252005888', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233830', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16695107491205120', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233831', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16695243126607872', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233832', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '75002207560273920', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233833', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '76215889006956544', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233834', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '76216071333351424', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233835', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '76216264070008832', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233836', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '76216459709124608', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233837', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '76216594207870976', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233838', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '76216702639017984', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233839', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '58480609315524608', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233840', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '61394706252173312', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233841', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '61417744146370560', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233842', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '76606430504816640', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233843', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '81558529864896512', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233844', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84082369492946944', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233845', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84082920431554560', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233846', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '81716172680073216', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233847', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84083562503999488', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233848', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84083641302388736', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233849', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '113601631450304512', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233850', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84084404707659776', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233851', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '82269650301227008', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233852', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84084724590448640', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233853', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '81319435670917120', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233854', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84084965817454592', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233855', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '117806106536841216', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233856', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '76914082455752704', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233857', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84085542324539392', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233858', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84085810797744128', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233859', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84085980943880192', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233860', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84086163001839616', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233861', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84086362248056832', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233862', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '76607201262702592', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233863', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84086882907983872', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233864', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84087009940869120', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233865', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84087154040377344', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233866', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '80539147005071360', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233867', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84087344352727040', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233868', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84087480852156416', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233869', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84087593041399808', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233870', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '211251162815401984', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233871', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '211251678651879424', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233872', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '39915540965232640', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233873', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41370251991977984', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233874', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45264987354042368', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233875', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45265487029866496', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233876', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45265762415284224', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233877', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45265886315024384', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233878', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45266070000373760', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233879', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41363147411427328', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233880', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41363537456533504', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233881', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41364927394353152', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233882', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '121426317022334976', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233883', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '149452775095275520', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233884', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41371711400054784', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233885', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41469219249852416', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233886', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '39916171171991552', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233887', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '39918482854252544', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233888', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '256539217813835777', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233889', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '256539894803861505', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233890', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '102235632889237504', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233891', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '102237605176807424', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233892', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '102240052523831296', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233893', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '103658022701633536', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233894', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41373430515240960', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233895', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '129033675403694080', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233896', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41375330996326400', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233897', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '42082442672082944', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233898', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41378916912336896', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233899', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '63741744973352960', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233900', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41376192166629376', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233901', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41377034236071936', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233902', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '56911328312299520', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233903', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '63482475359244288', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233904', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '64290663792906240', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233905', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '66790433014943744', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233906', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '210154306362413056', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233907', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '210155258859491329', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233908', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '210156371755143168', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233909', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '67027338952445952', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233910', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '67027909637836800', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233911', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '67042515441684480', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233912', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '67082402312228864', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233913', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '113602149589454848', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233914', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '113602342657462272', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233915', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '113603512293658624', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233916', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '113603617897844736', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233917', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16392452747300864', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233918', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16392767785668608', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233919', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16438800255291392', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233920', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16438962738434048', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('256540343267233921', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16439068543946752', '496138616573952');
 
 -- ----------------------------
 -- Table structure for t_setting
@@ -1684,14 +1029,21 @@ INSERT INTO `t_role_permission` VALUES ('252232342855225344', NULL, '2020-03-17 
 DROP TABLE IF EXISTS `t_setting`;
 CREATE TABLE `t_setting`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `value` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `value` text CHARACTER SET utf8 COLLATE utf8_general_ci,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of t_setting
+-- ----------------------------
+INSERT INTO `t_setting` VALUES ('EMAIL_SETTING', '682265633886208', '2020-04-02 17:19:15', 0, '682265633886208', '2020-04-02 20:37:06', '{\"host\":\"smtp.163.com\",\"username\":\"canghaihongxin@163.com\",\"password\":\"EEGOZADAZVAGPTUR\",\"changed\":true}');
+INSERT INTO `t_setting` VALUES ('OTHER_SETTING', '682265633886208', '2020-03-31 20:16:55', 0, '682265633886208', '2020-04-20 17:10:58', '{\"domain\":\"http://127.0.0.1:9200\",\"ssoDomain\":\"budongfeng.com\",\"blacklist\":\"\"}');
+INSERT INTO `t_setting` VALUES ('VAPTCHA_SETTING', '682265633886208', '2020-04-02 19:50:24', 0, '682265633886208', '2020-04-02 19:50:24', '{\"vid\":\"5e85ce1255d0def9521469ac\",\"secretKey\":\"b1fc8b0c60b64379bba7a4f632c66bbd\",\"changed\":true}');
 
 -- ----------------------------
 -- Table structure for t_user
@@ -1699,34 +1051,34 @@ CREATE TABLE `t_setting`  (
 DROP TABLE IF EXISTS `t_user`;
 CREATE TABLE `t_user`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `avatar` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `mobile` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `nick_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `sex` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `status` int(11) NULL DEFAULT NULL,
-  `type` int(11) NULL DEFAULT NULL,
-  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `department_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `street` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `pass_strength` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '省市县地址',
+  `avatar` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '用户头像',
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '描述/详情/备注',
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '邮件',
+  `mobile` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '手机',
+  `nick_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '昵称',
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '密码',
+  `sex` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '性别',
+  `status` int(11) DEFAULT NULL COMMENT '状态 默认0正常 -1拉黑',
+  `type` int(11) DEFAULT NULL COMMENT '用户类型 0普通用户 1管理员',
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '用户名',
+  `del_flag` int(11) DEFAULT NULL,
+  `department_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '所属部门id',
+  `street` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '街道地址',
+  `pass_strength` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '密码强度',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES ('16739222421508096', '', '2018-06-06 18:48:02', '', '2020-03-18 08:56:08', '', 'https://s1.ax1x.com/2018/05/19/CcdVQP.png', '', 'canghaihongxin@163.com', '17600000000', '', '$2a$10$PS04ecXfknNd3V8d.ymLTObQciapMU4xU8.GADBZZsuTZr7ymnagy', '男', 0, 0, 'test2', 0, '40652338142121984', '', '弱');
-INSERT INTO `t_user` VALUES ('4363087427670016', '', '2018-05-03 15:09:42', '', '2020-03-18 08:56:22', '[\"510000\",\"510100\",\"510114\"]', 'https://s1.ax1x.com/2018/05/19/CcdVQP.png', '', 'canghaihongxin@163.com', '17600000001', '', '$2a$10$PS04ecXfknNd3V8d.ymLTObQciapMU4xU8.GADBZZsuTZr7ymnagy', '男', 0, 0, 'test', 0, '40652338142121984', '', '弱');
-INSERT INTO `t_user` VALUES ('682265633886208', '', '2018-05-01 16:13:51', 'admin', '2020-03-18 08:56:56', '[\"510000\",\"510100\",\"510104\"]', 'https://s1.ax1x.com/2018/05/19/CcdVQP.png', 'test', 'canghaihongxin@163.com', '17600000002', 'tpr', '$2a$10$PS04ecXfknNd3V8d.ymLTObQciapMU4xU8.GADBZZsuTZr7ymnagy', '男', 0, 1, 'admin', 0, '40322777781112832', '天府1街', '弱');
+INSERT INTO `t_user` VALUES ('16739222421508096', '', '2018-06-06 18:48:02', '4363087427670016', '2020-03-25 16:01:30', '', 'https://s1.ax1x.com/2018/05/19/CcdVQP.png', '', 'canghaihongxin1@163.com', '17600000000', '', '$2a$10$PS04ecXfknNd3V8d.ymLTObQciapMU4xU8.GADBZZsuTZr7ymnagy', '男', 0, 0, 'test2', 0, '40652338142121984', '', '弱');
+INSERT INTO `t_user` VALUES ('4363087427670016', '', '2018-05-03 15:09:42', '', '2020-03-18 08:56:22', '[\"510000\",\"510100\",\"510114\"]', 'https://s1.ax1x.com/2018/05/19/CcdVQP.png', '', 'canghaihongxin2@163.com', '17600000001', '', '$2a$10$PS04ecXfknNd3V8d.ymLTObQciapMU4xU8.GADBZZsuTZr7ymnagy', '男', 0, 0, 'test', 0, '40652338142121984', '', '弱');
+INSERT INTO `t_user` VALUES ('682265633886208', '', '2018-05-01 16:13:51', 'admin', '2020-04-14 19:10:46', '[\"510000\",\"510100\",\"510104\"]', 'https://s1.ax1x.com/2018/05/19/CcdVQP.png', 'test', 'canghaihongxin@163.com', '17600000002', 'tpr', '$2a$10$NnhTPTwIaI1ARyHLT0hn5ePFxv5ZAYyu7Il7rF24.8tIqTOtz636S', '男', 0, 1, 'admin', 0, '40322777781112832', '天府1街', '弱');
 INSERT INTO `t_user` VALUES ('682265633886209', '', '2018-04-30 23:28:42', 'admin', '2020-03-18 08:56:40', '', 'https://s1.ax1x.com/2018/05/19/CcdVQP.png', '', '1012@qq.com', '17600000003', '', '$2a$10$PS04ecXfknNd3V8d.ymLTObQciapMU4xU8.GADBZZsuTZr7ymnagy', '男', -1, 0, 'tpr', 0, '40322777781112832', '', '弱');
 
 -- ----------------------------
@@ -1735,13 +1087,13 @@ INSERT INTO `t_user` VALUES ('682265633886209', '', '2018-04-30 23:28:42', 'admi
 DROP TABLE IF EXISTS `t_user_role`;
 CREATE TABLE `t_user_role`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `role_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `role_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '角色唯一id',
+  `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '用户唯一id',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -1760,16 +1112,16 @@ INSERT INTO `t_user_role` VALUES ('252505174482882560', NULL, '2020-03-18 08:57:
 DROP TABLE IF EXISTS `t_wechat`;
 CREATE TABLE `t_wechat`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(6) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(6) NULL DEFAULT NULL,
-  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `is_related` bit(1) NULL DEFAULT NULL,
-  `open_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `relate_username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(6) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(6) DEFAULT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `is_related` bit(1) DEFAULT NULL,
+  `open_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `relate_username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -1779,16 +1131,16 @@ CREATE TABLE `t_wechat`  (
 DROP TABLE IF EXISTS `t_weibo`;
 CREATE TABLE `t_weibo`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `is_related` bit(1) NULL DEFAULT NULL,
-  `open_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `relate_username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `is_related` bit(1) DEFAULT NULL,
+  `open_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `relate_username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -1798,12 +1150,12 @@ CREATE TABLE `t_weibo`  (
 DROP TABLE IF EXISTS `tx_order`;
 CREATE TABLE `tx_order`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(6) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(6) NULL DEFAULT NULL,
-  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(6) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(6) DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -1813,12 +1165,12 @@ CREATE TABLE `tx_order`  (
 DROP TABLE IF EXISTS `tx_tpr_acc`;
 CREATE TABLE `tx_tpr_acc`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(6) NULL DEFAULT NULL,
-  `del_flag` int(11) NULL DEFAULT NULL,
-  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(6) NULL DEFAULT NULL,
-  `money` double NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `create_time` datetime(6) DEFAULT NULL,
+  `del_flag` int(11) DEFAULT NULL,
+  `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `update_time` datetime(6) DEFAULT NULL,
+  `money` double DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -1838,5 +1190,22 @@ CREATE TABLE `undo_log`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `ux_undo_log`(`xid`, `branch_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'AT transaction mode undo table' ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Procedure structure for idata
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `idata`;
+delimiter ;;
+CREATE DEFINER=`root`@`%` PROCEDURE `idata`()
+BEGIN
+	declare i int;
+	set i = 1;
+	WHILE (1<100000) DO
+	INSERT INTO t VALUES(i,i,i);
+	set i=i+1;
+END WHILE;
+end
+;;
+delimiter ;
 
 SET FOREIGN_KEY_CHECKS = 1;
