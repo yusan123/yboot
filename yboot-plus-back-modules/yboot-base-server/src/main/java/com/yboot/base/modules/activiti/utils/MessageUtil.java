@@ -12,13 +12,16 @@ import com.yboot.base.modules.base.entity.MessageSend;
 import com.yboot.base.modules.base.entity.Setting;
 import com.yboot.base.modules.base.entity.User;
 import com.yboot.base.modules.base.service.MessageSendService;
+import com.yboot.base.modules.base.service.SettingService;
 import com.yboot.base.modules.base.service.UserService;
 import com.yboot.base.modules.base.vo.OtherSetting;
 import com.yboot.common.common.constant.ActivitiConstant;
 import com.yboot.common.common.constant.SettingConstant;
 import com.yboot.common.common.exception.YbootException;
+import com.yboot.common.common.utils.ResultUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -45,21 +48,11 @@ public class MessageUtil {
     private MessageSendService messageSendService;
 
     @Autowired
-    private StringRedisTemplate redisTemplate;
+    private SettingService settingService;
 
-    public OtherSetting getOtherSetting(){
-
-        String v = redisTemplate.opsForValue().get("setting::"+SettingConstant.OTHER_SETTING);
-        if(StrUtil.isBlank(v)){
-            throw new YbootException("系统未配置访问域名");
-        }
-
-        String v1 = StrUtil.removePrefix(v, "[");
-        String v2 = StrUtil.removeSuffix(v1, "]");
-        String v3 = StrUtil.removePrefix(v2, "\"com.yboot.base.modules.base.entity.Setting\",");
-        JSONObject jsonObject = JSONObject.parseObject(v3);
-        Object value = jsonObject.get("value");
-        OtherSetting otherSetting = JSONObject.parseObject(value.toString(), OtherSetting.class);
+    public OtherSetting getOtherSetting(String id){
+        Setting setting = settingService.get(SettingConstant.OTHER_SETTING);
+        OtherSetting otherSetting = new Gson().fromJson(setting.getValue(), OtherSetting.class);
         return otherSetting;
     }
 
@@ -108,7 +101,7 @@ public class MessageUtil {
             EmailMessage e = new EmailMessage();
             e.setUsername(user.getUsername());
             e.setContent(content);
-            e.setFullUrl(getOtherSetting().getDomain());
+            e.setFullUrl(getOtherSetting(SettingConstant.OTHER_SETTING).getDomain());
             emailUtil.sendTemplateEmail(user.getEmail(), "【YBoot】工作流通知提醒", "act-message-email", e);
         }
     }
