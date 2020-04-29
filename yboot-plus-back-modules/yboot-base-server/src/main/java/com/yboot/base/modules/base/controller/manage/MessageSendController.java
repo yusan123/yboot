@@ -59,9 +59,11 @@ public class MessageSendController extends YbootBaseController<MessageSendDao,Me
                 item.setUsername(u.getUsername());
             }
             Message m = messageService.get(item.getMessageId());
-            item.setTitle(m.getTitle());
-            item.setContent(m.getContent());
-            item.setType(m.getType());
+            if (m !=null){
+                item.setTitle(m.getTitle());
+                item.setContent(m.getContent());
+                item.setType(m.getType());
+            }
         });
         return new ResultUtil<Page<MessageSend>>().setData(page);
     }
