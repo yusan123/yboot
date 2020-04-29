@@ -1,4 +1,4 @@
-package com.yboot.base.config.interceptor;
+package com.yboot.common.config.interceptor;
 
 import cn.hutool.core.util.StrUtil;
 import com.yboot.common.common.jwt.JwtOperator;
@@ -6,6 +6,7 @@ import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 @Component
 public class Jwt2UserInterceptorAdapter extends HandlerInterceptorAdapter {
-    private static ThreadLocal<Claims> threadLocal = new ThreadLocal<>();
+    public static ThreadLocal<Claims> context = new InheritableThreadLocal<>();
 
     @Autowired
     private JwtOperator jwtOperator;
@@ -31,13 +32,24 @@ public class Jwt2UserInterceptorAdapter extends HandlerInterceptorAdapter {
         String access_token = request.getHeader("accessToken");
         if (StrUtil.isNotBlank(access_token)){
             Claims claimsFromToken = jwtOperator.getClaimsFromToken(access_token);
-            threadLocal.set(claimsFromToken);
+            context.set(claimsFromToken);
         }
 
         return true;
     }
 
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        context.remove();
+        super.postHandle(request, response, handler, modelAndView);
+
+    }
+
     public static Claims getClaims(){
-        return threadLocal.get();
+        return context.get();
+    }
+
+    public static void setClaims(Claims claims){
+        context.set(claims);
     }
 }

@@ -3,7 +3,7 @@ package com.yboot.base.common.utils;
 import cn.hutool.core.util.StrUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.yboot.base.config.interceptor.Jwt2UserInterceptorAdapter;
+import com.yboot.common.config.interceptor.Jwt2UserInterceptorAdapter;
 import com.yboot.base.config.properties.YbootTokenProperties;
 import com.yboot.base.modules.base.entity.Department;
 import com.yboot.base.modules.base.entity.Permission;

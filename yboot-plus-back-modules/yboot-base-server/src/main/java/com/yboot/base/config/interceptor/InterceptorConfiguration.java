@@ -1,6 +1,7 @@
 package com.yboot.base.config.interceptor;
 
 import com.yboot.base.config.properties.IgnoredUrlsProperties;
+import com.yboot.common.config.interceptor.Jwt2UserInterceptorAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
