@@ -24,11 +24,15 @@ import java.util.Map;
 public class JwtOperator {
 
 
+
+    public JwtOperator() {
+        this.secret = "tianpeirongshiyigedashuaigeyeshiyigedahaorenrenpinzhendehaoxiwangjiagongzi";
+    }
+
     /**
      * 秘钥
      * - 默认aaabbbcccdddeeefffggghhhiiijjjkkklllmmmnnnooopppqqqrrrsssttt
      */
-    @Value("${secret:tianpeirongshiyigedashuaigeyeshiyigedahaorenrenpinzhendehaoxiwangjiagongzi}")
     private String secret;
     /**
      * 有效期，单位秒

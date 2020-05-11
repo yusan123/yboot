@@ -1,5 +1,6 @@
 package com.yboot.base.config.security;
 
+import com.yboot.base.config.properties.YbootTokenProperties;
 import com.yboot.base.config.security.jwt.CustomTokenEnhancer;
 import com.yboot.common.common.exception.MyWebResponseExceptionTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private MyWebResponseExceptionTranslator myWebResponseExceptionTranslator;
 
+    @Autowired
+    public YbootTokenProperties tokenProperties;
 
     @Bean
     public TokenEnhancer customTokenEnhancer(){
@@ -52,10 +55,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         return new JwtTokenStore(jwtTokenEnHancer());
     }
 
+
     @Bean
     public JwtAccessTokenConverter jwtTokenEnHancer() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setSigningKey("tianpeirongshiyigedashuaigeyeshiyigedahaorenrenpinzhendehaoxiwangjiagongzi");
+        converter.setSigningKey(tokenProperties.getJwtSecret());
         return converter;
     }
 

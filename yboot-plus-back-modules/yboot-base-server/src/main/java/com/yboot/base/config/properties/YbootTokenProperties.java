@@ -13,6 +13,11 @@ import org.springframework.context.annotation.Configuration;
 public class YbootTokenProperties {
 
     /**
+      *  jwt 密钥
+     */
+    private String jwtSecret;
+
+    /**
      * 使用redis存储token
      */
     private Boolean redis = true;
