@@ -3,6 +3,7 @@ package com.yboot.base.config.security;
 import com.yboot.base.config.properties.YbootTokenProperties;
 import com.yboot.base.config.security.jwt.CustomTokenEnhancer;
 import com.yboot.common.common.exception.MyWebResponseExceptionTranslator;
+import com.yboot.common.common.jwt.JwtOperator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,7 +45,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private MyWebResponseExceptionTranslator myWebResponseExceptionTranslator;
 
     @Autowired
-    public YbootTokenProperties tokenProperties;
+    public JwtOperator jwtOperator;
 
     @Bean
     public TokenEnhancer customTokenEnhancer(){
@@ -59,7 +60,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Bean
     public JwtAccessTokenConverter jwtTokenEnHancer() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setSigningKey(tokenProperties.getJwtSecret());
+        converter.setSigningKey(jwtOperator.getSecret());
         return converter;
     }
 

@@ -108,7 +108,6 @@
             <Dropdown trigger="click" @on-click="handleDropDown">
               <a class="forget-pass">{{ $t('forgetPass') }}</a>
               <DropdownMenu slot="list">
-                <DropdownItem name="showAccount">体验测试账号</DropdownItem>
                 <DropdownItem name="resetByMobile">使用手机号重置密码()</DropdownItem>
                 <DropdownItem name="resetByEmail">使用邮箱重置密码()</DropdownItem>
               </DropdownMenu>

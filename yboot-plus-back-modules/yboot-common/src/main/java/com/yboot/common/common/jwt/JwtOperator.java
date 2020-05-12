@@ -3,6 +3,7 @@ package com.yboot.common.common.jwt;
 import com.google.common.collect.Maps;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,18 +22,15 @@ import java.util.Map;
 @Slf4j
 @SuppressWarnings("WeakerAccess")
 @Component
+@Data
 public class JwtOperator {
 
-
-
-    public JwtOperator() {
-        this.secret = "tianpeirongshiyigedashuaigeyeshiyigedahaorenrenpinzhendehaoxiwangjiagongzi";
-    }
 
     /**
      * 秘钥
      * - 默认aaabbbcccdddeeefffggghhhiiijjjkkklllmmmnnnooopppqqqrrrsssttt
      */
+    @Value("${secret:tianpeirongshiyigedashuaigeyeshiyigedahaorenrenpinzhendehaoxiwangjiagongzi}")
     private String secret;
     /**
      * 有效期，单位秒
