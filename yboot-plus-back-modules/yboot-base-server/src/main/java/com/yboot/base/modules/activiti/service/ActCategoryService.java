@@ -3,7 +3,6 @@ package com.yboot.base.modules.activiti.service;
 import com.yboot.base.modules.activiti.dao.ActCategoryDao;
 import com.yboot.common.base.YbootBaseService;
 import com.yboot.base.modules.activiti.entity.ActCategory;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.List;
 
