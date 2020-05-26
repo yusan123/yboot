@@ -78,10 +78,10 @@ DROP TABLE IF EXISTS `t_act_business`;
 CREATE TABLE `t_act_business`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `proc_def_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `proc_inst_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `result` int(11) DEFAULT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE `t_act_business`  (
   `table_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `apply_time` datetime(0) DEFAULT NULL,
+  `apply_time` datetime DEFAULT NULL,
   `is_history` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
@@ -102,10 +102,10 @@ DROP TABLE IF EXISTS `t_act_category`;
 CREATE TABLE `t_act_category`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `is_parent` bit(1) DEFAULT NULL,
   `parent_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `sort_order` decimal(10, 2) DEFAULT NULL,
@@ -132,10 +132,10 @@ DROP TABLE IF EXISTS `t_act_model`;
 CREATE TABLE `t_act_model`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `model_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -155,10 +155,10 @@ DROP TABLE IF EXISTS `t_act_node`;
 CREATE TABLE `t_act_node`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `node_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `relate_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -179,10 +179,10 @@ DROP TABLE IF EXISTS `t_act_process`;
 CREATE TABLE `t_act_process`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `category_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `deployment_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -210,10 +210,10 @@ DROP TABLE IF EXISTS `t_client`;
 CREATE TABLE `t_client`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(6) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(6) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `client_secret` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `home_uri` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -228,10 +228,10 @@ DROP TABLE IF EXISTS `t_department`;
 CREATE TABLE `t_department`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `parent_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '父id',
   `sort_order` decimal(10, 2) DEFAULT NULL COMMENT '排序值',
   `status` int(11) DEFAULT NULL COMMENT '是否启用 0启用 -1禁用',
@@ -262,10 +262,10 @@ DROP TABLE IF EXISTS `t_department_header`;
 CREATE TABLE `t_department_header`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `department_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '关联部门id',
   `type` int(11) DEFAULT NULL COMMENT '负责人类型 默认0主要 1副职',
   `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '关联部门负责人',
@@ -279,10 +279,10 @@ DROP TABLE IF EXISTS `t_dict`;
 CREATE TABLE `t_dict`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -310,10 +310,10 @@ DROP TABLE IF EXISTS `t_dict_data`;
 CREATE TABLE `t_dict_data`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `dict_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `sort_order` decimal(10, 2) DEFAULT NULL,
@@ -389,10 +389,10 @@ DROP TABLE IF EXISTS `t_file`;
 CREATE TABLE `t_file`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `size` bigint(20) DEFAULT NULL,
   `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -409,10 +409,10 @@ DROP TABLE IF EXISTS `t_github`;
 CREATE TABLE `t_github`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `is_related` bit(1) DEFAULT NULL,
   `open_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -428,13 +428,13 @@ DROP TABLE IF EXISTS `t_leave`;
 CREATE TABLE `t_leave`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `end_date` datetime(0) DEFAULT NULL,
-  `start_date` datetime(0) DEFAULT NULL,
+  `end_date` datetime DEFAULT NULL,
+  `start_date` datetime DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `duration` int(11) DEFAULT NULL,
   `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -454,10 +454,10 @@ DROP TABLE IF EXISTS `t_log`;
 CREATE TABLE `t_log`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `cost_time` int(11) DEFAULT NULL,
   `ip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `ip_info` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -477,10 +477,10 @@ DROP TABLE IF EXISTS `t_message`;
 CREATE TABLE `t_message`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `create_send` bit(1) DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -503,10 +503,10 @@ DROP TABLE IF EXISTS `t_message_send`;
 CREATE TABLE `t_message_send`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `message_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -534,10 +534,10 @@ CREATE TABLE `t_pay_info`  (
   `platform_amount` decimal(20, 2) NOT NULL COMMENT '支付金额',
   `pay_order_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '支付订单ID',
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(6) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(6) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `platform_number`(`platform_number`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 264581481639186433 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
@@ -564,10 +564,10 @@ DROP TABLE IF EXISTS `t_permission`;
 CREATE TABLE `t_permission`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '说明备注',
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '菜单/权限名称',
   `parent_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '父id',
@@ -589,15 +589,15 @@ CREATE TABLE `t_permission`  (
 -- Records of t_permission
 -- ----------------------------
 INSERT INTO `t_permission` VALUES ('102235632889237504', 'admin', '2019-01-28 17:00:15', 0, 'admin', '2019-11-22 11:47:14', '', 'vue-generator', '125909152017944576', 0, 3.00, 'Main', '/vue-generator', 'Vue代码生成', 'md-send', 1, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('102237605176807424', 'admin', '2019-01-28 17:08:06', 0, 'admin', '2020-03-17 16:47:16', '', 'table-generator', '102235632889237504', 0, 0.00, 'yboot-vue-generator/tableGenerator', 'table', '增删改表格生成[付费]', 'md-grid', 2, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('102240052523831296', 'admin', '2019-01-28 17:17:49', 0, 'admin', '2020-03-17 16:49:49', '', 'tree-generator', '102235632889237504', 0, 1.00, 'yboot-vue-generator/treeGenerator', 'tree', '树形结构生成[付费]', 'md-git-branch', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('102237605176807424', 'admin', '2019-01-28 17:08:06', 0, 'admin', '2020-03-17 16:47:16', '', 'table-generator', '102235632889237504', 0, 0.00, 'yboot-vue-generator/tableGenerator', 'table', '增删改表格生成', 'md-grid', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('102240052523831296', 'admin', '2019-01-28 17:17:49', 0, 'admin', '2020-03-17 16:49:49', '', 'tree-generator', '102235632889237504', 0, 1.00, 'yboot-vue-generator/treeGenerator', 'tree', '树形结构生成', 'md-git-branch', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('103658022701633536', 'admin', '2019-02-01 15:12:20', 0, 'admin', '2020-03-17 16:50:01', '', 'test', '102235632889237504', 0, 3.00, 'yboot-vue-generator/test', 'test', '代码生成测试页', 'ios-bug', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('113601631450304512', 'admin', '2019-03-01 01:44:41', 0, 'admin', '2019-03-01 01:44:41', NULL, '', '81716172680073216', 1, 2.00, '', '/yboot/actTask/backAll/**', '审批驳回至发起人', '', 3, 'disable', 0, NULL, b'1');
 INSERT INTO `t_permission` VALUES ('113602149589454848', 'admin', '2019-03-01 01:46:44', 0, 'admin', '2020-03-17 14:56:31', '', 'components', '125909152017944576', 0, 5.00, 'Main', '/components', 'YBoot业务组件', 'md-cube', 1, '', 0, '', b'0');
 INSERT INTO `t_permission` VALUES ('113602342657462272', 'admin', '2019-03-01 01:47:30', 0, 'admin', '2020-03-17 17:20:44', '', 'components', '113602149589454848', 0, 0.00, 'yboot-components/yboot-components', 'components', 'YBoot业务组件', 'md-cube', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('113603512293658624', 'admin', '2019-03-01 01:52:09', 0, 'admin', '2019-06-26 20:38:47', '', 'library', '125909152017944576', 0, 6.00, 'Main', '/library', '第三方依赖工具/组件', 'ios-link', 1, '', 0, '', b'0');
 INSERT INTO `t_permission` VALUES ('113603617897844736', 'admin', '2019-03-01 01:52:34', 0, 'admin', '2020-03-17 17:20:57', '', 'library', '113603512293658624', 0, 0.00, 'yboot-library/yboot-library', 'library', '第三方依赖工具/组件', 'ios-link', 2, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('117806106536841216', 'admin', '2019-03-12 16:11:46', 0, 'admin', '2019-03-12 16:11:46', NULL, 'process-finish-manage', '76606430504816640', 0, 0.80, 'activiti/process-finish-manage/processFinishManage', 'process-finish-manage', '结束的流程[付费]', 'md-power', 2, '', 0, NULL, b'1');
+INSERT INTO `t_permission` VALUES ('117806106536841216', 'admin', '2019-03-12 16:11:46', 0, 'admin', '2019-03-12 16:11:46', NULL, 'process-finish-manage', '76606430504816640', 0, 0.80, 'activiti/process-finish-manage/processFinishManage', 'process-finish-manage', '结束的流程', 'md-power', 2, '', 0, NULL, b'1');
 INSERT INTO `t_permission` VALUES ('121426317022334976', 'admin', '2019-03-22 15:57:11', 0, 'admin', '2019-03-22 15:57:11', NULL, 'redis', '39915540965232640', 0, 2.21, 'sys/redis/redis', 'redis', 'Redis缓存管理', 'md-barcode', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('125909152017944576', 'admin', '2019-04-04 00:50:22', 0, 'admin', '2020-03-17 14:56:19', '', 'yboot', '', -1, 0.00, '', '', 'YBoot管理系统', 'md-home', 0, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('129033675403694080', 'admin', '2019-04-12 15:46:07', 0, 'admin', '2020-03-17 16:47:28', '', 'single-window', '41373430515240960', 0, 1.00, 'yboot-vue-template/single-window/singleWindow', 'single-window', '动态组件单页操作', 'md-easel', 2, '', 0, '', b'1');
@@ -622,8 +622,8 @@ INSERT INTO `t_permission` VALUES ('16694861252005888', '', '2018-06-06 15:51:46
 INSERT INTO `t_permission` VALUES ('16695107491205120', '', '2018-06-06 15:52:44', 0, '', '2018-09-19 22:07:57', '', '', '5129710648430595', 1, 1.32, '', '/yboot/permission/edit*', '编辑菜单', '', 3, 'edit', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('16695243126607872', '', '2018-06-06 15:53:17', 0, '', '2018-08-10 21:41:33', '', '', '5129710648430595', 1, 1.33, '', '/yboot/permission/delByIds/**', '删除菜单', '', 3, 'delete', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('210154306362413056', 'admin', '2019-11-22 12:10:32', 0, 'admin', '2019-11-22 12:10:32', NULL, 'charts', '125909152017944576', 0, 3.10, 'Main', '/charts', '图表数据展示', 'md-analytics', 1, '', 0, NULL, b'1');
-INSERT INTO `t_permission` VALUES ('210155258859491329', 'admin', '2019-11-22 12:14:19', 0, 'admin', '2020-03-17 16:50:21', '', 'dashboard1', '210154306362413056', 0, 0.00, 'yboot-charts/dashboard1/dashboard1', 'dashboard1', 'Dashboard1[付费]', 'md-speedometer', 2, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('210156371755143168', 'admin', '2019-11-22 12:18:45', 0, 'admin', '2020-03-17 16:50:29', '', 'dashboard2', '210154306362413056', 0, 1.00, 'yboot-charts/dashboard2/dashboard2', 'dashboard2', 'Dashboard2[付费]', 'ios-speedometer', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('210155258859491329', 'admin', '2019-11-22 12:14:19', 0, 'admin', '2020-03-17 16:50:21', '', 'dashboard1', '210154306362413056', 0, 0.00, 'yboot-charts/dashboard1/dashboard1', 'dashboard1', 'Dashboard1', 'md-speedometer', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('210156371755143168', 'admin', '2019-11-22 12:18:45', 0, 'admin', '2020-03-17 16:50:29', '', 'dashboard2', '210154306362413056', 0, 1.00, 'yboot-charts/dashboard2/dashboard2', 'dashboard2', 'Dashboard2', 'ios-speedometer', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('211251162815401984', 'admin', '2019-11-25 12:49:03', 0, 'admin', '2019-11-25 12:49:12', '', 'open', '125909152017944576', 0, 1.20, 'Main', '/open', '开放平台', 'ios-apps', 1, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('211251678651879424', 'admin', '2019-11-25 12:51:06', 0, 'admin', '2019-11-25 12:51:06', NULL, 'client', '211251162815401984', 0, 0.00, 'open/client/client', 'client', '接入网站管理', 'md-browsers', 2, '', 0, NULL, b'1');
 INSERT INTO `t_permission` VALUES ('25014528525733888', '', '2018-06-29 14:51:09', 0, '', '2018-10-08 11:13:27', '', '', '5129710648430593', 1, 1.16, '', '无', '上传图片', '', 3, 'upload', 0, '', b'1');
@@ -640,13 +640,13 @@ INSERT INTO `t_permission` VALUES ('41370251991977984', NULL, '2018-08-13 18:02:
 INSERT INTO `t_permission` VALUES ('41371711400054784', '', '2018-08-13 18:08:45', 0, '', '2019-07-07 21:24:26', '', 'actuator', '39915540965232640', 0, 2.30, 'sys/actuator/actuator', 'actuator', 'Actuator监控', 'logo-angular', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('41373430515240960', '', '2018-08-13 18:15:35', 0, 'admin', '2019-11-22 11:47:07', '', 'vue-template', '125909152017944576', 0, 3.10, 'Main', '/vue-template', '后台Vue模版', 'ios-albums', 1, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('41375330996326400', '', '2018-08-13 18:23:08', 0, 'admin', '2020-03-17 16:47:37', '', 'simple-table', '41373430515240960', 0, 3.10, 'yboot-vue-template/simple-table/simpleTable', 'simple-table', '简单表格', 'ios-grid-outline', 2, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('41376192166629376', '', '2018-08-13 18:26:33', 0, 'admin', '2020-03-17 16:48:28', '', 'search-table', '41373430515240960', 0, 3.40, 'yboot-vue-template/search-table/searchTable', 'search-table', '搜索表格[付费]', 'md-grid', 2, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('41377034236071936', '', '2018-08-13 18:29:54', 0, 'admin', '2020-03-17 16:48:41', '', 'complex-table', '41373430515240960', 0, 3.50, 'yboot-vue-template/complex-table/complexTable', 'complex-table', '复杂表格[付费]', 'ios-grid', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('41376192166629376', '', '2018-08-13 18:26:33', 0, 'admin', '2020-03-17 16:48:28', '', 'search-table', '41373430515240960', 0, 3.40, 'yboot-vue-template/search-table/searchTable', 'search-table', '搜索表格', 'md-grid', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('41377034236071936', '', '2018-08-13 18:29:54', 0, 'admin', '2020-03-17 16:48:41', '', 'complex-table', '41373430515240960', 0, 3.50, 'yboot-vue-template/complex-table/complexTable', 'complex-table', '复杂表格', 'ios-grid', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('41378916912336896', '', '2018-08-13 18:37:23', 0, 'admin', '2020-03-17 16:48:02', '', 'tree', '41373430515240960', 0, 3.22, 'yboot-vue-template/tree/tree', 'tree', '树形结构', 'ios-git-network', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('41469219249852416', NULL, '2018-08-14 00:36:13', 0, NULL, '2018-08-14 00:36:13', NULL, '', '41371711400054784', 1, 2.31, '', '无', '查看数据', '', 3, 'view', 0, NULL, b'1');
 INSERT INTO `t_permission` VALUES ('42082442672082944', '', '2018-08-15 17:12:57', 0, 'admin', '2020-03-17 16:47:50', '', 'new-window', '41373430515240960', 0, 3.21, 'yboot-vue-template/new-window/newWindow', 'new-window', '新窗口操作', 'ios-browsers', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('43117268627886080', '', '2018-08-18 13:44:58', 0, '682265633886208', '2020-04-02 19:51:05', '', 'message-manage', '5129710648430592', 0, 1.30, 'sys/message-manage/messageManage', 'message-manage', '消息管理', 'md-mail', 2, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('44986029924421632', '', '2018-08-23 17:30:46', 0, '', '2018-09-23 23:26:53', '', 'social-manage', '5129710648430592', 0, 1.50, 'sys/social-manage/socialManage', 'social-manage', '社交账号绑定[付费]', 'md-share', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('44986029924421632', '', '2018-08-23 17:30:46', 0, '', '2018-09-23 23:26:53', '', 'social-manage', '5129710648430592', 0, 1.50, 'sys/social-manage/socialManage', 'social-manage', '社交账号绑定', 'md-share', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('45069342940860416', '', '2018-08-23 23:01:49', 0, '', '2018-08-24 10:01:09', '', '', '44986029924421632', 1, 1.42, '', '无', '查看社交账号数据', '', 3, 'view', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('45235228800716800', '', '2018-08-24 10:01:00', 0, '', '2018-09-19 22:07:23', '', '', '44986029924421632', 1, 1.41, '', '/yboot/relate/delByIds*', '删除解绑', '', 3, 'delete', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('45235621697949696', '', '2018-08-24 10:02:33', 0, '', '2018-09-19 22:06:57', '', '', '40238597734928384', 1, 1.21, '', '/yboot/department/add*', '添加部门', '', 3, 'add', 0, '', b'1');
@@ -666,25 +666,25 @@ INSERT INTO `t_permission` VALUES ('5129710648430594', '', '2018-06-04 19:02:35'
 INSERT INTO `t_permission` VALUES ('5129710648430595', '', '2018-06-04 19:02:37', 0, '', '2018-09-23 23:32:02', '', 'menu-manage', '5129710648430592', 0, 1.70, 'sys/menu-manage/menuManage', 'menu-manage', '菜单权限管理', 'md-menu', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('56309618086776832', '', '2018-09-23 23:26:40', 0, '682265633886208', '2020-04-02 19:51:19', '', 'oss-manage', '5129710648430592', 0, 1.40, 'sys/oss-manage/ossManage', 'oss-manage', '文件对象存储', 'ios-folder', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('56898976661639168', '', '2018-09-25 14:28:34', 0, '', '2018-09-25 15:12:46', '', '', '5129710648430593', 1, 1.17, '', '/yboot/user/importData*', '导入用户', '', 3, 'input', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('56911328312299520', '', '2018-09-25 15:17:39', 0, 'admin', '2020-03-17 16:48:57', '', 'excel', '41373430515240960', 0, 3.60, 'yboot-vue-template/excel/excel', 'excel', 'Excel导入导出[付费]', 'md-exit', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('56911328312299520', '', '2018-09-25 15:17:39', 0, 'admin', '2020-03-17 16:48:57', '', 'excel', '41373430515240960', 0, 3.60, 'yboot-vue-template/excel/excel', 'excel', 'Excel导入导出', 'md-exit', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('57009544286441472', NULL, '2018-09-25 21:47:55', 0, NULL, '2018-09-25 21:47:55', NULL, '', '43117268627886080', 1, 1.40, '', '/yboot/messageSend/save*', '添加已发送消息', '', 3, 'add', 0, NULL, b'1');
 INSERT INTO `t_permission` VALUES ('57009744761589760', NULL, '2018-09-25 21:48:43', 0, NULL, '2018-09-25 21:48:43', NULL, '', '43117268627886080', 1, 1.50, '', '/yboot/messageSend/update*', '编辑已发送消息', '', 3, 'edit', 0, NULL, b'1');
 INSERT INTO `t_permission` VALUES ('57009981228060672', NULL, '2018-09-25 21:49:39', 0, NULL, '2018-09-25 21:49:39', NULL, '', '43117268627886080', 1, 1.60, '', '/yboot/messageSend/delByIds/*', '删除已发送消息', '', 3, 'delete', 0, NULL, b'1');
 INSERT INTO `t_permission` VALUES ('57212882168844288', '', '2018-09-26 11:15:55', 0, '', '2018-10-08 11:10:05', '', '', '56309618086776832', 1, 1.41, '', '无', '上传文件', '', 3, 'upload', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('58480609315524608', '', '2018-09-29 23:13:24', 0, 'admin', '2018-11-14 13:24:26', '', 'setting', '5129710648430592', 0, 1.90, 'sys/setting-manage/settingManage', 'setting', '系统配置[付费]', 'ios-settings-outline', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('58480609315524608', '', '2018-09-29 23:13:24', 0, 'admin', '2018-11-14 13:24:26', '', 'setting', '5129710648430592', 0, 1.90, 'sys/setting-manage/settingManage', 'setting', '系统配置', 'ios-settings-outline', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('61394706252173312', NULL, '2018-10-08 00:12:59', 0, NULL, '2018-10-08 00:12:59', NULL, '', '58480609315524608', 1, 1.81, '', '/yboot/setting/seeSecret/**', '查看私密配置', '', 3, 'view', 0, NULL, b'1');
 INSERT INTO `t_permission` VALUES ('61417744146370560', '', '2018-10-08 01:44:32', 0, '', '2018-10-08 01:50:03', '', '', '58480609315524608', 1, 1.82, '', '/yboot/setting/*/set*', '编辑配置', '', 3, 'edit', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('61560041605435392', NULL, '2018-10-08 11:09:58', 0, NULL, '2018-10-08 11:09:58', NULL, '', '56309618086776832', 1, 1.42, '', '/yboot/file/rename*', '重命名文件', '', 3, 'edit', 0, NULL, b'1');
 INSERT INTO `t_permission` VALUES ('61560275261722624', NULL, '2018-10-08 11:10:54', 0, NULL, '2018-10-08 11:10:54', NULL, '', '56309618086776832', 1, 1.43, '', '/yboot/file/copy*', '复制文件', '', 3, 'edit', 0, NULL, b'1');
 INSERT INTO `t_permission` VALUES ('61560480518377472', NULL, '2018-10-08 11:11:43', 0, NULL, '2018-10-08 11:11:43', NULL, '', '56309618086776832', 1, 1.44, '', '/yboot/file/delete/*', '删除文件', '', 3, 'delete', 0, NULL, b'1');
-INSERT INTO `t_permission` VALUES ('63482475359244288', '', '2018-10-13 18:29:02', 0, 'admin', '2020-03-17 16:49:09', '', 'custom-tree', '41373430515240960', 0, 3.80, 'yboot-vue-template/custom-tree/customTree', 'custom-tree', '自定义树[付费]', 'md-git-network', 2, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('63741744973352960', '', '2018-10-14 11:39:17', 0, 'admin', '2020-03-17 16:48:14', '', 'render', '41373430515240960', 0, 3.30, 'yboot-vue-template/render/render', 'render', 'Render函数示例[付费]', 'md-aperture', 2, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('64290663792906240', '', '2018-10-16 00:00:29', 0, 'admin', '2020-03-17 16:49:23', '', 'tree&table', '41373430515240960', 0, 3.90, 'yboot-vue-template/tree&table/tree&table', 'tree&table', '树+表格[付费]', 'md-list', 2, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('66790433014943744', 'admin', '2018-10-22 21:33:42', 0, 'admin', '2020-03-17 16:49:35', '', 'card-list', '41373430515240960', 0, 3.91, 'yboot-vue-template/card-list/cardList', 'card-list', '卡片列表[付费]', 'md-card', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('63482475359244288', '', '2018-10-13 18:29:02', 0, 'admin', '2020-03-17 16:49:09', '', 'custom-tree', '41373430515240960', 0, 3.80, 'yboot-vue-template/custom-tree/customTree', 'custom-tree', '自定义树', 'md-git-network', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('63741744973352960', '', '2018-10-14 11:39:17', 0, 'admin', '2020-03-17 16:48:14', '', 'render', '41373430515240960', 0, 3.30, 'yboot-vue-template/render/render', 'render', 'Render函数示例', 'md-aperture', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('64290663792906240', '', '2018-10-16 00:00:29', 0, 'admin', '2020-03-17 16:49:23', '', 'tree&table', '41373430515240960', 0, 3.90, 'yboot-vue-template/tree&table/tree&table', 'tree&table', '树+表格', 'md-list', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('66790433014943744', 'admin', '2018-10-22 21:33:42', 0, 'admin', '2020-03-17 16:49:35', '', 'card-list', '41373430515240960', 0, 3.91, 'yboot-vue-template/card-list/cardList', 'card-list', '卡片列表', 'md-card', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('67027338952445952', 'admin', '2018-10-23 13:15:03', 0, 'admin', '2018-10-23 14:57:38', '', 'product-template', '125909152017944576', 0, 4.00, 'Main', '/product-template', '前台产品级组件', 'md-ribbon', 1, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('67027909637836800', 'admin', '2018-10-23 13:17:19', 0, 'admin', '2020-03-17 16:50:39', '', 'banner', '67027338952445952', 0, 4.10, 'yboot-product-template/banner/Banner', 'banner', '轮播组件[付费]', 'md-book', 2, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('67042515441684480', 'admin', '2018-10-23 14:15:22', 0, 'admin', '2020-03-17 16:50:46', '', 'product', '67027338952445952', 0, 4.20, 'yboot-product-template/product/Product', 'product', '产品组件[付费]', 'md-pricetags', 2, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('67082402312228864', 'admin', '2018-10-23 16:53:53', 0, 'admin', '2020-03-17 16:50:56', '', 'category', '67027338952445952', 0, 4.30, 'yboot-product-template/category/Category', 'category', '分类栏组件[付费]', 'md-apps', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('67027909637836800', 'admin', '2018-10-23 13:17:19', 0, 'admin', '2020-03-17 16:50:39', '', 'banner', '67027338952445952', 0, 4.10, 'yboot-product-template/banner/Banner', 'banner', '轮播组件', 'md-book', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('67042515441684480', 'admin', '2018-10-23 14:15:22', 0, 'admin', '2020-03-17 16:50:46', '', 'product', '67027338952445952', 0, 4.20, 'yboot-product-template/product/Product', 'product', '产品组件', 'md-pricetags', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('67082402312228864', 'admin', '2018-10-23 16:53:53', 0, 'admin', '2020-03-17 16:50:56', '', 'category', '67027338952445952', 0, 4.30, 'yboot-product-template/category/Category', 'category', '分类栏组件', 'md-apps', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('75002207560273920', 'admin', '2018-11-14 13:24:21', 0, 'admin', '2018-11-20 20:06:22', '', 'dict', '5129710648430592', 0, 1.80, 'sys/dict-manage/dictManage', 'dict', '数据字典管理', 'md-bookmarks', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('76215889006956544', 'admin', '2018-11-17 21:47:05', 0, 'admin', '2018-11-17 21:47:53', '', '', '75002207560273920', 1, 1.81, '', '/yboot/dict/add*', '添加字典', '', 3, 'add', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('76216071333351424', 'admin', '2018-11-17 21:47:48', 0, 'admin', '2018-11-17 21:47:48', NULL, '', '75002207560273920', 1, 1.82, '', '/yboot/dict/edit*', '编辑字典', '', 3, 'edit', 0, NULL, b'1');
@@ -693,13 +693,13 @@ INSERT INTO `t_permission` VALUES ('76216459709124608', 'admin', '2018-11-17 21:
 INSERT INTO `t_permission` VALUES ('76216594207870976', 'admin', '2018-11-17 21:49:53', 0, 'admin', '2018-11-17 21:49:53', NULL, '', '75002207560273920', 1, 1.85, '', '/yboot/dictData/edit*', '编辑字典数据', '', 3, 'edit', 0, NULL, b'1');
 INSERT INTO `t_permission` VALUES ('76216702639017984', 'admin', '2018-11-17 21:50:18', 0, 'admin', '2018-11-17 21:50:18', NULL, '', '75002207560273920', 1, 1.86, '', '/yboot/dictData/delByIds/**', '删除字典数据', '', 3, 'delete', 0, NULL, b'1');
 INSERT INTO `t_permission` VALUES ('76606430504816640', 'admin', '2018-11-18 23:38:57', 0, 'admin', '2018-11-18 23:39:12', '', 'activiti', '125909152017944576', 0, 1.10, 'Main', '/activiti', '工作流程', 'md-git-compare', 1, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('76607201262702592', 'admin', '2018-11-18 23:42:01', 0, 'admin', '2018-11-20 19:41:58', '', 'model-manage', '76606430504816640', 0, 1.00, 'activiti/model-manage/modelManage', 'model-manage', '模型管理[付费]', 'md-cube', 2, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('76914082455752704', 'admin', '2018-11-19 20:01:28', 0, 'admin', '2018-11-20 19:41:50', '', 'process-manage', '76606430504816640', 0, 0.90, 'activiti/process-manage/processManage', 'process-manage', '流程管理[付费]', 'md-calendar', 2, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('80539147005071360', 'admin', '2018-11-29 20:06:10', 0, 'admin', '2018-12-04 14:14:41', '', 'category-manage', '76606430504816640', 0, 2.00, 'activiti/category-manage/categoryManage', 'category-manage', '流程分类管理[付费]', 'md-bookmark', 2, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('81319435670917120', 'admin', '2018-12-01 23:46:45', 0, 'admin', '2018-12-02 15:37:03', '', 'process-ins-manage', '76606430504816640', 0, 0.70, 'activiti/process-ins-manage/processInsManage', 'process-ins-manage', '运行中的流程[付费]', 'md-fastforward', 2, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('81558529864896512', 'admin', '2018-12-02 15:36:50', 0, 'admin', '2018-12-08 14:50:38', '', 'apply-manage', '76606430504816640', 0, 0.00, 'activiti/apply-manage/applyManage', 'apply-manage', '我的申请[付费]', 'md-clipboard', 2, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('81716172680073216', 'admin', '2018-12-03 02:03:15', 0, 'admin', '2018-12-03 02:03:15', NULL, 'todo-manage', '76606430504816640', 0, 0.10, 'activiti/todo-manage/todoManage', 'todo-manage', '我的待办[付费]', 'ios-pricetag', 2, '', 0, NULL, b'1');
-INSERT INTO `t_permission` VALUES ('82269650301227008', 'admin', '2018-12-04 14:42:34', 0, 'admin', '2018-12-04 14:42:34', NULL, 'done-manage', '76606430504816640', 0, 0.20, 'activiti/done-manage/doneManage', 'done-manage', '我的已办[付费]', 'ios-pricetag-outline', 2, '', 0, NULL, b'1');
+INSERT INTO `t_permission` VALUES ('76607201262702592', 'admin', '2018-11-18 23:42:01', 0, 'admin', '2018-11-20 19:41:58', '', 'model-manage', '76606430504816640', 0, 1.00, 'activiti/model-manage/modelManage', 'model-manage', '模型管理', 'md-cube', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('76914082455752704', 'admin', '2018-11-19 20:01:28', 0, 'admin', '2018-11-20 19:41:50', '', 'process-manage', '76606430504816640', 0, 0.90, 'activiti/process-manage/processManage', 'process-manage', '流程管理', 'md-calendar', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('80539147005071360', 'admin', '2018-11-29 20:06:10', 0, 'admin', '2018-12-04 14:14:41', '', 'category-manage', '76606430504816640', 0, 2.00, 'activiti/category-manage/categoryManage', 'category-manage', '流程分类管理', 'md-bookmark', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('81319435670917120', 'admin', '2018-12-01 23:46:45', 0, 'admin', '2018-12-02 15:37:03', '', 'process-ins-manage', '76606430504816640', 0, 0.70, 'activiti/process-ins-manage/processInsManage', 'process-ins-manage', '运行中的流程', 'md-fastforward', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('81558529864896512', 'admin', '2018-12-02 15:36:50', 0, 'admin', '2018-12-08 14:50:38', '', 'apply-manage', '76606430504816640', 0, 0.00, 'activiti/apply-manage/applyManage', 'apply-manage', '我的申请', 'md-clipboard', 2, '', 0, '', b'1');
+INSERT INTO `t_permission` VALUES ('81716172680073216', 'admin', '2018-12-03 02:03:15', 0, 'admin', '2018-12-03 02:03:15', NULL, 'todo-manage', '76606430504816640', 0, 0.10, 'activiti/todo-manage/todoManage', 'todo-manage', '我的待办', 'ios-pricetag', 2, '', 0, NULL, b'1');
+INSERT INTO `t_permission` VALUES ('82269650301227008', 'admin', '2018-12-04 14:42:34', 0, 'admin', '2018-12-04 14:42:34', NULL, 'done-manage', '76606430504816640', 0, 0.20, 'activiti/done-manage/doneManage', 'done-manage', '我的已办', 'ios-pricetag-outline', 2, '', 0, NULL, b'1');
 INSERT INTO `t_permission` VALUES ('84082369492946944', 'admin', '2018-12-09 14:45:40', 0, 'admin', '2018-12-09 14:46:59', '', '', '81558529864896512', 1, 0.00, '', '/yboot/leave/add*', '添加请假申请', '', 3, 'add', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('84082920431554560', 'admin', '2018-12-09 14:47:51', 0, 'admin', '2018-12-09 14:47:51', NULL, '', '81558529864896512', 1, 1.00, '', '/yboot/actBusiness/delByIds/**', '删除草稿申请', '', 3, 'delete', 0, NULL, b'1');
 INSERT INTO `t_permission` VALUES ('84083562503999488', 'admin', '2018-12-09 14:50:25', 0, 'admin', '2018-12-09 14:50:25', NULL, '', '81716172680073216', 1, 0.00, '', '/yboot/actTask/pass**', '审批通过', '', 3, 'enable', 0, NULL, b'1');
@@ -726,10 +726,10 @@ DROP TABLE IF EXISTS `t_qq`;
 CREATE TABLE `t_qq`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `is_related` bit(1) DEFAULT NULL,
   `open_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -745,10 +745,10 @@ DROP TABLE IF EXISTS `t_quartz_job`;
 CREATE TABLE `t_quartz_job`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `cron_expression` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `job_class_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -764,9 +764,9 @@ DROP TABLE IF EXISTS `t_role`;
 CREATE TABLE `t_role`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '角色名 以ROLE_开头',
   `del_flag` int(11) DEFAULT NULL,
   `default_role` bit(1) DEFAULT NULL COMMENT '是否为注册默认角色',
@@ -789,10 +789,10 @@ DROP TABLE IF EXISTS `t_role_department`;
 CREATE TABLE `t_role_department`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `department_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '部门id',
   `role_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '角色id',
   PRIMARY KEY (`id`) USING BTREE
@@ -812,10 +812,10 @@ DROP TABLE IF EXISTS `t_role_permission`;
 CREATE TABLE `t_role_permission`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `permission_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '权限ID',
   `role_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`) USING BTREE
@@ -1030,10 +1030,10 @@ DROP TABLE IF EXISTS `t_setting`;
 CREATE TABLE `t_setting`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `value` text CHARACTER SET utf8 COLLATE utf8_general_ci,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
@@ -1052,9 +1052,9 @@ DROP TABLE IF EXISTS `t_user`;
 CREATE TABLE `t_user`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '省市县地址',
   `avatar` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '用户头像',
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '描述/详情/备注',
@@ -1088,10 +1088,10 @@ DROP TABLE IF EXISTS `t_user_role`;
 CREATE TABLE `t_user_role`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `role_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '角色唯一id',
   `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '用户唯一id',
   PRIMARY KEY (`id`) USING BTREE
@@ -1113,10 +1113,10 @@ DROP TABLE IF EXISTS `t_wechat`;
 CREATE TABLE `t_wechat`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(6) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(6) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `is_related` bit(1) DEFAULT NULL,
   `open_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -1132,10 +1132,10 @@ DROP TABLE IF EXISTS `t_weibo`;
 CREATE TABLE `t_weibo`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(0) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(0) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `is_related` bit(1) DEFAULT NULL,
   `open_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -1151,10 +1151,10 @@ DROP TABLE IF EXISTS `tx_order`;
 CREATE TABLE `tx_order`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(6) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(6) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
@@ -1166,10 +1166,10 @@ DROP TABLE IF EXISTS `tx_tpr_acc`;
 CREATE TABLE `tx_tpr_acc`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime(6) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime(6) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
   `money` double DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
@@ -1185,8 +1185,8 @@ CREATE TABLE `undo_log`  (
   `context` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'undo_log context,such as serialization',
   `rollback_info` longblob NOT NULL COMMENT 'rollback info',
   `log_status` int(11) NOT NULL COMMENT '0:normal status,1:defense status',
-  `log_created` datetime(0) NOT NULL COMMENT 'create datetime',
-  `log_modified` datetime(0) NOT NULL COMMENT 'modify datetime',
+  `log_created` datetime NOT NULL COMMENT 'create datetime',
+  `log_modified` datetime NOT NULL COMMENT 'modify datetime',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `ux_undo_log`(`xid`, `branch_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'AT transaction mode undo table' ROW_FORMAT = Compact;
