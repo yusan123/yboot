@@ -9,6 +9,7 @@ import com.yboot.base.modules.base.vo.OssSetting;
 import com.yboot.base.modules.file.entity.File;
 import com.yboot.base.modules.file.manage.FileManageFactory;
 import com.yboot.base.modules.file.service.FileService;
+import com.yboot.base.modules.file.utils.TypeUtil;
 import com.yboot.common.common.constant.CommonConstant;
 import com.yboot.common.common.constant.SettingConstant;
 import com.yboot.common.common.exception.LimitException;
@@ -84,7 +85,7 @@ public class UploadController {
             InputStream inputStream = file.getInputStream();
             // 上传至第三方云服务或服务器
             result = fileManageFactory.getFileManage(null).inputStreamUpload(inputStream, fKey, file);
-            f.setLocation(getType(setting.getValue()));
+            f.setLocation(TypeUtil.getType(setting.getValue()));
             // 保存数据信息至数据库
             f.setName(file.getOriginalFilename());
             f.setSize(file.getSize());
@@ -103,20 +104,5 @@ public class UploadController {
         return ResultUtil.data(result);
     }
 
-    public Integer getType(String type){
-        switch (type){
-            case SettingConstant.QINIU_OSS:
-                return CommonConstant.OSS_QINIU;
-            case SettingConstant.ALI_OSS:
-                return CommonConstant.OSS_ALI;
-            case SettingConstant.TENCENT_OSS:
-                return CommonConstant.OSS_TENCENT;
-            case SettingConstant.MINIO_OSS:
-                return CommonConstant.OSS_MINIO;
-            case SettingConstant.LOCAL_OSS:
-                return CommonConstant.OSS_LOCAL;
-            default:
-                return -1;
-        }
-    }
+
 }

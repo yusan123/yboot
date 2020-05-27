@@ -4,7 +4,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 49.233.92.53:8487
+        server-addr: 127.0.0.1:8848
     gateway:
       # 开启动态发现服务 需要和注册中心一起使用，这样网关就可以在注册中心找到其他的服务
       discovery:
@@ -81,6 +81,8 @@ ignored:
     - /**/*.ico
     - /base/test/**
     - /modeler.html
+    - /base/html2word/**
+    - /base/hello
   # 限流及黑名单不拦截的路径
   limitUrls:
     - /**/*.js

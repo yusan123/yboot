@@ -44,7 +44,10 @@
         <aliyun.oss.version>3.4.2</aliyun.oss.version>
         <qcloud.cos.version>5.5.3</qcloud.cos.version>
         <activiti.version>5.22.0</activiti.version>
-
+        <poi.version>3.15</poi.version>
+        <commons-lang3.version>3.9</commons-lang3.version>
+        <best-pay.version>1.3.0</best-pay.version>
+        <jsoup.version>1.9.2</jsoup.version>
     </properties>
 
     <dependencyManagement>
@@ -203,6 +206,31 @@
                 <artifactId>activiti-modeler</artifactId>
                 <version>${activiti.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.springboot</groupId>
+                <artifactId>best-pay-sdk</artifactId>
+                <version>${best-pay.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 </project>

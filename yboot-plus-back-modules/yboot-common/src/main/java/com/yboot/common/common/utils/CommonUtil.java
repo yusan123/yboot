@@ -76,4 +76,8 @@ public class CommonUtil {
         }
         return flag;
     }
+
+    public static void main(String[] args) {
+        System.out.println(renamePic("ww.doc"));
+    }
 }

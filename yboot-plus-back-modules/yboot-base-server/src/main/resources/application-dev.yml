@@ -245,7 +245,10 @@ ignored:
     - /**/*.ico
     - /**/*.html
     - /**/*.htm
-#    - /base/test/**
+    - /base/html2word/**
+    - /base/hello
+    - /output/**
+  #    - /base/test/**
   # 限流及黑名单不拦截的路径
   limitUrls:
     - /**/*.js
