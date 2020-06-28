@@ -48,6 +48,8 @@ json值如下：
 3.  在数据库中创建yboot数据库，在根目录里面有两个sql文件，先运行quartz.sql在运行yboot.sql。
 4.  必须先启动base-servere服务，在启动其他两个服务。
 
+![输入图片说明](https://images.gitee.com/uploads/images/2020/0628/131458_21dc4de4_1523748.png "屏幕截图.png")
+
 #### 参与贡献
 
 1. Fork 本仓库
