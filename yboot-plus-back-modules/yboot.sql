@@ -1,22 +1,21 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 杨国栋mysql
+ Source Server         : 法务测试
  Source Server Type    : MySQL
- Source Server Version : 50725
- Source Host           : rm-bp1ajd206kzn2wcfxto.mysql.rds.aliyuncs.com:3306
+ Source Server Version : 50644
+ Source Host           : 192.168.4.26:3306
  Source Schema         : yboot
 
  Target Server Type    : MySQL
- Target Server Version : 50725
+ Target Server Version : 50644
  File Encoding         : 65001
 
- Date: 28/04/2020 17:05:11
+ Date: 30/06/2020 11:43:09
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-
 
 -- ----------------------------
 -- Table structure for jdbc
@@ -24,7 +23,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `jdbc`;
 CREATE TABLE `jdbc`  (
   `next_val` bigint(20) DEFAULT NULL
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of jdbc
@@ -58,8 +57,6 @@ INSERT INTO `oauth_client_details` VALUES ('gateway', 'base-server,business-serv
 INSERT INTO `oauth_client_details` VALUES ('system', NULL, '$2a$10$QN9vg9iX3WFovHnDX7bJO.rWWDkS0VP7HYhV.HDiVEE56xPwZfjKe', 'app', 'authorization_code,password,refresh_token', NULL, NULL, 28800, NULL, NULL, NULL);
 INSERT INTO `oauth_client_details` VALUES ('yboot', 'base-server,business-server', '$2a$10$MGN6fWATnbOLU.zIvT2d1u9BPWJGQeJDx6qZ.H9HZ8bU3KLWNVQpK', 'read,write,all', 'authorization_code,password,refresh_token', NULL, NULL, 28800, 864000, NULL, NULL);
 
-
-
 -- ----------------------------
 -- Table structure for rocketmq_transaction_log
 -- ----------------------------
@@ -69,7 +66,7 @@ CREATE TABLE `rocketmq_transaction_log`  (
   `log` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `transaction_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for t_act_business
@@ -78,10 +75,10 @@ DROP TABLE IF EXISTS `t_act_business`;
 CREATE TABLE `t_act_business`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `proc_def_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `proc_inst_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `result` int(11) DEFAULT NULL,
@@ -89,11 +86,10 @@ CREATE TABLE `t_act_business`  (
   `table_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `apply_time` datetime DEFAULT NULL,
+  `apply_time` datetime(0) DEFAULT NULL,
   `is_history` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for t_act_category
@@ -102,10 +98,10 @@ DROP TABLE IF EXISTS `t_act_category`;
 CREATE TABLE `t_act_category`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `is_parent` bit(1) DEFAULT NULL,
   `parent_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `sort_order` decimal(10, 2) DEFAULT NULL,
@@ -113,7 +109,7 @@ CREATE TABLE `t_act_category`  (
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_act_category
@@ -132,16 +128,16 @@ DROP TABLE IF EXISTS `t_act_model`;
 CREATE TABLE `t_act_model`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `model_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_act_model
@@ -155,15 +151,15 @@ DROP TABLE IF EXISTS `t_act_node`;
 CREATE TABLE `t_act_node`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `node_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `relate_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_act_node
@@ -179,10 +175,10 @@ DROP TABLE IF EXISTS `t_act_process`;
 CREATE TABLE `t_act_process`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `category_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `deployment_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -196,7 +192,7 @@ CREATE TABLE `t_act_process`  (
   `business_table` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `route_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_act_process
@@ -210,16 +206,16 @@ DROP TABLE IF EXISTS `t_client`;
 CREATE TABLE `t_client`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `client_secret` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `home_uri` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `redirect_uri` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for t_department
@@ -228,17 +224,17 @@ DROP TABLE IF EXISTS `t_department`;
 CREATE TABLE `t_department`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `parent_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '父id',
   `sort_order` decimal(10, 2) DEFAULT NULL COMMENT '排序值',
   `status` int(11) DEFAULT NULL COMMENT '是否启用 0启用 -1禁用',
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'title',
   `is_parent` bit(1) DEFAULT NULL COMMENT '是否为父节点(含子节点) 默认false',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_department
@@ -262,15 +258,15 @@ DROP TABLE IF EXISTS `t_department_header`;
 CREATE TABLE `t_department_header`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `department_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '关联部门id',
   `type` int(11) DEFAULT NULL COMMENT '负责人类型 默认0主要 1副职',
   `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '关联部门负责人',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for t_dict
@@ -279,16 +275,16 @@ DROP TABLE IF EXISTS `t_dict`;
 CREATE TABLE `t_dict`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `sort_order` decimal(10, 2) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_dict
@@ -310,10 +306,10 @@ DROP TABLE IF EXISTS `t_dict_data`;
 CREATE TABLE `t_dict_data`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `dict_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `sort_order` decimal(10, 2) DEFAULT NULL,
@@ -321,7 +317,7 @@ CREATE TABLE `t_dict_data`  (
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_dict_data
@@ -389,10 +385,10 @@ DROP TABLE IF EXISTS `t_file`;
 CREATE TABLE `t_file`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `size` bigint(20) DEFAULT NULL,
   `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -400,7 +396,7 @@ CREATE TABLE `t_file`  (
   `f_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `location` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for t_github
@@ -409,17 +405,17 @@ DROP TABLE IF EXISTS `t_github`;
 CREATE TABLE `t_github`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `is_related` bit(1) DEFAULT NULL,
   `open_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `relate_username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for t_leave
@@ -428,18 +424,18 @@ DROP TABLE IF EXISTS `t_leave`;
 CREATE TABLE `t_leave`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `end_date` datetime DEFAULT NULL,
-  `start_date` datetime DEFAULT NULL,
+  `end_date` datetime(0) DEFAULT NULL,
+  `start_date` datetime(0) DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `duration` int(11) DEFAULT NULL,
   `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_leave
@@ -454,10 +450,10 @@ DROP TABLE IF EXISTS `t_log`;
 CREATE TABLE `t_log`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `cost_time` int(11) DEFAULT NULL,
   `ip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `ip_info` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -468,7 +464,7 @@ CREATE TABLE `t_log`  (
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `log_type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for t_message
@@ -477,16 +473,16 @@ DROP TABLE IF EXISTS `t_message`;
 CREATE TABLE `t_message`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `create_send` bit(1) DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_message
@@ -503,15 +499,15 @@ DROP TABLE IF EXISTS `t_message_send`;
 CREATE TABLE `t_message_send`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `message_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_message_send
@@ -534,28 +530,30 @@ CREATE TABLE `t_pay_info`  (
   `platform_amount` decimal(20, 2) NOT NULL COMMENT '支付金额',
   `pay_order_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '支付订单ID',
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `platform_number`(`platform_number`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 264581481639186433 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 289459540905168897 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_pay_info
 -- ----------------------------
-INSERT INTO `t_pay_info` VALUES (257234025691746308, '682265633886208', '12345', 2, NULL, 'NOTPAY', 0.01, 'a35ff2648e1c4bfd8741f5742e71607f', '682265633886208', '2020-03-31 10:08:31.913000', 1, '682265633886208', '2020-03-31 10:10:49.103000');
-INSERT INTO `t_pay_info` VALUES (257234601666154496, '682265633886208', '12345', 2, NULL, 'NOTPAY', 0.01, '94ba191e14d84afd9a276cecbc36add6', '682265633886208', '2020-03-31 10:10:49.238000', 1, '682265633886208', '2020-03-31 11:40:32.217000');
-INSERT INTO `t_pay_info` VALUES (257257180099514368, '682265633886208', '12345', 2, NULL, 'NOTPAY', 0.01, 'a285a6de9101421f906ae9b0010fa559', '682265633886208', '2020-03-31 11:40:32.357000', 1, '682265633886208', '2020-03-31 11:40:37.561000');
-INSERT INTO `t_pay_info` VALUES (257257202450960384, '682265633886208', '12345', 2, '4200000479202003314976947902', 'SUCCESS', 0.01, 'ceea7f7038d8441cbb71d65d71c2e95e', '682265633886208', '2020-03-31 11:40:37.682000', 0, NULL, '2020-03-31 11:41:54.879000');
-INSERT INTO `t_pay_info` VALUES (257308727974039552, '682265633886208', 'p6e2d9rozk', 2, NULL, 'NOTPAY', 0.01, '16626db7d30e4529940af30b5d274627', '682265633886208', '2020-03-31 15:05:22.328000', 0, NULL, NULL);
-INSERT INTO `t_pay_info` VALUES (257309098092007430, '682265633886208', 'tfjpnv0kyk', 2, NULL, 'NOTPAY', 0.01, 'd41659bb37fb4f5b99bdff783c547ee5', '682265633886208', '2020-03-31 15:06:50.568000', 0, NULL, NULL);
-INSERT INTO `t_pay_info` VALUES (258055661659623424, '682265633886208', 'at3hs1blkx', 2, NULL, 'NOTPAY', 0.01, 'ab3e15e245d24937be6bebbbb6e8cd57', '682265633886208', '2020-04-02 16:33:25.201000', 0, NULL, NULL);
-INSERT INTO `t_pay_info` VALUES (258056105421180928, '682265633886208', '0b11na0n29', 2, NULL, 'NOTPAY', 0.01, 'c3ccba30f92146ea8fa4a6a185ec2dd0', '682265633886208', '2020-04-02 16:35:10.993000', 0, NULL, NULL);
-INSERT INTO `t_pay_info` VALUES (258314813594144768, '682265633886208', 'eowrmeblwp', 2, NULL, 'NOTPAY', 0.01, '147fa80a31ca432a884bd47b62d4a8f2', '682265633886208', '2020-04-03 09:43:11.832000', 0, NULL, NULL);
-INSERT INTO `t_pay_info` VALUES (262669871567867904, '682265633886208', 'vcqyrv7v9a', 2, NULL, 'NOTPAY', 0.01, '7a9c20293a224aa6938ec2afd5e1dc06', '682265633886208', '2020-04-15 10:08:38.566000', 0, NULL, NULL);
-INSERT INTO `t_pay_info` VALUES (264581481639186432, '682265633886208', 'qdpwegpj4u', 2, NULL, 'NOTPAY', 0.01, '0a5eec650f5c448abb5b14428cac12c0', '682265633886208', '2020-04-20 16:44:41.922000', 0, NULL, NULL);
+INSERT INTO `t_pay_info` VALUES (257234025691746308, '682265633886208', '12345', 2, NULL, 'NOTPAY', 0.01, 'a35ff2648e1c4bfd8741f5742e71607f', '682265633886208', '2020-03-31 10:08:31', 1, '682265633886208', '2020-03-31 10:10:49');
+INSERT INTO `t_pay_info` VALUES (257234601666154496, '682265633886208', '12345', 2, NULL, 'NOTPAY', 0.01, '94ba191e14d84afd9a276cecbc36add6', '682265633886208', '2020-03-31 10:10:49', 1, '682265633886208', '2020-03-31 11:40:32');
+INSERT INTO `t_pay_info` VALUES (257257180099514368, '682265633886208', '12345', 2, NULL, 'NOTPAY', 0.01, 'a285a6de9101421f906ae9b0010fa559', '682265633886208', '2020-03-31 11:40:32', 1, '682265633886208', '2020-03-31 11:40:37');
+INSERT INTO `t_pay_info` VALUES (257257202450960384, '682265633886208', '12345', 2, '4200000479202003314976947902', 'SUCCESS', 0.01, 'ceea7f7038d8441cbb71d65d71c2e95e', '682265633886208', '2020-03-31 11:40:37', 0, NULL, '2020-03-31 11:41:54');
+INSERT INTO `t_pay_info` VALUES (257308727974039552, '682265633886208', 'p6e2d9rozk', 2, NULL, 'NOTPAY', 0.01, '16626db7d30e4529940af30b5d274627', '682265633886208', '2020-03-31 15:05:22', 0, NULL, NULL);
+INSERT INTO `t_pay_info` VALUES (257309098092007430, '682265633886208', 'tfjpnv0kyk', 2, NULL, 'NOTPAY', 0.01, 'd41659bb37fb4f5b99bdff783c547ee5', '682265633886208', '2020-03-31 15:06:50', 0, NULL, NULL);
+INSERT INTO `t_pay_info` VALUES (258055661659623424, '682265633886208', 'at3hs1blkx', 2, NULL, 'NOTPAY', 0.01, 'ab3e15e245d24937be6bebbbb6e8cd57', '682265633886208', '2020-04-02 16:33:25', 0, NULL, NULL);
+INSERT INTO `t_pay_info` VALUES (258056105421180928, '682265633886208', '0b11na0n29', 2, NULL, 'NOTPAY', 0.01, 'c3ccba30f92146ea8fa4a6a185ec2dd0', '682265633886208', '2020-04-02 16:35:10', 0, NULL, NULL);
+INSERT INTO `t_pay_info` VALUES (258314813594144768, '682265633886208', 'eowrmeblwp', 2, NULL, 'NOTPAY', 0.01, '147fa80a31ca432a884bd47b62d4a8f2', '682265633886208', '2020-04-03 09:43:11', 0, NULL, NULL);
+INSERT INTO `t_pay_info` VALUES (262669871567867904, '682265633886208', 'vcqyrv7v9a', 2, NULL, 'NOTPAY', 0.01, '7a9c20293a224aa6938ec2afd5e1dc06', '682265633886208', '2020-04-15 10:08:38', 0, NULL, NULL);
+INSERT INTO `t_pay_info` VALUES (264581481639186432, '682265633886208', 'qdpwegpj4u', 2, NULL, 'NOTPAY', 0.01, '0a5eec650f5c448abb5b14428cac12c0', '682265633886208', '2020-04-20 16:44:41', 0, NULL, NULL);
+INSERT INTO `t_pay_info` VALUES (289221121910247424, '682265633886208', 'sh11thmtee', 2, NULL, 'NOTPAY', 0.01, '09b36aa0f1f14091bffd890e26e6132c', '682265633886208', '2020-06-27 16:33:49', 0, NULL, NULL);
+INSERT INTO `t_pay_info` VALUES (289459540905168896, '682265633886208', 'ncs7fpx5n1', 2, NULL, 'NOTPAY', 0.01, 'c4984bfcab35484698c75ce2b6afd877', '682265633886208', '2020-06-28 08:21:13', 0, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for t_permission
@@ -564,10 +562,10 @@ DROP TABLE IF EXISTS `t_permission`;
 CREATE TABLE `t_permission`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '说明备注',
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '菜单/权限名称',
   `parent_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '父id',
@@ -583,7 +581,7 @@ CREATE TABLE `t_permission`  (
   `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '网页链接',
   `show_always` bit(1) DEFAULT NULL COMMENT '始终显示 默认是',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_permission
@@ -681,10 +679,6 @@ INSERT INTO `t_permission` VALUES ('63482475359244288', '', '2018-10-13 18:29:02
 INSERT INTO `t_permission` VALUES ('63741744973352960', '', '2018-10-14 11:39:17', 0, 'admin', '2020-03-17 16:48:14', '', 'render', '41373430515240960', 0, 3.30, 'yboot-vue-template/render/render', 'render', 'Render函数示例', 'md-aperture', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('64290663792906240', '', '2018-10-16 00:00:29', 0, 'admin', '2020-03-17 16:49:23', '', 'tree&table', '41373430515240960', 0, 3.90, 'yboot-vue-template/tree&table/tree&table', 'tree&table', '树+表格', 'md-list', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('66790433014943744', 'admin', '2018-10-22 21:33:42', 0, 'admin', '2020-03-17 16:49:35', '', 'card-list', '41373430515240960', 0, 3.91, 'yboot-vue-template/card-list/cardList', 'card-list', '卡片列表', 'md-card', 2, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('67027338952445952', 'admin', '2018-10-23 13:15:03', 0, 'admin', '2018-10-23 14:57:38', '', 'product-template', '125909152017944576', 0, 4.00, 'Main', '/product-template', '前台产品级组件', 'md-ribbon', 1, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('67027909637836800', 'admin', '2018-10-23 13:17:19', 0, 'admin', '2020-03-17 16:50:39', '', 'banner', '67027338952445952', 0, 4.10, 'yboot-product-template/banner/Banner', 'banner', '轮播组件', 'md-book', 2, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('67042515441684480', 'admin', '2018-10-23 14:15:22', 0, 'admin', '2020-03-17 16:50:46', '', 'product', '67027338952445952', 0, 4.20, 'yboot-product-template/product/Product', 'product', '产品组件', 'md-pricetags', 2, '', 0, '', b'1');
-INSERT INTO `t_permission` VALUES ('67082402312228864', 'admin', '2018-10-23 16:53:53', 0, 'admin', '2020-03-17 16:50:56', '', 'category', '67027338952445952', 0, 4.30, 'yboot-product-template/category/Category', 'category', '分类栏组件', 'md-apps', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('75002207560273920', 'admin', '2018-11-14 13:24:21', 0, 'admin', '2018-11-20 20:06:22', '', 'dict', '5129710648430592', 0, 1.80, 'sys/dict-manage/dictManage', 'dict', '数据字典管理', 'md-bookmarks', 2, '', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('76215889006956544', 'admin', '2018-11-17 21:47:05', 0, 'admin', '2018-11-17 21:47:53', '', '', '75002207560273920', 1, 1.81, '', '/base/dict/add*', '添加字典', '', 3, 'add', 0, '', b'1');
 INSERT INTO `t_permission` VALUES ('76216071333351424', 'admin', '2018-11-17 21:47:48', 0, 'admin', '2018-11-17 21:47:48', NULL, '', '75002207560273920', 1, 1.82, '', '/base/dict/edit*', '编辑字典', '', 3, 'edit', 0, NULL, b'1');
@@ -726,17 +720,17 @@ DROP TABLE IF EXISTS `t_qq`;
 CREATE TABLE `t_qq`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `is_related` bit(1) DEFAULT NULL,
   `open_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `relate_username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for t_quartz_job
@@ -745,17 +739,17 @@ DROP TABLE IF EXISTS `t_quartz_job`;
 CREATE TABLE `t_quartz_job`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `cron_expression` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `job_class_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `parameter` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for t_role
@@ -764,16 +758,16 @@ DROP TABLE IF EXISTS `t_role`;
 CREATE TABLE `t_role`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '角色名 以ROLE_开头',
   `del_flag` int(11) DEFAULT NULL,
   `default_role` bit(1) DEFAULT NULL COMMENT '是否为注册默认角色',
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '备注',
   `data_type` int(11) DEFAULT NULL COMMENT '数据权限类型 0全部默认 1自定义 2本部门及以下 3本部门 4仅本人',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_role
@@ -789,14 +783,14 @@ DROP TABLE IF EXISTS `t_role_department`;
 CREATE TABLE `t_role_department`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `department_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '部门id',
   `role_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '角色id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_role_department
@@ -812,14 +806,14 @@ DROP TABLE IF EXISTS `t_role_permission`;
 CREATE TABLE `t_role_permission`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `permission_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '权限ID',
   `role_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_role_permission
@@ -832,196 +826,188 @@ INSERT INTO `t_role_permission` VALUES ('252232315252510720', NULL, '2020-03-17 
 INSERT INTO `t_role_permission` VALUES ('252232315361562624', NULL, '2020-03-17 14:53:31', 0, NULL, '2020-03-17 14:53:31', '16392452747300864', '16457350655250432');
 INSERT INTO `t_role_permission` VALUES ('252232315470614528', NULL, '2020-03-17 14:53:31', 0, NULL, '2020-03-17 14:53:31', '16392767785668608', '16457350655250432');
 INSERT INTO `t_role_permission` VALUES ('252232315579666432', NULL, '2020-03-17 14:53:31', 0, NULL, '2020-03-17 14:53:31', '16439068543946752', '16457350655250432');
-INSERT INTO `t_role_permission` VALUES ('252232336316305408', NULL, '2020-03-17 14:53:36', 0, NULL, '2020-03-17 14:53:36', '125909152017944576', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232336425357312', NULL, '2020-03-17 14:53:36', 0, NULL, '2020-03-17 14:53:36', '5129710648430592', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232336580546560', NULL, '2020-03-17 14:53:36', 0, NULL, '2020-03-17 14:53:36', '5129710648430593', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232336693792768', NULL, '2020-03-17 14:53:36', 0, NULL, '2020-03-17 14:53:36', '40238597734928384', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232336802844672', NULL, '2020-03-17 14:53:36', 0, NULL, '2020-03-17 14:53:36', '43117268627886080', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232336911896576', NULL, '2020-03-17 14:53:36', 0, NULL, '2020-03-17 14:53:36', '57009744761589760', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232337025142784', NULL, '2020-03-17 14:53:36', 0, NULL, '2020-03-17 14:53:36', '56309618086776832', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232337134194688', NULL, '2020-03-17 14:53:36', 0, NULL, '2020-03-17 14:53:36', '44986029924421632', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232337243246592', NULL, '2020-03-17 14:53:36', 0, NULL, '2020-03-17 14:53:36', '5129710648430594', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232337352298496', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '5129710648430595', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232337461350400', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '75002207560273920', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232337570402305', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '58480609315524608', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232337679454209', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '76606430504816640', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232337792700416', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '81558529864896512', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232337901752320', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '81716172680073216', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232338010804224', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '82269650301227008', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232338119856128', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '81319435670917120', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232338228908032', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '117806106536841216', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232338337959937', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '76914082455752704', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232338451206144', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '76607201262702592', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232338560258048', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '80539147005071360', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232338669309952', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '211251162815401984', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232338778361856', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '211251678651879424', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232338887413760', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '39915540965232640', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232338996465664', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '41370251991977984', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232339105517568', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '41363147411427328', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232339214569472', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '121426317022334976', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232339323621376', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '149452775095275520', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232339432673280', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '41371711400054784', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232339545919489', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '39916171171991552', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232339659165696', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '39918482854252544', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232339768217600', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '102235632889237504', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232339877269504', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '102237605176807424', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232339990515712', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '102240052523831296', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232340099567616', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '103658022701633536', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232340212813824', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '41373430515240960', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232340321865728', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '129033675403694080', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232340443500545', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '41375330996326400', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232340552552449', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '42082442672082944', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232340665798656', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '41378916912336896', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232340774850560', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '63741744973352960', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232340883902464', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '41376192166629376', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232340992954368', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '41377034236071936', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232341102006272', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '56911328312299520', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232341211058177', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '63482475359244288', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232341324304384', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '64290663792906240', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232341433356288', NULL, '2020-03-17 14:53:37', 0, NULL, '2020-03-17 14:53:37', '66790433014943744', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232341542408192', NULL, '2020-03-17 14:53:38', 0, NULL, '2020-03-17 14:53:38', '67027338952445952', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232341651460096', NULL, '2020-03-17 14:53:38', 0, NULL, '2020-03-17 14:53:38', '67027909637836800', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232341764706304', NULL, '2020-03-17 14:53:38', 0, NULL, '2020-03-17 14:53:38', '67042515441684480', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232341873758208', NULL, '2020-03-17 14:53:38', 0, NULL, '2020-03-17 14:53:38', '67082402312228864', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232341982810112', NULL, '2020-03-17 14:53:38', 0, NULL, '2020-03-17 14:53:38', '113602149589454848', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232342091862016', NULL, '2020-03-17 14:53:38', 0, NULL, '2020-03-17 14:53:38', '113602342657462272', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232342200913920', NULL, '2020-03-17 14:53:38', 0, NULL, '2020-03-17 14:53:38', '113603512293658624', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232342309965824', NULL, '2020-03-17 14:53:38', 0, NULL, '2020-03-17 14:53:38', '113603617897844736', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232342419017728', NULL, '2020-03-17 14:53:38', 0, NULL, '2020-03-17 14:53:38', '16392452747300864', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232342528069632', NULL, '2020-03-17 14:53:38', 0, NULL, '2020-03-17 14:53:38', '16392767785668608', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232342637121536', NULL, '2020-03-17 14:53:38', 0, NULL, '2020-03-17 14:53:38', '16438800255291392', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232342746173440', NULL, '2020-03-17 14:53:38', 0, NULL, '2020-03-17 14:53:38', '16438962738434048', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('252232342855225344', NULL, '2020-03-17 14:53:38', 0, NULL, '2020-03-17 14:53:38', '16439068543946752', '496138616573953');
-INSERT INTO `t_role_permission` VALUES ('256540343267233792', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '125909152017944576', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233793', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '5129710648430592', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233794', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '5129710648430593', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233795', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '15701400130424832', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233796', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16678126574637056', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233797', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '15701915807518720', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233798', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '15708892205944832', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233799', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16678447719911424', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233800', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '25014528525733888', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233801', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '56898976661639168', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233802', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '156365156580855808', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233803', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '40238597734928384', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233804', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45235621697949696', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233805', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45235787867885568', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233806', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45235939278065664', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233807', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '43117268627886080', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233808', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45236734832676864', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233809', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45237010692050944', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233810', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45237170029465600', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233811', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '57009544286441472', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233812', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '57009744761589760', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233813', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '57009981228060672', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233814', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '56309618086776832', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233815', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '57212882168844288', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233816', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '61560041605435392', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233817', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '61560275261722624', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233818', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '61560480518377472', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233819', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '44986029924421632', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233820', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45235228800716800', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233821', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45069342940860416', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233822', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '5129710648430594', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233823', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16687383932047360', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233824', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16689632049631232', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233825', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16689745006432256', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233826', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16689883993083904', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233827', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16690313745666048', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233828', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '5129710648430595', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233829', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16694861252005888', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233830', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16695107491205120', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233831', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16695243126607872', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233832', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '75002207560273920', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233833', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '76215889006956544', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233834', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '76216071333351424', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233835', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '76216264070008832', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233836', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '76216459709124608', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233837', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '76216594207870976', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233838', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '76216702639017984', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233839', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '58480609315524608', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233840', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '61394706252173312', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233841', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '61417744146370560', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233842', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '76606430504816640', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233843', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '81558529864896512', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233844', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84082369492946944', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233845', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84082920431554560', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233846', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '81716172680073216', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233847', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84083562503999488', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233848', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84083641302388736', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233849', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '113601631450304512', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233850', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84084404707659776', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233851', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '82269650301227008', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233852', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84084724590448640', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233853', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '81319435670917120', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233854', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84084965817454592', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233855', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '117806106536841216', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233856', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '76914082455752704', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233857', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84085542324539392', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233858', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84085810797744128', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233859', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84085980943880192', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233860', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84086163001839616', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233861', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84086362248056832', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233862', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '76607201262702592', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233863', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84086882907983872', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233864', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84087009940869120', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233865', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84087154040377344', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233866', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '80539147005071360', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233867', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84087344352727040', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233868', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84087480852156416', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233869', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '84087593041399808', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233870', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '211251162815401984', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233871', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '211251678651879424', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233872', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '39915540965232640', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233873', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41370251991977984', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233874', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45264987354042368', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233875', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45265487029866496', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233876', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45265762415284224', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233877', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45265886315024384', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233878', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '45266070000373760', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233879', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41363147411427328', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233880', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41363537456533504', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233881', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41364927394353152', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233882', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '121426317022334976', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233883', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '149452775095275520', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233884', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41371711400054784', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233885', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41469219249852416', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233886', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '39916171171991552', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233887', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '39918482854252544', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233888', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '256539217813835777', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233889', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '256539894803861505', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233890', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '102235632889237504', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233891', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '102237605176807424', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233892', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '102240052523831296', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233893', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '103658022701633536', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233894', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41373430515240960', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233895', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '129033675403694080', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233896', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41375330996326400', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233897', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '42082442672082944', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233898', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41378916912336896', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233899', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '63741744973352960', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233900', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41376192166629376', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233901', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '41377034236071936', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233902', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '56911328312299520', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233903', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '63482475359244288', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233904', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '64290663792906240', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233905', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '66790433014943744', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233906', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '210154306362413056', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233907', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '210155258859491329', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233908', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '210156371755143168', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233909', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '67027338952445952', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233910', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '67027909637836800', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233911', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '67042515441684480', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233912', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '67082402312228864', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233913', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '113602149589454848', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233914', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '113602342657462272', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233915', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '113603512293658624', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233916', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '113603617897844736', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233917', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16392452747300864', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233918', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16392767785668608', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233919', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16438800255291392', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233920', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16438962738434048', '496138616573952');
-INSERT INTO `t_role_permission` VALUES ('256540343267233921', '682265633886208', '2020-03-29 12:12:05', 0, NULL, NULL, '16439068543946752', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481920', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '125909152017944576', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481921', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '5129710648430592', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481922', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '5129710648430593', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481923', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '15701400130424832', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481924', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '16678126574637056', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481925', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '15701915807518720', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481926', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '15708892205944832', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481927', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '16678447719911424', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481928', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '25014528525733888', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481929', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '56898976661639168', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481930', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '156365156580855808', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481931', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '40238597734928384', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481932', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '45235621697949696', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481933', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '45235787867885568', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481934', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '45235939278065664', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481935', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '43117268627886080', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481936', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '45236734832676864', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481937', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '45237010692050944', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481938', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '45237170029465600', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481939', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '57009544286441472', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481940', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '57009744761589760', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481941', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '57009981228060672', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481942', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '56309618086776832', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481943', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '57212882168844288', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481944', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '61560041605435392', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481945', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '61560275261722624', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481946', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '61560480518377472', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481947', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '44986029924421632', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481948', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '45235228800716800', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481949', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '45069342940860416', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481950', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '5129710648430594', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481951', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '16687383932047360', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481952', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '16689632049631232', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481953', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '16689745006432256', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481954', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '16689883993083904', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481955', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '16690313745666048', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481956', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '5129710648430595', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481957', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '16694861252005888', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481958', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '16695107491205120', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481959', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '16695243126607872', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481960', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '75002207560273920', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481961', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '76215889006956544', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481962', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '76216071333351424', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481963', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '76216264070008832', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481964', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '76216459709124608', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481965', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '76216594207870976', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481966', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '76216702639017984', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481967', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '58480609315524608', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481968', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '61394706252173312', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481969', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '61417744146370560', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481970', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '76606430504816640', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481971', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '81558529864896512', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481972', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '84082369492946944', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481973', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '84082920431554560', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481974', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '81716172680073216', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481975', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '84083562503999488', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481976', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '84083641302388736', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481977', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '113601631450304512', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481978', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '84084404707659776', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481979', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '82269650301227008', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481980', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '84084724590448640', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481981', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '81319435670917120', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481982', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '84084965817454592', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481983', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '117806106536841216', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481984', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '76914082455752704', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481985', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '84085542324539392', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481986', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '84085810797744128', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481987', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '84085980943880192', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481988', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '84086163001839616', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481989', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '84086362248056832', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481990', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '76607201262702592', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481991', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '84086882907983872', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481992', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '84087009940869120', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481993', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '84087154040377344', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481994', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '80539147005071360', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481995', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '84087344352727040', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481996', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '84087480852156416', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481997', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '84087593041399808', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481998', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '211251162815401984', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430481999', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '211251678651879424', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482000', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '39915540965232640', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482001', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '41370251991977984', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482002', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '45264987354042368', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482003', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '45265487029866496', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482004', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '45265762415284224', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482005', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '45265886315024384', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482006', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '45266070000373760', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482007', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '41363147411427328', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482008', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '41363537456533504', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482009', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '41364927394353152', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482010', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '121426317022334976', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482011', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '149452775095275520', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482012', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '41371711400054784', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482013', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '41469219249852416', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482014', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '39916171171991552', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482015', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '39918482854252544', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482016', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '256539217813835777', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482017', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '256539894803861505', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482018', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '102235632889237504', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482019', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '102237605176807424', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482020', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '102240052523831296', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482021', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '103658022701633536', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482022', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '41373430515240960', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482023', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '129033675403694080', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482024', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '41375330996326400', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482025', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '42082442672082944', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482026', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '41378916912336896', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482027', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '63741744973352960', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482028', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '41376192166629376', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482029', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '41377034236071936', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482030', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '56911328312299520', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482031', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '63482475359244288', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482032', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '64290663792906240', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482033', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '66790433014943744', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482034', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '210154306362413056', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482035', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '210155258859491329', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482036', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '210156371755143168', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482037', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '113602149589454848', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482038', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '113602342657462272', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482039', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '113603512293658624', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482040', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '113603617897844736', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482041', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '16392452747300864', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482042', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '16392767785668608', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482043', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '16438800255291392', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482044', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '16438962738434048', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290226411430482045', '682265633886208', '2020-06-30 11:08:29', 0, NULL, NULL, '16439068543946752', '496138616573952');
+INSERT INTO `t_role_permission` VALUES ('290227100609155072', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '125909152017944576', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155073', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '5129710648430592', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155074', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '5129710648430593', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155075', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '40238597734928384', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155076', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '43117268627886080', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155077', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '57009744761589760', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155078', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '56309618086776832', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155079', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '44986029924421632', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155080', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '5129710648430594', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155081', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '5129710648430595', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155082', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '75002207560273920', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155083', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '58480609315524608', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155084', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '76606430504816640', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155085', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '81558529864896512', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155086', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '81716172680073216', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155087', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '82269650301227008', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155088', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '81319435670917120', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155089', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '117806106536841216', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155090', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '76914082455752704', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155091', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '76607201262702592', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155092', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '80539147005071360', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155093', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '211251162815401984', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155094', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '211251678651879424', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155095', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '39915540965232640', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155096', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '41370251991977984', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155097', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '41363147411427328', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155098', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '121426317022334976', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155099', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '149452775095275520', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155100', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '41371711400054784', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155101', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '39916171171991552', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155102', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '39918482854252544', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155103', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '102235632889237504', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155104', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '102237605176807424', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155105', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '102240052523831296', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155106', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '103658022701633536', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155107', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '41373430515240960', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155108', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '129033675403694080', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155109', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '41375330996326400', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155110', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '42082442672082944', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155111', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '41378916912336896', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155112', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '63741744973352960', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155113', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '41376192166629376', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155114', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '41377034236071936', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155115', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '56911328312299520', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100609155116', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '63482475359244288', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100642709504', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '64290663792906240', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100642709505', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '66790433014943744', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100642709506', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '113602149589454848', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100642709507', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '113602342657462272', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100642709508', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '113603512293658624', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100642709509', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '113603617897844736', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100642709510', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '16392452747300864', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100642709511', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '16392767785668608', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100642709512', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '16438800255291392', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100642709513', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '16438962738434048', '496138616573953');
+INSERT INTO `t_role_permission` VALUES ('290227100642709514', '682265633886208', '2020-06-30 11:11:13', 0, NULL, NULL, '16439068543946752', '496138616573953');
 
 -- ----------------------------
 -- Table structure for t_setting
@@ -1030,19 +1016,19 @@ DROP TABLE IF EXISTS `t_setting`;
 CREATE TABLE `t_setting`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `value` text CHARACTER SET utf8 COLLATE utf8_general_ci,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_setting
 -- ----------------------------
 INSERT INTO `t_setting` VALUES ('EMAIL_SETTING', '682265633886208', '2020-04-02 17:19:15', 0, '682265633886208', '2020-04-02 20:37:06', '{\"host\":\"smtp.163.com\",\"username\":\"canghaihongxin@163.com\",\"password\":\"EEGOZADAZVAGPTUR\",\"changed\":true}');
-INSERT INTO `t_setting` VALUES ('OTHER_SETTING', '682265633886208', '2020-03-31 20:16:55', 0, '682265633886208', '2020-04-20 17:10:58', '{\"domain\":\"http://127.0.0.1:9200\",\"ssoDomain\":\"budongfeng.com\",\"blacklist\":\"\"}');
+INSERT INTO `t_setting` VALUES ('OTHER_SETTING', '682265633886208', '2020-03-31 20:16:55', 0, '682265633886208', '2020-06-24 18:16:13', '{\"domain\":\"http://yboot.budongfeng.com:9200\",\"ssoDomain\":\"budongfeng.com\",\"blacklist\":\"\"}');
 INSERT INTO `t_setting` VALUES ('VAPTCHA_SETTING', '682265633886208', '2020-04-02 19:50:24', 0, '682265633886208', '2020-04-02 19:50:24', '{\"vid\":\"5e85ce1255d0def9521469ac\",\"secretKey\":\"b1fc8b0c60b64379bba7a4f632c66bbd\",\"changed\":true}');
 
 -- ----------------------------
@@ -1052,9 +1038,9 @@ DROP TABLE IF EXISTS `t_user`;
 CREATE TABLE `t_user`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '省市县地址',
   `avatar` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '用户头像',
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '描述/详情/备注',
@@ -1071,14 +1057,14 @@ CREATE TABLE `t_user`  (
   `street` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '街道地址',
   `pass_strength` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '密码强度',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
 INSERT INTO `t_user` VALUES ('16739222421508096', '', '2018-06-06 18:48:02', '4363087427670016', '2020-03-25 16:01:30', '', 'https://s1.ax1x.com/2018/05/19/CcdVQP.png', '', 'canghaihongxin1@163.com', '17600000000', '', '$2a$10$PS04ecXfknNd3V8d.ymLTObQciapMU4xU8.GADBZZsuTZr7ymnagy', '男', 0, 0, 'test2', 0, '40652338142121984', '', '弱');
 INSERT INTO `t_user` VALUES ('4363087427670016', '', '2018-05-03 15:09:42', '', '2020-03-18 08:56:22', '[\"510000\",\"510100\",\"510114\"]', 'https://s1.ax1x.com/2018/05/19/CcdVQP.png', '', 'canghaihongxin2@163.com', '17600000001', '', '$2a$10$PS04ecXfknNd3V8d.ymLTObQciapMU4xU8.GADBZZsuTZr7ymnagy', '男', 0, 0, 'test', 0, '40652338142121984', '', '弱');
-INSERT INTO `t_user` VALUES ('682265633886208', '', '2018-05-01 16:13:51', 'admin', '2020-04-14 19:10:46', '[\"510000\",\"510100\",\"510104\"]', 'https://s1.ax1x.com/2018/05/19/CcdVQP.png', 'test', 'canghaihongxin@163.com', '17600000002', 'tpr', '$2a$10$NnhTPTwIaI1ARyHLT0hn5ePFxv5ZAYyu7Il7rF24.8tIqTOtz636S', '男', 0, 1, 'admin', 0, '40322777781112832', '天府1街', '弱');
+INSERT INTO `t_user` VALUES ('682265633886208', '', '2018-05-01 16:13:51', '682265633886208', '2020-06-30 11:12:46', '[\"510000\",\"510100\",\"510104\"]', 'https://s1.ax1x.com/2018/05/19/CcdVQP.png', 'test', 'canghaihongxin@163.com', '17600000002', 'tpr', '$2a$10$8KA1CQm1v0zKwW4egTmZM.Z5qKI3N4u2RNrlRnMdGU.1VeKwbSOUW', '男', 0, 1, 'admin', 0, '40322777781112832', '天府1街', '弱');
 INSERT INTO `t_user` VALUES ('682265633886209', '', '2018-04-30 23:28:42', 'admin', '2020-03-18 08:56:40', '', 'https://s1.ax1x.com/2018/05/19/CcdVQP.png', '', '1012@qq.com', '17600000003', '', '$2a$10$PS04ecXfknNd3V8d.ymLTObQciapMU4xU8.GADBZZsuTZr7ymnagy', '男', -1, 0, 'tpr', 0, '40322777781112832', '', '弱');
 
 -- ----------------------------
@@ -1088,14 +1074,14 @@ DROP TABLE IF EXISTS `t_user_role`;
 CREATE TABLE `t_user_role`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `role_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '角色唯一id',
   `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '用户唯一id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_user_role
@@ -1113,17 +1099,17 @@ DROP TABLE IF EXISTS `t_wechat`;
 CREATE TABLE `t_wechat`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `is_related` bit(1) DEFAULT NULL,
   `open_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `relate_username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for t_weibo
@@ -1132,17 +1118,17 @@ DROP TABLE IF EXISTS `t_weibo`;
 CREATE TABLE `t_weibo`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `is_related` bit(1) DEFAULT NULL,
   `open_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `relate_username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for tx_order
@@ -1151,13 +1137,13 @@ DROP TABLE IF EXISTS `tx_order`;
 CREATE TABLE `tx_order`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for tx_tpr_acc
@@ -1166,13 +1152,13 @@ DROP TABLE IF EXISTS `tx_tpr_acc`;
 CREATE TABLE `tx_tpr_acc`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` datetime(0) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` datetime(0) DEFAULT NULL,
   `money` double DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for undo_log
@@ -1185,8 +1171,8 @@ CREATE TABLE `undo_log`  (
   `context` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'undo_log context,such as serialization',
   `rollback_info` longblob NOT NULL COMMENT 'rollback info',
   `log_status` int(11) NOT NULL COMMENT '0:normal status,1:defense status',
-  `log_created` datetime NOT NULL COMMENT 'create datetime',
-  `log_modified` datetime NOT NULL COMMENT 'modify datetime',
+  `log_created` datetime(0) NOT NULL COMMENT 'create datetime',
+  `log_modified` datetime(0) NOT NULL COMMENT 'modify datetime',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `ux_undo_log`(`xid`, `branch_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'AT transaction mode undo table' ROW_FORMAT = Compact;
